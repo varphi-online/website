@@ -309,6 +309,11 @@
      color: #000;
 }
 
+#home a:hover{
+     cursor: pointer;
+     color: #fff;
+}
+
  #programmingOut{
      position: absolute;
      width: 100%;
