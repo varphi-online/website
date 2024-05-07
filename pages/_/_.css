@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+   height: 100%;
+   overflow-y: hidden;
+   overflow-x: hidden;
+   color: white;
+   z-index: 2;
+}
+
+.kode-mono-mono {
+  font-family: "Kode Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Kode Mono";
+  font-size: 3em;
+  text-align: center
+}
+
+#bg {
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   z-index: -1;
+   overflow: hidden;
+}

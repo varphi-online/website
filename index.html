@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>varphi.online</title>
+      <link rel="stylesheet" href="sitewide/primary.css">
+      <link rel="icon" type="image/x-icon" href="sitewide/taskbar/Sync Earth.ico">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap">
+   </head>
+   <body>
+   <svg>
+         <filter id="pixelate" x="0" y="0">
+            <feFlood x="2" y="2" height="1" width="1"/>
+            <feComposite width="2" height="2"/>
+            <feTile result="a"/>
+            <feComposite in="SourceGraphic" in2="a" 
+               operator="in"/>
+            <feMorphology operator="dilate"
+               radius="1"/>
+         </filter>
+      </svg>
+      <svg>
+         <filter id="pixelate2" x="0" y="0">
+            <feFlood x="4" y="4" height="2" width="2"/>
+            <feComposite width="4" height="4"/>
+            <feTile result="a"/>
+            <feComposite in="SourceGraphic" in2="a" 
+               operator="in"/>
+            <feMorphology operator="dilate"
+               radius="1.7"/>
+         </filter>
+      </svg>
+      <h1>varphi.online</h1>
+      <div class="main" id="main">
+         <div class="cube">
+            <div class="cube__face cube__face--front"><img src="https://f4.bcbits.com/img/a2371408069_10.jpg"></div>
+            <div class="cube__face cube__face--back"><img src="https://f4.bcbits.com/img/a2378214422_10.jpg"></div>
+            <div class="cube__face cube__face--right"><img src="https://f4.bcbits.com/img/a3155449451_10.jpg"></div>
+            <div class="cube__face cube__face--left"><img src="https://f4.bcbits.com/img/a0702562904_10.jpg"></div>
+            <div class="cube__face cube__face--top"><img src="https://f4.bcbits.com/img/a2829327501_10.jpg"></div>
+            <div class="cube__face cube__face--bottom"><a href="https://varphi-online.neocities.org/pages/_/_"><img src="pages/_/her.png"></a></div>
+         </div>
+      </div>      
+      <script src="pages/index/cube.js"></script>
+      <iframe id=taskbar style="z-index: -10; position: absolute; left:0; top:0; height: 100vh; width: 100vw;" src="https://varphi-online.neocities.org/sitewide/taskbar/taskbar.html" seamless frameBorder="0" allow-same-origi></iframe>
+   </body>
+</html>

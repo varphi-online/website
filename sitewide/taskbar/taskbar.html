@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="taskbar.css">
+   </head>
+   <body>
+      <svg>
+         <filter id="pixelate" x="0" y="0">
+            <feFlood x="2" y="2" height="1" width="1"/>
+            <feComposite width="2" height="2"/>
+            <feTile result="a"/>
+            <feComposite in="SourceGraphic" in2="a" 
+               operator="in"/>
+            <feMorphology operator="dilate"
+               radius="1"/>
+         </filter>
+      </svg>
+      <svg>
+         <filter id="pixelate2" x="0" y="0">
+            <feFlood x="4" y="4" height="2" width="2"/>
+            <feComposite width="4" height="4"/>
+            <feTile result="a"/>
+            <feComposite in="SourceGraphic" in2="a" 
+               operator="in"/>
+            <feMorphology operator="dilate"
+               radius="1.7"/>
+         </filter>
+      </svg>
+      <div class="window" id="musicPlayer">
+         <div class="windowHeader" id="musicPlayerheader">Music Player 2000</div>
+         <div class="windowContent">
+            <p>Current Song: <span id="currentSong">none</span></p>
+            <button class="playerButton" onclick="previousSong()"><img src=musicPlayer/prev.png></button>
+            <button class="playerButton" onclick="playPause()"><img id="musicPlayPause" src="musicPlayer/play.png"></button>
+            <button class="playerButton" onclick="nextSong()"><img src=musicPlayer/next.png></button>
+         </div>
+         <div id="musicPlayerFrame">
+            <div id="player"></div>
+         </div>
+      </div>
+      
+      <script src="window.js"></script>
+      <script src="https://www.youtube.com/iframe_api"></script>
+      <div id="taskbarContainer">
+         <div id="startmenu" style="display: none;">
+            <div class="menuEntry"  id="artistInfo">
+               <img src="https://f4.bcbits.com/img/0034404237_20.jpg">
+               <p>USR: VARPHI<br><br>
+                  STATUS: ONLINE<br>
+                  SUBSTATUS: AWAKE<br>
+               </p>
+               <div class="menuPopout" id="artistInfoOut">
+                  <p style="text-align: center;">
+                     19yo. Musician/Programmer<br>
+                     I create what I want to see in the world.<br><br>
+                  </p>
+                  <div class="row">
+                     <div class="column">
+                        Genres:
+                        <ul>
+                           <li>Ambient</li>
+                           <li>Electronica</li>
+                           <li>OST</li>
+                           <li>Acoustic</li>
+                        </ul>
+                     </div>
+                     <div class="column">
+                        Interests:
+                        <ul>
+                           <li>Mathematics</li>
+                           <li>Graphics</li>
+                           <li>Games</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="menuEntry"  id="links">
+               <div class="menuImg">
+                  <img src="Sync Earth.ico">
+               </div>
+               <div class="menuText">LINKS</div>
+               <div class="contextArr"></div>
+               <div class="menuPopout" id="linksOut">
+                  <div class="link">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png">
+                     <div class="menuText">Spotify</div>
+                     <a target="_blank" rel="noopener noreferrer" href="https://open.spotify.com/artist/1hMrh5wetHbeiJYBezuEPs?si=aXMsvaFwT86NiAlWRh3fMw" class="fill-div"></a>
+                  </div>
+                  <div class="link">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Bandcamp-button-circle-green.svg/1200px-Bandcamp-button-circle-green.svg.png">
+                     <div class="menuText">Bandcamp</div>
+                     <a target="_blank" rel="noopener noreferrer" href="https://varphiartist.bandcamp.com/" class="fill-div"></a>
+                  </div>
+                  <div class="link">
+                     <img src="https://cdn.icon-icons.com/icons2/1211/PNG/512/1491580647-yumminkysocialmedia18_83093.png">
+                     <div class="menuText">Youtube</div>
+                     <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/@varphiartist" class="fill-div"></a>
+                  </div>
+                  <div class="link">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Apple_Music_icon.svg/2048px-Apple_Music_icon.svg.png">
+                     <div class="menuText">Apple Music</div>
+                     <a target="_blank" rel="noopener noreferrer" href="https://music.apple.com/ee/artist/varphi/1648184088" class="fill-div"></a>
+                  </div>
+                  <div class="link">
+                     <img src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png">
+                     <div class="menuText">Github</div>
+                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/varphi-online" class="fill-div"></a>
+                  </div>
+               </div>
+               <div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="bar">
+         <div id="start">
+            <button id="startbtn" type="button" onclick="toggleDiv('startmenu','startbtn', true)">Info</button>
+            <img src="INFO.ico">
+         </div>
+         <div id="platforms">
+            <button id="playerButton" type="button" onclick="toggleDiv('musicPlayer', 'playerButton', true)">Music Player 2000</button>
+            <img src="Music Disc.ico">
+         </div>
+         <div id="dreams">
+            <a href="https://varphi-online.neocities.org/">
+            <button type="button" >Dreams</button>
+            <img src="Opened Folder.ico">
+            </a>
+         </div>
+         <div id=controlPanel>
+            <div id=cPanelVis>
+               <button id="volumeCPanel" type="button">
+                  <img src="Volume.ico" onclick="toggleDiv('volumeControl','volumeCPanel', false)">
+                  <div class="window" id="volumeControl">
+                     <div class="windowContent">
+                        <p>Volume</p>
+                        <input id=volumeSlider value="8" type="range" orient="vertical"/>
+                     </div>
+                  </div>
+               </button>
+               <div id="clock">
+                  <span id="swatchClock">@000</span>
+                  <script defer src="https://melonking.net/scripts/swatchTime.js"></script>
+               </div>
+            </div>
+         </div>
+         <script>
+            function toggleDiv(toToggle, toggler, indent) {
+              var div = document.getElementById(String(toToggle));
+              var div2 = document.getElementById(String(toggler));
+              var style = window.getComputedStyle(div);
+              if (style.display === "none") {
+                div.style.display = "block";
+                if (indent){
+                div2.style.boxShadow = "inset -1px -1px #f1f0f1, inset -2px -2px #eaebea,inset 1px 1px #323132, inset 2px 2px #414041";
+                div2.style.backgroundColor = "#E0E0E0"
+                }
+              } else {
+                div.style.display = "none";
+                if (indent){
+                div2.style.boxShadow = "inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041";
+                div2.style.backgroundColor = "#c6c3c6"
+                }
+              }
+            }
+         </script>
+      </div>
+      <script src="musicPlayer/music.js"></script>
+   </body>

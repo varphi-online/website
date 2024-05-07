@@ -1,0 +1,463 @@
+/*Initialize stuff*/
+ @font-face {
+     font-family: win95;
+     src: url("../W95FA.otf") format("opentype");
+}
+ .column {
+     float: left;
+     width: 50%;
+}
+/* Clear floats after the columns */
+ .row:after {
+     content: "";
+     display: table;
+     clear: both;
+}
+ svg {
+     position: absolute;
+     height: 0;
+}
+ body {
+     margin:0px;
+     height: 100%;
+     overflow-y: hidden;
+     overflow-x: hidden;
+     color: white;
+     image-rendering: pixelated;
+}
+ * {
+     box-sizing: border-box;
+}
+/* Window related stuff, should eventually move to its own file */
+ .window {
+     position: absolute;
+     z-index: 9;
+     background-color: #c6c3c6;
+     border: 1px solid #d3d3d3;
+     text-align: center;
+     padding: 2px;
+     box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+     pointer-events: all;
+}
+ .windowHeader{
+     padding: 2px;
+     cursor: move;
+     z-index: 10;
+     font-family: "win95";
+     font-size: 1.7cqh;
+     background-color: #0E0087;
+     text-align: left;
+     color: #fff;
+     height: 20px;
+}
+ .windowContent p{
+     font-family: "win95";
+     color: black;
+     margin: 0;
+     padding: 8px;
+     font-size: 1.3cqh;
+     text-align: center;
+     
+}
+ #musicPlayer{
+     top: 4%;
+     right: 2%;
+     display: none;
+     width: 27vh;
+     height: fit-content;
+     z-index: 10;
+}
+ #musicPlayerheader{
+     width: 100%;
+}
+ #musicPlayerFrame{
+     visibility: hidden;
+}
+ .playerButton {
+     aspect-ratio : 1 / 1;
+     width: 15%;
+     cursor: pointer;
+     background-color: #c6c3c6;
+     border: none;
+     margin: 1%;
+     box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+}
+ .playerButton img{
+     height: 75%;
+     -webkit-filter: drop-shadow(1px 1px #FAFAFA);
+     filter: drop-shadow(1px 1px #FAFAFA);
+     left: 50%;
+     position: relative;
+     transform: translateX(-50%);
+     vertical-align: middle;
+}
+ .playerButton:active {
+     box-shadow: rgb(241, 240, 241) -1px -1px inset, rgb(234, 235, 234) -2px -2px inset, rgb(50, 49, 50) 1px 1px inset, rgb(65, 64, 65) 2px 2px inset;
+}
+ #volumeControl{
+     display: none;
+     width: 6vh;
+     height: 16vh;
+     position: absolute;
+     left: -60%;
+     bottom: 140%;
+}
+ #volumeSlider{
+     writing-mode: vertical-lr;
+     direction: rtl;
+     appearance: none;
+     width:2px;
+     outline: none;
+     height: 10cqh;
+     background: black;
+     box-shadow: 1px 1px #f1f0f1, inset 1px 1px #323132;
+}
+ #volumeSlider::-webkit-slider-thumb {
+     -webkit-appearance: none;
+     appearance: none;
+     width: 2cqh;
+     height: 1cqh;
+     background: #c6c3c6;
+     cursor: pointer;
+     box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+}
+ #volumeSlider::-moz-range-thumb {
+     -webkit-appearance: none;
+     appearance: none;
+     background: #c6c3c6;
+     box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+     width: 20px;
+     height: 5%;
+     background: #000;
+     cursor: pointer;
+}
+/* Start menu classes and objects */
+ #startmenu {
+   pointer-events:all;
+     background-color: #c6c3c6;
+     bottom: 4vh;
+     left: 3px;
+     position: absolute;
+     padding: 2px;
+    /* height: 68%;
+    p */
+     width: 24vh;
+     box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+     z-index: 5;
+}
+
+
+ .menuEntry{
+     position: relative;
+     width: 100%;
+     font-family: "win95";
+     color: black;
+     font-size: 1.42cqh;
+     border-bottom: 1px solid #747074;
+}
+ .menuEntry:hover{
+     background-color: #010080;
+     color: white;
+     transition: 0s;
+}
+ .menuEntry:hover .contextArr{
+     filter: invert(1);
+     transition: 0s;
+}
+ .menuEntry .menuPopout {
+     display: none;
+     height: auto;
+     position: absolute;
+     width: 140%;
+     font-family: "win95";
+     color: black;
+     left: 23.7vh;
+     font-size: 1.4cqh;
+     box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+     background-color: #c6c3c6;
+}
+ .menuEntry .menuImg{
+     position: absolute;
+     height: 100%;
+     width: 20%;
+}
+ .menuEntry .menuImg img{
+     height: 75%;
+     position: relative;
+     left: 50%;
+     top: 50%;
+     transform: translateX(-50%) translateY(-50%);
+}
+ .menuEntry .menuText{
+     display: inline flex;
+     width: 70%;
+     height: 100%;
+     left: 20%;
+     position: absolute;
+     align-items: center;
+     flex-direction: row;
+     flex-wrap: nowrap;
+}
+ .menuEntry .contextArr{
+     left: 90%;
+     display: inline-block;
+     position: absolute;
+     height: 100%;
+     width: 10%;
+     background-image: url(taskbar/contArr.ico);
+     background-position: center;
+     background-size: 55%;
+     background-repeat: no-repeat;
+}
+/* artist info */
+ #artistInfo:hover #artistInfoOut {
+     display: inline-block;
+}
+ #artistInfo {
+     padding: 5px;
+     height: 8.7vh;
+}
+ #artistInfo img{
+     filter: url(#pixelate2);
+     height: 84%;
+     position: absolute;
+}
+ #artistInfo p{
+     margin-left: 42%;
+     margin-top: 5px;
+}
+ #artistInfoOut {
+     top: -2px;
+     padding-left: 11px;
+     padding-top: 8px;
+     z-index: 1;
+}
+ #artistInfoOut p{
+     margin: 0;
+     padding: 0;
+}
+/* Links */
+ #links:hover #linksOut {
+     display: inline-block;
+     transition: 0.5s;
+}
+ #links {
+     height: 4vh;
+}
+ #linksOut{
+     width: 70%;
+     height: auto;
+     bottom: 0%;
+     padding-top: 2px;
+     padding-left: 2px;
+     padding-right: 2px;
+}
+ .link:hover{
+     background-color: #010080;
+     color: white;
+    /* box-shadow: inset -1px -1px #f1f0f1, inset -2px -2px #eaebea, inset 1px 1px #323132, inset 2px 2px #414041;
+     */
+}
+ .link {
+     display: block;
+     width: 100%;
+     height: 5vh;
+     border-bottom: 1px solid #747074;
+}
+ .link .menuText{
+     position: relative;
+     top: -20%;
+     left: 9%;
+}
+ .link img{
+     display: inline-block;
+     height: 75%;
+     position: relative;
+     left: 5%;
+     top: 10%;
+}
+ .link .fill-div {
+     display: block;
+     height: 100%;
+     width: 100%;
+     text-decoration: none;
+     position: relative;
+     bottom: 118%;
+}
+/* at some point I need to refactor this to all be class based because each button is tedious and inflexible */
+ #taskbarContainer{
+     width: 100vw;
+     height: 50vh;
+     position: absolute;
+     left: 0;
+     bottom: 0;
+}
+ .bar{
+   pointer-events:all;
+     box-shadow: inset -2px 2px 0px #f1f0f1;
+     padding: 4px;
+    /* border: 1px solid red;
+     */
+     position: absolute;
+     bottom: 0px;
+     width: 100vw;
+     height: 4vh;
+     background-color: #c6c3c6;
+     color: black;
+}
+/* Actual buttons */
+ #start{
+     display: inline-block;
+     height: 100%;
+     width: 8vh;
+    /* border: 1px solid green;
+     */
+}
+ #start button{
+     -webkit-text-stroke: 1px black;
+     height: 100%;
+     width: 95%;
+     position: relative;
+     text-align: left;
+     padding-left: 48%;
+     font-family: "win95";
+     font-size: 1.8cqh;
+     border: none;
+     background-color: #c6c3c6;
+     box-shadow: inset 1px 1px #f1f0f1, inset 1.5px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+     border-radius: 0;
+     cursor: pointer;
+}
+ #start img{
+     position: absolute;
+     left: 1.1vh;
+     top: 25%;
+     height: 60%;
+     image-rendering: pixelated;
+     pointer-events:none;
+}
+ #platforms{
+     display: none;
+     position: relative;
+     height: 100%;
+     width: 18vh;
+     margin-right: 8px;
+    /* border: 1px solid green;
+     */
+}
+ #platforms button{
+     white-space:nowrap;
+     height: 100%;
+     width: 100%;
+     position: relative;
+     text-align: left;
+     padding-left: 22%;
+     padding-right: 5%;
+     font-family: "win95";
+     font-size: 1.8cqh;
+     border: none;
+     background-color: #c6c3c6;
+     box-shadow: inset 1px 1px #f1f0f1, inset 1.5px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+     border-radius: 0;
+     cursor: pointer;
+}
+ #platforms img{
+     position: absolute;
+     left: 4%;
+     top: 12%;
+     height: 76%;
+     image-rendering: pixelated;
+     pointer-events:none;
+}
+ #dreams{
+     display: inline-block;
+     position: relative;
+     height: 100%;
+     width: 18vh;
+    /* border: 1px solid green;
+     */
+}
+ #dreams button{
+     height: 100%;
+     width: 95%;
+     position: relative;
+     text-align: left;
+     padding-left: 22%;
+     left: -2%;
+     font-family: "win95";
+     font-size: 1.8cqh;
+     border: none;
+     background-color: #c6c3c6;
+     box-shadow: inset 1px 1px #f1f0f1, inset 1.5px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+     border-radius: 0;
+     cursor: pointer;
+}
+ #dreams img{
+     position: absolute;
+     left: 3%;
+     top: 12%;
+     height: 76%;
+     image-rendering: pixelated;
+     pointer-events:none;
+}
+ #controlPanel{
+     display: inline-block;
+     position: absolute;
+     height: 80%;
+     width: 12vh;
+     right:4px;
+    /* border: 1px solid green;
+     */
+}
+ #controlPanel #cPanelVis{
+     box-shadow: inset 1px 1px #b0aeb0, inset 1.5px 2px #adaaad, 1px 1px #eae8ea, 2px 2px #e5e4e5;
+     background-color: #c6c3c6;
+     width: 100%;
+     height: 100%;
+     padding: 2px;
+}
+ #volumeCPanel {
+     aspect-ratio : 1 / 1;
+     height: 100%;
+     border: none;
+     background-color: #c6c3c6;
+     left: 2%;
+     position: relative;
+}
+ #volumeCPanel img{
+     width: 130%;
+     top: 7%;
+     position: relative;
+     cursor: pointer;
+}
+ #controlPanel #clock{
+     height: 100%;
+     width: 30%;
+     position: absolute;
+     right: 2%;
+     text-align: right;
+     padding-left: 0;
+     font-family: "win95";
+     font-size: 1.7cqh;
+     border: none;
+     border-radius: 0;
+     top: 0;
+}
+ #controlPanel span{
+     z-index: 4;
+     position: absolute;
+     right: 8%;
+     height: 76%;
+     image-rendering: pixelated;
+}
+ #swatchClock a:link, #swatchClock a:visited, #swatchClock a:hover{
+     color: black;
+     text-decoration: none;
+}
+ #swatchClock{
+     position: absolute;
+     right: 1.9%;
+     bottom: 1.05%;
+     font-family: "win95";
+     text-decoration: none;
+}
