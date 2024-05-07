@@ -1,0 +1,50 @@
+/* HTML 3d shenanigans */
+.main {
+    filter: url(#pixelate2);
+    width: 400px;
+    height: 400px;
+    perspective: 400px;
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+  .cube {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: 25%;
+    left: 25%;
+    transform-style: preserve-3d;
+    transform: translateZ(-20px);
+    transition: transform 0.01s;
+    pointer-events: all;
+  }
+  
+  .cube__face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    pointer-events: all;
+  }
+  
+  .cube__face img {
+    width: 100%;
+    image-rendering: pixelated;
+    pointer-events: all;
+  }
+  
+  .cube__face--front  { transform: rotateY(  0deg) translateZ(100px); }
+  .cube__face--right  { transform: rotateY( 90deg) translateZ(100px); }
+  .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+  .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+  .cube__face--top    { transform: rotateX( 90deg) translateZ(100px); }
+  .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }

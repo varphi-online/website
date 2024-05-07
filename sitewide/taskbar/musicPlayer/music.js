@@ -51,7 +51,7 @@ var taskbar = document.getElementById("platforms");
 taskbar.style.display = "inline-block";
 player.playVideo();
 player.nextVideo();
-
+image.src = "musicPlayer/pause.png"
 }
 
 function onPlayerReady(event) {
