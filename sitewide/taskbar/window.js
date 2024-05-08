@@ -1,11 +1,20 @@
 // Make the DIV element draggable:
-//https://www.w3schools.com/howto/howto_js_draggable.asp
-dragElement(document.getElementById("musicPlayer"));
+// https://www.w3schools.com/howto/howto_js_draggable.asp
+
+// Edited from original script to iterate across all moveableWindow classes on
+// a page instead of hard-coding it
+
+var collection = document.getElementsByClassName("moveableWindow");
+
+for (let i = 0; i < collection.length; i++) {
+  dragElement(collection[i]);
+}
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
     // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").style.cursor = "move";
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:

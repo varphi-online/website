@@ -2,6 +2,8 @@
 <html>
    <head>
       <link rel="stylesheet" href="taskbar.css">
+      <link rel="stylesheet" href="taskbar_startmenu.css">
+      <link rel="stylesheet" href="taskbar_window.css">
    </head>
    <body>
       <svg>
@@ -26,7 +28,7 @@
                radius="1.7"/>
          </filter>
       </svg>
-      <div class="window" id="musicPlayer">
+      <div class="window moveableWindow" id="musicPlayer">
          <div class="windowHeader" id="musicPlayerheader">Music Player 2000</div>
          <div class="windowContent">
             <p>Current Song: <span id="currentSong">none</span></p>
@@ -127,8 +129,9 @@
                         <div class="link">
                            <img src="https://f4.bcbits.com/img/a2371408069_10.jpg">
                            <div class="menuText">Orbit</div>
-                           <a target="_parent" rel="noopener noreferrer" href="../../pages/music/orbit.html" class="fill-div"></a>
+                           <a target="_parent" rel="noopener noreferrer" href="../../pages/music/orbit/orbit.html" class="fill-div"></a>
                         </div>
+                        <!--
                         <div class="link">
                            <img src="https://f4.bcbits.com/img/a3155449451_10.jpg">
                            <div class="menuText">Faded Horizons</div>
@@ -149,6 +152,7 @@
                            <div class="menuText">Ergo Empty</div>
                            <a target="_parent" rel="noopener noreferrer" href="../../pages/music/ergoempty.html" class="fill-div"></a>
                         </div>
+                        -->
                      </div>
                      <div>
                      </div>
@@ -198,7 +202,7 @@
             <img src="Music Disc.ico">
          </div>
          <div id="dreams">
-            <a href="https://varphi-online.neocities.org/">
+            <a target="_parent" href="../../index.html">
             <button type="button" >Dreams</button>
             <img src="Opened Folder.ico">
             </a>

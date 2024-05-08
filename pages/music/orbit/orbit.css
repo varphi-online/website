@@ -1,0 +1,76 @@
+@font-face {
+    font-family: c64;
+    src: url("C64_Pro-STYLE.otf") format("opentype");
+}
+
+#bgScroll{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: -100;
+    filter: url(#pixelate2);
+    image-rendering: pixelated;
+    background: none;
+    background-color: none;
+}
+
+#bgSkybox {
+    position: absolute;
+    width: 100vw;
+    height: 200vh;
+    z-index: -101;
+    top: -25vh;
+    filter: url(#pixelate2);
+    image-rendering: pixelated;
+    background: none;
+    background-color: none;
+}
+
+h1{
+    font-family: c64;
+    letter-spacing: 1vh;
+    filter: url(#pixelate);
+}
+
+.windowContent img{
+    margin-top: 1%;
+    position: relative;
+    aspect-ratio: 1/1;
+    height: 33vh;
+}
+#infoBox{
+    position:absolute;
+    left:64vw;
+    top: 50vh;
+    transform: translateY(-50%);
+}
+
+#infoBox .windowContent{
+    text-wrap: balance;
+    width: 45vh;
+}
+
+#albumCover{
+    aspect-ratio: 1/1;
+    position:absolute;
+    left:18vw;
+    top: 47vh;
+}
+
+#tracklist {
+    width: 36vh;
+    height: auto;
+    position: absolute;
+    left: 8vw;
+    top: 30vh;
+}
+
+#tracklist ol{
+    padding: 8px;
+    text-align: left;
+    font-family: win95;
+    color: black;
+    padding-inline-start: 2cqw;
+    padding-right: 1cqw;
+    margin: 0;
+}

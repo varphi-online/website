@@ -1,0 +1,246 @@
+/*
+Main startmenu container has auto height for modularity.
+*/
+
+#startmenu {
+    pointer-events:all;
+      background-color: #c6c3c6;
+      bottom: 4vh;
+      left: 3px;
+      position: absolute;
+      padding: 2px;
+     /* height: 68%;
+     p */
+      width: 24vh;
+      box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+      z-index: 5;
+ }
+ 
+ #startmenu div:last-child{
+      border: none;
+    }
+
+/*
+Class based entries account for everything except the actual hover functonality
+because class children are broken when it comes to ::hover pseudo element.
+*/
+
+.menuEntry{
+      height: 4vh;
+      position: relative;
+      width: 100%;
+      font-family: "win95";
+      color: black;
+      font-size: 1.42cqh;
+      border-bottom: 1px solid #747074;
+ }
+  .menuEntry:hover{
+      background-color: #010080;
+      color: white;
+      transition: 0s;
+ }
+  .menuEntry:hover .contextArr{
+      filter: invert(1);
+      transition: 0s;
+ }
+  .menuEntry .menuPopout {
+      display: none;
+      height: auto;
+      position: absolute;
+      width: 140%;
+      font-family: "win95";
+      color: black;
+      left: 23.8vh;
+      font-size: 1.4cqh;
+      box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+      background-color: #c6c3c6;
+ }
+  .menuEntry .menuImg{
+      position: absolute;
+      height: 100%;
+      width: 20%;
+ }
+  .menuEntry .menuImg img{
+      height: 70%;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+ }
+  .menuEntry .menuText{
+      cursor: default;
+      display: inline flex;
+      width: 70%;
+      height: 100%;
+      left: 20%;
+      position: absolute;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: nowrap;
+ }
+  .menuEntry .contextArr{
+      left: 90%;
+      display: inline-block;
+      position: absolute;
+      height: 100%;
+      width: 12%;
+      background-image: url(contArr.ico);
+      background-position: center;
+      background-size: 50%;
+      background-repeat: no-repeat;
+ }
+ 
+/*
+The link class can be used anywhere, do not confuse with the links menu entry
+*/
+
+.link:hover{
+    background-color: #010080;
+    color: white;
+}
+.link {
+    display: block;
+    width: 100%;
+    height: 5vh;
+    border-bottom: 1px solid #747074;
+}
+.link .menuText{
+    position: relative;
+    top: -20%;
+    left: 9%;
+}
+.link img{
+    display: inline-block;
+    height: 75%;
+    position: relative;
+    left: 5%;
+    top: 10%;
+}
+.link .fill-div {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    bottom: 118%;
+}
+
+ /*
+ Special entry behaves different from all others and stays at the top, best
+ not to mess with it too much
+ */
+
+  #artistInfo:hover #artistInfoOut {
+      display: inline-block;
+ }
+  #artistInfo {
+      padding: 5px;
+      height: 8.7vh;
+ }
+  #artistInfo img{
+      filter: url(#pixelate2);
+      height: 84%;
+      position: absolute;
+ }
+  #artistInfo p{
+      margin-left: 42%;
+      margin-top: 5px;
+ }
+  #artistInfoOut {
+      top: 0px;
+      padding-left: 11px;
+      padding-top: 8px;
+      z-index: 1;
+ }
+  #artistInfoOut p{
+      margin: 0;
+      padding: 0;
+ }
+
+/*
+Links has very basic formatting because of all class definitions
+*/
+
+  #links:hover #linksOut {
+      display: inline-block;
+      transition: 0.5s;
+ }
+ 
+  #linksOut{
+      width: 70%;
+      height: auto;
+      bottom: 0%;
+      padding: 2px;
+ }
+ 
+/*
+Projects has a sub-menu of menu entries that have their own links popouts
+indentation is used to show heirarchy
+*/
+
+ #projects:hover #projectsOut {
+      display: inline-block;
+      transition: 0.5s;
+ }
+ 
+ #projectsOut{
+      width: 70%;
+      height: auto;
+      bottom: 0%;
+      padding: 2px;
+ }
+ 
+ #music:hover #musicOut{
+      display: inline-block;
+      transition: 0.5s;
+ }
+ 
+    #musicOut{
+         position: absolute;
+         width: 100%;
+         height: auto;
+         bottom: 0%;
+         left: 100%;
+         padding: 2px;
+    }
+
+    #musicOut .link img{
+         filter: url(#pixelate);
+    }
+
+    #programming:hover #programmingOut{
+         display: inline-block;
+         transition: 0.5s;
+    }
+
+    #programmingOut{
+        position: absolute;
+        width: 100%;
+        height: auto;
+        bottom: 0%;
+        left: 101%;
+        padding: 2px;
+   }
+ 
+/*
+May be useful to make a second button menuentry class instead of doing this
+if more appear in the start menu.
+*/
+ 
+ #home{
+      cursor: pointer;
+ }
+ 
+ #home .menuText{
+      cursor: pointer;
+ }
+ 
+ #home a{
+      cursor: pointer;
+      color: #000;
+ }
+ 
+ #home a:hover{
+      cursor: pointer;
+      color: #fff;
+ }

@@ -1,0 +1,135 @@
+/*
+Generalized classes for containing divs
+
+Use sitewide/taskbar/window.js to allow movement, will only move if the window
+header has the same id as it's parent but with "header" at the end. Without this
+you will be able to move the window from anywhere inside it.
+
+The div must also have the moveableWindow class as well
+
+Ex:
+<div class="window moveableWindow" id=[somewindowid]>
+    <div id=[somewindoid]header>
+*/
+
+.window {
+    position: absolute;
+    z-index: 9;
+    background-color: #c6c3c6;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+    padding: 2px;
+    box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+    pointer-events: all;
+}
+
+.windowHeader{
+    padding: 2px;
+    
+    z-index: 10;
+    font-family: "win95";
+    font-size: 1.7cqh;
+    background-color: #0E0087;
+    text-align: left;
+    color: #fff;
+    margin-bottom: 2px;
+    height: min(20px, 2.1cqh);
+}
+.windowContent p{
+    font-family: "win95";
+    color: black;
+    margin: 0;
+    padding: 8px;
+    font-size: 1.3cqh;
+    text-align: center;
+}
+
+.whiteBg{
+    background-color: white;
+    box-shadow: inset -1px -1px #f1f0f1, inset -1.5px -2px #eaebea, inset 1px 1px #323132;
+}
+
+/*
+Music player applet, classes for buttons for expandability/readability
+*/
+
+#musicPlayer{
+    top: 4%;
+    right: 2%;
+    display: none;
+    width: 27vh;
+    height: fit-content;
+    z-index: 10;
+}
+#musicPlayerheader{
+    width: 100%;
+}
+#musicPlayerFrame{
+    visibility: hidden;
+}
+.playerButton {
+    aspect-ratio : 1 / 1;
+    width: 15%;
+    cursor: pointer;
+    background-color: #c6c3c6;
+    border: none;
+    margin: 1%;
+    box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+}
+.playerButton img{
+    height: 75%;
+    -webkit-filter: drop-shadow(1px 1px #FAFAFA);
+    filter: drop-shadow(1px 1px #FAFAFA);
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    vertical-align: middle;
+}
+.playerButton:active {
+    box-shadow: rgb(241, 240, 241) -1px -1px inset, rgb(234, 235, 234) -2px -2px inset, rgb(50, 49, 50) 1px 1px inset, rgb(65, 64, 65) 2px 2px inset;
+}
+
+/*
+Volume window is placed relative to the volume control icon in the
+control panel instead of screen.
+
+! Does not look correct on firefox, at some point will need to figure that out
+*/
+
+#volumeControl{
+    display: none;
+    width: 6vh;
+    height: 16vh;
+    position: absolute;
+    left: -60%;
+    bottom: 140%;
+}
+#volumeSlider{
+    writing-mode: vertical-lr;
+    direction: rtl;
+    appearance: none;
+    width:2px;
+    outline: none;
+    height: 10cqh;
+    background: black;
+    box-shadow: 1px 1px #f1f0f1, inset 1px 1px #323132;
+}
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 2cqh;
+    height: 1cqh;
+    background: #c6c3c6;
+    cursor: pointer;
+    box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+}
+#volumeSlider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #c6c3c6;
+    box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
+    width: 20px;
+    height: 5%;
+    background: #000;
+    cursor: pointer;
+}
