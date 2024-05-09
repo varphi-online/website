@@ -21,6 +21,10 @@ if (localStorage.getItem("volume") === null) {
     }
 }
 
+if (localStorage.getItem("paused") === null) {
+  localStorage.setItem("paused", false);
+}
+
 if (localStorage.getItem("videoIndex") === null) {
     localStorage.setItem("videoIndex", "21");
     localStorage.setItem("videoSeek", 0);
@@ -85,7 +89,6 @@ function onPlayerReady(event) {
     event.target.setLoop(true);
     event.target.setVolume(0)
     openPlayer();
-    console.log("Seeking to time: "+localStorage.getItem("videoSeek"))
     //Seek once fully loaded, and only once
     player.addEventListener('onStateChange', function(e) {
       if (e.data == YT.PlayerState.PLAYING && !seekPerformed) {
