@@ -5,7 +5,7 @@
       <link rel="stylesheet" href="taskbar_startmenu.css">
       <link rel="stylesheet" href="taskbar_window.css">
    </head>
-   <body>
+   <body onbeforeunload="return logVideoData()">
       <svg>
          <filter id="pixelate" x="0" y="0">
             <feFlood x="2" y="2" height="1" width="1"/>
@@ -41,7 +41,7 @@
          </div>
       </div>
       <script src="window.js"></script>
-      <script src="https://www.youtube.com/iframe_api"></script>
+      <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
       <div id="taskbarContainer">
          <div id="startmenu" style="display: none;">
             <div class="menuEntry"  id="artistInfo">
