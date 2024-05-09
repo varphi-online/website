@@ -30,18 +30,25 @@
       </svg>
       <div class="window moveableWindow" id="musicPlayer">
          <div class="windowHeader" id="musicPlayerheader">Music Player 2000</div>
-         <div class="windowContent">
+         <div style="margin-bottom: 6%;" class="windowContent">
             <p>Current Song: <span id="currentSong">none</span></p>
             <button class="playerButton" onclick="previousSong()"><img src=musicPlayer/prev.png></button>
             <button class="playerButton" onclick="playPause()"><img id="musicPlayPause" src="musicPlayer/play.png"></button>
             <button class="playerButton" onclick="nextSong()"><img src=musicPlayer/next.png></button>
+         </div>
+         <div class="windowContent" id="musicSelect">
+            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">Website Music</button>
+            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxYuXG4rOLh8QaCXeXg78lo')">Discography</button>
+            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">Orbit</button>
+            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxZY9eF1L0obp7zmpESPLQa')">An End of Sorts</button>
+            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxA9_EO73LnUUJ5QJsehmC9')">FOTE6</button>
+            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfayOwGFpd7C30W0lDwYx2_ey')">Singles</button>
          </div>
          <div id="musicPlayerFrame">
             <div id="player"></div>
          </div>
       </div>
       <script src="window.js"></script>
-      <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
       <div id="taskbarContainer">
          <div id="startmenu" style="display: none;">
             <div class="menuEntry"  id="artistInfo">
@@ -223,6 +230,8 @@
                   <script defer src="https://melonking.net/scripts/swatchTime.js"></script>
                </div>
             </div>
+         </div>
+         <div id="hider">
          </div>
          <script>
             function toggleDiv(toToggle, toggler, indent) {

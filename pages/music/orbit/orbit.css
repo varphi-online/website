@@ -20,7 +20,7 @@
     height: 200vh;
     z-index: -101;
     top: -25vh;
-    filter: url(#pixelate2);
+    filter: url(#pixelate2) brightness(110%);
     image-rendering: pixelated;
     background: none;
     background-color: none;

@@ -150,7 +150,7 @@
      position: absolute;
      height: 80%;
      width: 12vh;
-     right:4px;
+     right:0.5%;
     /* border: 1px solid green;
      */
 }
@@ -205,4 +205,12 @@
      bottom: 1.05%;
      font-family: "win95";
      text-decoration: none;
+}
+
+#hider{
+     height: 100%;
+     width: 0.3%;
+     position: absolute;
+     right:2px;
+     top: 0%;
 }

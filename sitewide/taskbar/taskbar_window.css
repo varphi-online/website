@@ -13,6 +13,7 @@ Ex:
 */
 
 .window {
+    display: block;
     position: absolute;
     z-index: 9;
     background-color: #c6c3c6;
@@ -49,6 +50,14 @@ Ex:
     box-shadow: inset -1px -1px #f1f0f1, inset -1.5px -2px #eaebea, inset 1px 1px #323132;
 }
 
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block; /* or any other display value as per your requirement */
+}
+
 /*
 Music player applet, classes for buttons for expandability/readability
 */
@@ -65,8 +74,28 @@ Music player applet, classes for buttons for expandability/readability
     width: 100%;
 }
 #musicPlayerFrame{
-    visibility: hidden;
+    display: none;
 }
+
+#musicSelect button{
+    width: 100%;
+    margin-top: 2px;
+    box-shadow: inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, inset -1px -1px #323132, inset -2px -2px #414041;
+    border: none;
+    border-radius: 0;
+    font-family: win95;
+    cursor: pointer;
+    background-color: #c6c3c6;
+    font-size: 1.3cqh;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#musicSelect button:active{
+    box-shadow: inset -1px -1px #f1f0f1, inset -2px -2px #eaebea, inset 1px 1px #323132, inset 2px 2px #414041;
+    background-color: #E0E0E0;
+}
+
 .playerButton {
     aspect-ratio : 1 / 1;
     width: 15%;
