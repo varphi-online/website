@@ -3,7 +3,7 @@
 
 // Edited from original script to iterate across all moveableWindow classes on
 // a page instead of hard-coding it
-
+window.addEventListener('DOMContentLoaded', () => {
 var collection = document.getElementsByClassName("moveableWindow");
 
 for (let i = 0; i < collection.length; i++) {
@@ -51,3 +51,4 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+});

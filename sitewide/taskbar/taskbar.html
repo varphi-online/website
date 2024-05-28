@@ -37,7 +37,7 @@
             <button class="playerButton" onclick="nextSong()"><img src=musicPlayer/next.png></button>
          </div>
          <div class="windowContent" id="musicSelect">
-            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">Website Music</button>
+            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfazadVRIROx8J7FlpErhTPsA')">Website Music</button>
             <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxYuXG4rOLh8QaCXeXg78lo')">Discography</button>
             <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">Orbit</button>
             <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxZY9eF1L0obp7zmpESPLQa')">An End of Sorts</button>
@@ -187,6 +187,15 @@
                   </div>
                   </div>
                </div>
+               <div class="menuEntry"  id="settings">
+                  <div class="menuImg">
+                     <img src="Settings.ico">
+                  </div>
+                  <div class="menuText">SETTINGS</div>
+                  <div class="contextArr" style="visibility: hidden;"></div>
+                  <button onclick="toggleDiv('settingsWindow', 'settings', false);toggleDiv('settingsTaskbar', 'settings', false)"></button>
+               </a>
+               </div>
                <div class="menuEntry"  id="home">
                   <a target="_parent" rel="noopener noreferrer" href="../../index.html" class="fill-div">
                   <div class="menuImg">
@@ -200,19 +209,19 @@
          </div>
       </div>
       <div class="bar">
-         <div id="start">
-            <button id="startbtn" type="button" onclick="toggleDiv('startmenu','startbtn', true)">Info</button>
+         <div id="appIcons">
+         <button class="taskbarEntry" id="startbtn" type="button" onclick="toggleDiv('startmenu','startbtn', true)">
             <img src="INFO.ico">
-         </div>
-         <div id="platforms">
-            <button id="playerButton" type="button" onclick="toggleDiv('musicPlayer', 'playerButton', true)">Music Player 2000</button>
+            <p>Start</p>
+         </button>
+         <button class="taskbarEntry" id="musicPlayerTB" style="display: none;" type="button" onclick="toggleDiv('musicPlayer', 'musicPlayerTB', true)">
             <img src="Music Disc.ico">
-         </div>
-         <div id="dreams">
-            <a target="_parent" href="../../index.html">
-            <button type="button" >Dreams</button>
+            <p>Music Player 2000</p>
+         </button>
+         <a class="taskbarEntry" target="_parent" href="../../index.html">
             <img src="Opened Folder.ico">
-            </a>
+            <p>Dreams</p>
+         </a>
          </div>
          <div id=controlPanel>
             <div id=cPanelVis>

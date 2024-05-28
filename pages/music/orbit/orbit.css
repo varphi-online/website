@@ -39,10 +39,10 @@ h1{
     height: 33vh;
 }
 #infoBox{
-    position:absolute;
-    left:64vw;
-    top: 50vh;
-    transform: translateY(-50%);
+    position: absolute;
+    left: 8vw;
+    top: 30vh;
+
 }
 
 #infoBox .windowContent{
@@ -53,16 +53,23 @@ h1{
 #albumCover{
     aspect-ratio: 1/1;
     position:absolute;
-    left:18vw;
-    top: 47vh;
+    right: 0px;
+    bottom: 0px;
 }
 
 #tracklist {
     width: 36vh;
-    height: auto;
+    height: 30vh;
     position: absolute;
-    left: 8vw;
-    top: 30vh;
+    top: 0px;
+    left:0px;
+    font-size: 1.8cqh;
+}
+
+#tracklist .windowContent{
+    width: 36vh;
+    height: 27cqh;
+    width: 35.3cqh;
 }
 
 #tracklist ol{
@@ -73,4 +80,14 @@ h1{
     padding-inline-start: 2cqw;
     padding-right: 1cqw;
     margin: 0;
+}
+
+#sisterWindows{
+    height: auto;
+    width: auto;
+    width: 52vh;
+    height: 50vh;
+    position:absolute;
+    left:64vw;
+    top: 20vh;
 }

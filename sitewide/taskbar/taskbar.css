@@ -51,100 +51,58 @@
      color: black;
 }
 /* Actual buttons */
- #start{
-     display: inline-block;
+
+#appIcons {
      height: 100%;
-     width: 8vh;
-    /* border: 1px solid green;
-     */
-}
- #start button{
-     -webkit-text-stroke: 1px black;
-     height: 100%;
-     width: 95%;
      position: relative;
-     text-align: left;
-     padding-left: 48%;
-     font-family: "win95";
-     font-size: 1.8cqh;
+     width: 90%;
+     display: inline-flex;
+     justify-content: flex-start;
+     align-items: center;
+}
+
+.taskbarEntry{
+     position: relative;
+     height: 100%;
+     display: flex;
+     justify-content: flex-start;
+     box-sizing: content-box;
+     width: fit-content;
+     align-items: center;
      border: none;
+     padding: 0;
+     padding-left: 5px;
+     padding-right: 5px;
+     cursor: pointer;
      background-color: #c6c3c6;
      box-shadow: inset 1px 1px #f1f0f1, inset 1.5px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
-     border-radius: 0;
-     cursor: pointer;
-}
- #start img{
-     position: absolute;
-     left: 1.1vh;
-     top: 25%;
-     height: 60%;
-     image-rendering: pixelated;
-     pointer-events:none;
-}
- #platforms{
-     display: none;
-     position: relative;
-     height: 100%;
-     width: 18vh;
+     gap: 6px;
      margin-right: 8px;
-    /* border: 1px solid green;
-     */
+     text-decoration: none;
+     color: black;
 }
- #platforms button{
-     white-space:nowrap;
-     height: 100%;
-     width: 100%;
-     position: relative;
-     text-align: left;
-     padding-left: 22%;
-     padding-right: 5%;
-     font-family: "win95";
-     font-size: 1.8cqh;
-     border: none;
-     background-color: #c6c3c6;
-     box-shadow: inset 1px 1px #f1f0f1, inset 1.5px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
-     border-radius: 0;
-     cursor: pointer;
-}
- #platforms img{
-     position: absolute;
-     left: 4%;
-     top: 12%;
+
+.taskbarEntry img {
      height: 76%;
      image-rendering: pixelated;
-     pointer-events:none;
+     margin: 0;
 }
- #dreams{
-     display: inline-block;
-     position: relative;
-     height: 100%;
-     width: 18vh;
-    /* border: 1px solid green;
-     */
-}
- #dreams button{
-     height: 100%;
-     width: 95%;
-     position: relative;
-     text-align: left;
-     padding-left: 22%;
-     left: -2%;
+
+.taskbarEntry p {
      font-family: "win95";
+     margin: 0;
      font-size: 1.8cqh;
-     border: none;
-     background-color: #c6c3c6;
-     box-shadow: inset 1px 1px #f1f0f1, inset 1.5px 2px #eaebea, 1px 1px #323132, 2px 2px #414041;
-     border-radius: 0;
-     cursor: pointer;
 }
- #dreams img{
-     position: absolute;
-     left: 3%;
-     top: 12%;
-     height: 76%;
-     image-rendering: pixelated;
-     pointer-events:none;
+
+#startbtn {
+     -webkit-text-stroke: 1px black;
 }
+
+.taskbarEntry.indent{
+     box-shadow: inset -1px -1px #f1f0f1, inset -2px -2px #eaebea,inset 1px 1px #323132, inset 2px 2px #414041;
+     background-color: #E0E0E0;
+}
+
  #controlPanel{
      display: inline-block;
      position: absolute;

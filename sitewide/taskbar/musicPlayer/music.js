@@ -1,7 +1,8 @@
 let player;
 let image = document.getElementById("musicPlayPause");
 let slider = document.getElementById("volumeSlider");
-let default_plist = "PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS";
+let default_plist = "PLZVAe2HWDfazadVRIROx8J7FlpErhTPsA";
+let default_song = "LfG1aumyJ_I";
 let seekPerformed = false;
 
 var tag = document.createElement('script');
@@ -69,7 +70,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: 1,
         width: 1,
-        videoId: "NivE6ZETBqk",
+        videoId: default_song,
         playerVars: {
             autoplay: 1,
             controls: 0,
@@ -109,8 +110,8 @@ function onPlayerReady(event) {
 
 function openPlayer() {
     player.setLoop(true);
-    var taskbar = document.getElementById("platforms");
-    taskbar.style.display = "inline-block";
+    var taskbar = document.getElementById("musicPlayerTB");
+    taskbar.style.display = "inline-flex";
     //player.playVideo();
     //player.nextVideo();
     player.playVideoAt(localStorage.getItem("videoIndex"))
@@ -149,7 +150,7 @@ function changePlaylist(elem, pid){
     player = new YT.Player('player', {
         height: 1,
         width: 1,
-        videoId: "NivE6ZETBqk",
+        videoId: default_song,
         playerVars: {
             autoplay: 1,
             controls: 0,
