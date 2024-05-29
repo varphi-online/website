@@ -4,6 +4,9 @@
       <title>varphi.online</title>
       <link rel="stylesheet" href="sitewide/primary.css">
       <link rel="stylesheet" href="pages/index/index.css">
+      <link rel="stylesheet" href="sitewide/taskbar/taskbar_window.css">
+      <script src="sitewide/apps/apps.js"></script>
+      <script src="sitewide\taskbar\window.js"></script>
       <link rel="icon" type="image/x-icon" href="sitewide/taskbar/Sync Earth.ico">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap">
    </head>
@@ -38,10 +41,27 @@
             <div class="cube__face cube__face--right"><img src="sitewide\images\mini\faded-horizons.jpg"></div>
             <div class="cube__face cube__face--left"><img src="sitewide\images\mini\fote6.jpg"></div>
             <div class="cube__face cube__face--top"><img src="sitewide\images\mini\ergo-empty.jpg"></div>
-            <div class="cube__face cube__face--bottom"><a href="/pages/_/_"><img src="/pages/_/her.png"></a></div>
+            <div class="cube__face cube__face--bottom"><a href="/pages/willow/willow.html"><img src="/pages/willow/her.png"></a></div>
          </div>
       </div>
       <script src="pages/index/cube.js"></script>
+
+      <div class="app" data-title="Info" data-icon="Book.ico">
+         <div class="window movableWindow" id="infoBox" style="display: none;">
+             <div class="windowHeader" id="infoBoxheader">General Info</div>
+             <div class="windowContent whiteBg">
+                <p>
+                Varphi is the collective works of musician, programmer and jack of trades ██████<br><br>
+                This site is a compilation of all works that can be faithfully brought to the world-wide-web and is very much alive! Constantly
+                being updated, with changes plainly visible on the accompanying Github Repo. A <a target="_blank" href="http://varphi-online.neocities.org">sister site</a>
+                is available as well and is updated whenever is most convienient, so older versions may be available there!<br><br>
+                If you are viewing this on mobile and cannot access all the great stuff here, click <a href="https://varphi.carrd.co">this link</a>
+                to access the music of Varphi on a site made for mobile.
+             </p>
+             </div>
+          </div>
+     </div>
+
       <iframe id=taskbar style="z-index: -10; position: absolute; left:0; top:0; height: 100vh; width: 100vw;" src="sitewide/taskbar/taskbar.html" seamless frameBorder="0" allow-same-origi></iframe>
    </body>
 </html>

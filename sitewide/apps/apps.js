@@ -59,7 +59,8 @@ window.addEventListener("DOMContentLoaded", () => {
       //image is referenced as data-icon="<link to some image>" as an attribute in the app div
       var image = document.createElement("img");
       if (elmnt.dataset.icon) {
-        image.src = elmnt.dataset.icon;
+        image.src = "/sitewide/apps/icons/" + elmnt.dataset.icon;
+        console.log(image.src);
       } else {
         image.src = "/sitewide/taskbar/Program.ico";
       }
