@@ -1,10 +1,10 @@
 // Make the DIV element draggable:
 // https://www.w3schools.com/howto/howto_js_draggable.asp
 
-// Edited from original script to iterate across all moveableWindow classes on
+// Edited from original script to iterate across all movableWindow classes on
 // a page instead of hard-coding it
 window.addEventListener('DOMContentLoaded', () => {
-var collection = document.getElementsByClassName("moveableWindow");
+var collection = document.getElementsByClassName("movableWindow");
 
 for (let i = 0; i < collection.length; i++) {
   dragElement(collection[i]);

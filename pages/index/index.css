@@ -44,7 +44,22 @@
   
   .cube__face--front  { transform: rotateY(  0deg) translateZ(100px); }
   .cube__face--right  { transform: rotateY( 90deg) translateZ(100px); }
-  .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+  .cube__face--back   { transform: rotateY(180deg) translateZ(100px); -webkit-transform: rotateY(180deg) translateZ(100px); -moz-transform: rotateY(180deg) translateZ(100px); -ms-transform: rotateY(180deg) translateZ(100px); -o-transform: rotateY(180deg) translateZ(100px); }
   .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
   .cube__face--top    { transform: rotateX( 90deg) translateZ(100px); }
   .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+  /* Window Boxes */
+
+  #infoBox{
+    position: absolute;
+    right: 13vh;
+    bottom: 13vh;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  #infoBox .windowContent {
+    text-wrap: balance;
+    width: 30vh;
+  }
