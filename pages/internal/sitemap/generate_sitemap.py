@@ -1,6 +1,15 @@
 import os
 
-root = 'C:\\Users\\acfma\\Documents\\Code\\Web\\website'
+def walk_up_folder(path, depth=1):
+    _cur_depth = 1
+    while _cur_depth < depth:
+        path = os.path.dirname(path)
+        _cur_depth += 1
+    return path
+
+root = os.path.join(os.path.dirname( __file__ ))
+root = walk_up_folder(root,4)
+print(root )
 
 main = []
 
@@ -10,7 +19,7 @@ for path, subdirs, files in os.walk(root):
             dir = path.split("website\\")
             if len(dir) >1:
                 dir = dir[1].split("\\")
-                main.append((["root"] + dir,name))
+                main.append((["root"] + dir,name+"|"+path.split("website\\")[1]))
             else:
                 dir = ""
                 main.append((["root"],name))
@@ -32,7 +41,6 @@ def listadd(file, directory_path, pwd):
 for item in main:
     listadd(item[1], item[0], out)
 
-path = root+"\\pages\\internal\\sitemap\\sitemap.txt"
-
-file =  open(path, 'w')
-file.write(str(out))
+path = root+"\\pages\\internal\\sitemap\\sitemap.js"
+with open(path, "w") as file:
+    file.write(f"var sitemap = {str(out)};\n")
