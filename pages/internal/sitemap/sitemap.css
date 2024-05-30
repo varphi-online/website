@@ -1,0 +1,22 @@
+span {
+    position: relative;
+    padding-left: 15px;
+    border-left: 1px dashed black;
+    margin-left: 10px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+summary p{
+    margin: 0;
+}
+
+summary img {
+    height: 20px;
+    margin-right: 5px;
+}
+
+summary {
+    display: flex;
+    align-items: center;
+}
