@@ -1,9 +1,16 @@
 #mainFlex {
-    display: flexbox;
+    display: flex;
     width: 100vw;
     height: 100vh;
+    flex-wrap: wrap;
 }
 
 .box{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 10vh;
+    text-align: center;
 }
