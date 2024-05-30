@@ -1,0 +1,603 @@
+132 (2).ico
+3D Text.ico
+3D computer.ico
+AOL (Canada).ico
+AOL (UK) 2.ico
+AOL (UK).ico
+AOL (USA).ico
+AOL Disc.ico
+AOL List.ico
+AOL.ico
+Accesability.ico
+Agent.ico
+Alarm (1 of 8).ico
+Alarm (2 of 8).ico
+Alarm (3 of 8).ico
+Alarm (4 of 8).ico
+Alarm (5 of 8).ico
+Alarm (6 of 8).ico
+Alarm (7 of 8).ico
+Alarm (8 of 8).ico
+Amex.ico
+Apple.ico
+Arrow (down).ico
+Arrow (up).ico
+Battery (Big on green BG).ico
+Battery (Big on red BG).ico
+Battery (Big without BG).ico
+Battery (Small on green BG).ico
+Battery (Small on red BG).ico
+Battery (Small on white BG).ico
+Battery (Small on yellow BG).ico
+Battery (Unknown %).ico
+Battery 2 (10%).ico
+Battery 2 (50%).ico
+Battery 2 (Battery error).ico
+Battery 2 (Charging).ico
+Battery 2 (Full).ico
+Battery 2 (No battery).ico
+Battery Indicator (0%).ico
+Battery Indicator (100%).ico
+Battery Indicator (15%).ico
+Battery Indicator (25%).ico
+Battery Indicator (30%).ico
+Battery Indicator (40%).ico
+Battery Indicator (5%).ico
+Battery Indicator (50%).ico
+Battery Indicator (60%).ico
+Battery Indicator (70%).ico
+Battery Indicator (75%).ico
+Battery Indicator (90%).ico
+Battery Indicator (95%).ico
+Battery block.ico
+Beizer.ico
+Blank sheet.ico
+Blank sheets.ico
+Blue dot.ico
+Book 2.ico
+Book 3.ico
+Book 4.ico
+Book Disc.ico
+Book with clock.ico
+Book with phone 2.ico
+Book with phone 3.ico
+Book with phone.ico
+Book.ico
+Books folder.ico
+Box with files.ico
+Briefcase with phone.ico
+Briefcase.ico
+Builder.ico
+Bunch of Keys.ico
+CSi.ico
+Calculator.ico
+Certificate 2.ico
+Certificate.ico
+Change battery.ico
+Chat.ico
+Check mard.ico
+Chemistry with phone.ico
+Chip 2.ico
+Chip Card.ico
+Chip.ico
+Cine-film roll.ico
+Cine-film with music.ico
+Cine-film.ico
+Clipboard with phone.ico
+Color triangle sheet (gray).ico
+Color triangle sheet (white).ico
+Computer Card.ico
+Computer Input.ico
+Computer and Briefcase Sync.ico
+Computer are Earth.ico
+Computer on hand Input.ico
+Computer with phone.ico
+Computer with program.ico
+Computer with programs.ico
+Conference table.ico
+Config program.ico
+Config sheet.ico
+Connect to Database with Phone.ico
+Connect to Earth with phone.ico
+Connections on Earth.ico
+Constructor.ico
+Contact Card.ico
+Content sort (right).ico
+Content sort (up & down).ico
+Controls Folder.ico
+Controls.ico
+Cross.ico
+Cursor Trail.ico
+Cursor active.ico
+Cursor.ico
+Customize computer.ico
+Dark Agent.ico
+Deform sheet (H).ico
+Deform sheet (V).ico
+Deskette Drive.ico
+Desktop.ico
+Destroy letter.ico
+Detector.ico
+Device.ico
+Devices.ico
+Dial-Up Connection (1 of 4).ico
+Dial-Up Connection (2 of 4).ico
+Dial-Up Connection (3 of 4).ico
+Dial-Up Connection (4 of 4).ico
+Dial-Up Folder.ico
+Dial-Up.ico
+Dialog.ico
+Disc Drive 2.ico
+Disc Drive 3.ico
+Disc Drive.ico
+Disc sheet.ico
+Discover.ico
+Diskette Drive with Diskette.ico
+Diskette.ico
+Diskettes.ico
+Document Locked.ico
+Document to Document.ico
+Document with Earth.ico
+Document with phone.ico
+Documents Folder.ico
+Documents conflict.ico
+Drawing figures.ico
+Drawing green picture.ico
+Drawing on whiteboard.ico
+Drawing red picture.ico
+Drive Graph.ico
+Drive.ico
+Earth (16 colors).ico
+Earth (4 colors).ico
+Earth (8 colors).ico
+Earth (small).ico
+Earth Help Program.ico
+Earth Rating Document.ico
+Earth Rating Program.ico
+Earth Rating.ico
+Eject Drive.ico
+Empty Recycle Bin.ico
+Exit (gray).ICO
+Explosion (1 of 3).ico
+Explosion (2 of 3).ico
+Explosion (3 of 3).ico
+FIRE.ICO
+Fax & Modem Sync.ico
+Fax Input.ico
+Fax Warning.ico
+Fax connection.ico
+Fax dialing (1 of 9).ico
+Fax dialing (2 of 9).ico
+Fax dialing (3 of 9).ico
+Fax dialing (4 of 9).ico
+Fax dialing (5 of 9).ico
+Fax dialing (6 of 9).ico
+Fax dialing (7 of 9).ico
+Fax dialing (8 of 9).ico
+Fax dialing (9 of 9).ico
+Fax print.ico
+Fax.ico
+Files from computer.ico
+Filling forms.ico
+Flying Windows.ico
+Folder (hi-res).ico
+Folder Transfer.ico
+Folder catalog 2.ico
+Folder catalog.ico
+Folder to Briefcase.ico
+Folder to Folder & Document to Document.ico
+Folder to Folder.ico
+Folder with files to Folder with files.ico
+Folder's files to Folder.ico
+Folder.ico
+Folders conflict.ico
+Folders with files conflict.ico
+Folt Folder.ico
+Font slide.ico
+Font speed.ico
+Font.ico
+Generic.ico
+Globe.ico
+Gray briefcase.ico
+Gray tile.ico
+Handset in hand.ico
+Handset with Dock Station.ico
+Handset with dialog error.ico
+Handset with dialog.ico
+Handset.ico
+Help (gray).ICO
+Help 3D.ico
+Help Tile.ico
+Help book.ico
+Help page.ico
+Help sheet.ico
+Highlight Network Drive.ico
+Highlights in program.ico
+Holding.ico
+House with car.ico
+Hoverboard.ico
+IE Disc.ico
+INFO.ico
+IR-Port (Green & Red).ico
+IR-Port (green).ico
+IR-Port Error.ico
+IR-Port Multi-transfer (Red & Red & Red).ico
+IR-Port Share (Green).ico
+IR-Port Warning (Green & Red).ico
+IR-Port Warning (Red & Red).ico
+IR-Port share (Red).ico
+IR-Port transfer (Green & Red).ico
+IR-Port transfer (Red & Red).ico
+IR-Port transfer denied.ico
+IR-Port transfer grogress(Red & Green).ico
+IR-Port transfer progress (Green & Red).ico
+IR-Port transfer progress (Red & Red) (1 of 4).ico
+IR-Port transfer progress (Red & Red) (2 of 4).ico
+IR-Port transfer progress (Red & Red) (3 of 4).ico
+IR-Port transfer progress (Red & Red) (4 of 4).ico
+IR-Port.ico
+Info (gray).ICO
+Input in Network Net.ico
+Input on Drive.ico
+Installation on computer (discs).ico
+Installation on computer (diskettes).ico
+Installation on computer (stopped).ico
+Installation program.ico
+IpQuestion.ico
+Ir-Port (red).ico
+Ir-Port multi-transfer (Green & Red & Red).ico
+Ir-Port multi-transfer (Red & Green & Green).ico
+JCB.ico
+Java.ico
+Joy controls (down).ico
+Joy controls (left).ico
+Joy controls (off).ico
+Joy controls (on).ico
+Joy controls (right).ico
+Joy controls (up).ico
+Joy pressed.ico
+Joy.ico
+Key in Lock.ico
+Key.ico
+Keyboard.ico
+Keys with Earth.ico
+LAN Connect.ico
+LAN Transfer (1 of 4).ico
+LAN Transfer (2 of 4).ico
+LAN Transfer (3 of 4).ico
+LAN Transfer (4 of 4).ico
+LAN.ico
+Lamp 2.ico
+Lamp with phone.ico
+Lamp.ico
+Laptop Input.ico
+Letter (back side 16x16px).ICO
+Letter (back side 32x32px).ICO
+Letter 2.ico
+Letter with phone.ico
+Letter.ico
+Letters (3D).ico
+Letters with phone.ico
+Light beam.ico
+Light pin sheet.ico
+Link on Document with Earth.ico
+Link on Fonts folder.ico
+Link on Printers folder .ico
+Link to MSN.ico
+Link to.ico
+List.ico
+Lock and 2 keys.ico
+Locked.ico
+Logo.ico
+MCI with phone.ico
+MIDI keyboard & Computer.ico
+MIDI keyboard (connected).ico
+MIDI keyboard.ico
+MS-DOS logo.ico
+MSN.ico
+MYICON.ico
+Mail Search on Earth.ico
+Mail catalog.ico
+Mail stamp (arrow) (small).ico
+Mail stamp (check mark) (small).ico
+Mail stamp (check mark).ico
+Mail stamp (cross) (small).ico
+Mail stamp (cross).ico
+Mail stamp (move).ico
+Mail stamp (none).ICO
+Mail stamp (return) (small).ico
+Mail stamp (return).ico
+Mail stamp (small).ICO
+Mail text.ico
+Mail with Credit Card.ico
+Mail wizard deny.ico
+Mail wizard.ico
+Mail.ico
+Mailbox with phone.ico
+Mailbox.ico
+Marking forms.ico
+MasterCard.ico
+Microphone & Cassette.ico
+Microphone.ico
+Microsoft ERU.ico
+Microsoft with Ball.ico
+Mouse LMB.ico
+Mouse.ico
+Move document with phone (green).ico
+Move document with phone (pink).ico
+Move document.ico
+Move sheet.ico
+Movie Frame (3-2-1).ico
+Movie frame (cubes).ico
+Movie frame (in hands).ico
+Movie sheet.ico
+Movie.ico
+Moving letters.ico
+Multimedia Drive.ico
+Music Disc 2.ico
+Music Disc.ico
+Music sheet (black).ico
+Music sheet (purple).ico
+Mute volume.ico
+My Computer.ico
+Mystify.ico
+Net cable.ico
+Network Drive Error.ico
+Network Drive.ico
+Network Neighborhood (16x16px & 32x32px).ico
+Network Neighborhood (48x48px).ico
+New Folder (small).ico
+New Folder 2.ico
+New folder.ico
+New letter.ico
+News on Network Drive.ico
+Newspaper (white 3D with letter).ico
+Newspaper (white 3D).ico
+Newspaper (yellow 3D).ico
+Newspaper (yellow).ico
+Newspaper with phone.ico
+Night on computer.ico
+Notepad document config.ico
+Notepad document.ico
+Notepad sheets.ico
+Notepad writing.ico
+Notepad.ico
+Notepads.ico
+Office progam.ico
+Opened Folder.ico
+Orb with phone.ico
+Other abstract.ico
+PHONE.ico
+PRO_ORB.ICO
+Paint.ico
+Paintbrish.ico
+Painting.ico
+Paper (check mark).ico
+Paper (cross).ico
+Paperclip.ico
+People.ico
+Petri Dish with phone.ico
+Phone (2 of 5 diodes on).ico
+Phone (all diodes off).ico
+Phone (gray) dialing 2.ico
+Phone (gray) dialing.ico
+Phone (gray).ico
+Phone dialing.ico
+Phone input.ico
+Pin program in Start Menu.ico
+Pin sheet.ico
+Pinned note (small).ICO
+Pinned note.ico
+Plug.ico
+Plush bear.ico
+Point on sheet.ico
+Power (High).ico
+Power (Low).ico
+Power (Medium).ico
+Printer & Computer 2.ico
+Printer & Computer.ico
+Printer (3D).ico
+Printer 2.ico
+Printer 3.ico
+Printer Input.ico
+Printer Network.ico
+Printer board in.ico
+Printer board out.ico
+Printer calendar.ico
+Printer control list.ico
+Printer help.ico
+Printer monitor.ico
+Printer rainbow.ico
+Printer.ico
+Printers folder.ico
+Program Folder (16x16px & 24x24px).ico
+Program Folder (16x16px & 32x32px).ico
+Program list.ico
+Program manager.ico
+Program wait 2.ico
+Program wait.ico
+Program wizard.ico
+Program.ico
+Programs 2.ico
+Programs.ico
+Projector (gray) sheet.ico
+Projector (green) sheet.ico
+Projector (light-blue) sheet.ico
+Projector (pink) sheet.ico
+Projector 2.ico
+Projector sheets.ico
+Projector.ico
+Pult.ico
+Question.ico
+Read (gray).ICO
+Recycle Bin with document.ico
+Recycle Bin with folder and document.ico
+Recycle Bin with folder.ico
+Recycle Bin with paper.ico
+Recycle Bin with torned document and program.ico
+Recycle Bin with torned documents.ico
+Red Abstract.ico
+Red phone and small Yellow phone.ico
+Regedit file.ico
+Regedit swap.ico
+Regedit value (bin).ico
+Regedit value (hex).ico
+Regedit.ico
+Remove Folder.ico
+Remove fax.ico
+Rename Folder.ico
+Resize sheet (H).ico
+Resize sheet (V).ico
+Roadsign.ico
+SMALL.ico
+Safe.ico
+Save Printer File.ico
+Science with phone.ico
+Scrap.ico
+Screensaver.ico
+Search folder.ico
+Search for Printer 2.ico
+Search for Printer.ico
+Search in Regedit.ico
+Search in sheet (16x16px & 24x24px).ico
+Search in sheet (16x16px & 32x32px) (blue).ico
+Search in sheet (pink).ico
+Search in sheet (small).ico
+Search letter.ico
+Search letters.ico
+Search on Disc.ico
+Search on Diskette Drive (1 of 4).ico
+Search on Diskette Drive (2 of 4).ico
+Search on Diskette Drive (3 of 4).ico
+Search on Diskette Drive (4 of 4).ico
+Search on Earth.ico
+Search on computer 2.ico
+Search on computer.ico
+Settings.ico
+Shared.ico
+Sheet print format (1-1 & 2-2 & 3-3).ico
+Sheet print format (1-2-3 & 1-2-3).ico
+Sheet print format (double H).ico
+Sheet print format (double V).ico
+Sheet print format (long H).ico
+Sheet print format (long V).ico
+Sheet print format (short H).ico
+Sheet print format (short V).ico
+Sheet with cubes 2 (locked).ico
+Sheet with cubes 2.ico
+Sheet with cubes.ico
+Sheet with home.ico
+Sheet with painting.ico
+Sheets & Documents.ico
+Sheets conflict 2.ico
+Shortcut (big).ico
+Shortcut (up).ico
+Shortcut on blue.ico
+Shortcut.ico
+SiS.ico
+Sign Printer.ico
+Sign letter (16x16px).ICO
+Sign letter (32x32px).ICO
+Sign white letter.ico
+Signed letter.ico
+Smiley face.ico
+Sound (left) (small).ico
+Sound (right) (small).ico
+Sound computer.ico
+Sound program.ico
+Star (1 of 10).ico
+Star (10 of 10).ico
+Star (2 of 10).ico
+Star (3 of 10).ico
+Star (4 of 10).ico
+Star (5 of 10).ico
+Star (6 of 10).ico
+Star (7 of 10).ico
+Star (8 of 10).ico
+Star (9 of 10).ico
+Star stamp.ico
+Star.ico
+Starfield.ico
+Stopwatch.ico
+Stuff.ico
+Sync Earth Fail.ico
+Sync Earth.ico
+System to folder.ico
+TWUNK.ico
+Tablet Write.ico
+Task Manager.ico
+Text field sheet 2.ico
+Text field sheet 3.ico
+Text field sheet.ico
+Text in letter.ico
+Text sheet (H).ico
+Text sheet (V).ico
+Text stamp.ico
+Text to letter.ico
+Tip of the Day.ico
+Tree.ico
+TrueType font (blue).ico
+TrueType font (green).ico
+TrueType font (logo).ico
+Turn Off Computer (display only).ico
+Turn Off Computer (full).ico
+UX Earth.ico
+Umbrella with phone.ico
+Uninstall Recycle Bin.ico
+Unlock printer.ico
+User program notififcation.ico
+User program.ico
+User with computer.ico
+User's documents.ico
+User.ico
+Users with cursor.ico
+VBS program.ico
+VBS programs 2.ico
+VBS programs.ico
+Visa.ico
+Volume (green) sheet.ico
+Volume (light-blue) sheet.ico
+Volume (pink) sheet.ico
+Volume (yellow) sheet.ico
+Volume Controls 2.ico
+Volume Controls.ico
+Volume Dialog.ico
+Volume Disc.ico
+Volume Speaker.ico
+Volume Up.ico
+Volume Wave (gray).ico
+Volume Wave.ico
+Volume sheets.ico
+Volume.ico
+WANG catalog.ico
+WANG device.ico
+Warning.ico
+Web-Document.ico
+Web-document (small).ico
+Web-document 2.ico
+Web-document move.ico
+Web-document program.ico
+Web-documents folder 2.ico
+Web-documents folder.ico
+Web-documents.ico
+Welcome program.ico
+White letter (opened with text).ico
+White letter (opened).ico
+White letter.ico
+Windiws logo (with text) 2.ico
+Windows 95 logo.ico
+Windows Disc.ico
+Windows Key (32x32).ico
+Windows Key (48x48).ico
+Windows document.ico
+Windows logo (with text).ico
+Windows logo (without text).ico
+WordPad document (small).ICO
+WordPad document.ico
+WordPad sheet.ico
+WordPad.ico
+Write program.ico
+Writing forms with Fax.ico
+Writing on list with figures.ico
+Writing on sheet.ico
+Writing sheet.ico

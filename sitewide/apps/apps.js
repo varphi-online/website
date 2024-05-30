@@ -62,7 +62,7 @@ window.addEventListener("DOMContentLoaded", () => {
         image.src = "/sitewide/apps/icons/" + elmnt.dataset.icon;
         console.log(image.src);
       } else {
-        image.src = "/sitewide/taskbar/Program.ico";
+        image.src = "/sitewide/apps/icons/Program.ico";
       }
       button.appendChild(image);
       button.appendChild(paragraph);
