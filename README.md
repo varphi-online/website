@@ -5,5 +5,6 @@
 - [ ] Blog with my own JS formatter?
 - [ ] Refactor window/app system to be less bulky
 ## Internal Pages
-- [ ] Sitemap
-- [ ] Icon viewer page
+- [x] Sitemap
+- [x] Icon viewer page
+- [ ] Fix battery icons
