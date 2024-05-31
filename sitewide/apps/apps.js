@@ -60,7 +60,6 @@ window.addEventListener("DOMContentLoaded", () => {
       var image = document.createElement("img");
       if (elmnt.dataset.icon) {
         image.src = "/sitewide/apps/icons/" + elmnt.dataset.icon;
-        console.log(image.src);
       } else {
         image.src = "/sitewide/apps/icons/Program.ico";
       }

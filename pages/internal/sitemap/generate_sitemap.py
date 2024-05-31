@@ -9,7 +9,6 @@ def walk_up_folder(path, depth=1):
 
 root = os.path.join(os.path.dirname( __file__ ))
 root = walk_up_folder(root,4)
-print(root )
 
 main = []
 
