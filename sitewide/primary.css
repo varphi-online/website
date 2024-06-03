@@ -49,13 +49,18 @@ body::after{
 }
 
 
-@media screen and (min-width: 800px) {
-h1 {
-  filter: url(#pixelate2);
-}
+@media only screen and (max-width: 600px) {
+ body #taskbar {
+  z-index: 100;
+ }
 }
 
+#taskbar {
+  z-index: -10;
+ }
+
 h1 {
+  filter: url(#pixelate2);
   font-family: "Kode Mono";
   font-size: 3em;
   text-align: center;
@@ -65,6 +70,7 @@ h1 {
   transform: translateX(-50%);
   margin: 0;
   top: 2.5vh;
+  -webkit-filter: url(#pixelate2);
 }
 
 * { box-sizing: border-box; }

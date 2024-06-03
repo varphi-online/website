@@ -3,6 +3,10 @@
     src: url("C64_Pro-STYLE.otf") format("opentype");
 }
 
+body {
+    overflow:hidden;
+}
+
 #bgScroll{
     position: absolute;
     width: 100vw;

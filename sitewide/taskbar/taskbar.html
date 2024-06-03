@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
       <link rel="stylesheet" href="taskbar.css">
       <link rel="stylesheet" href="taskbar_startmenu.css">
       <link rel="stylesheet" href="taskbar_window.css">
@@ -9,7 +10,7 @@
       <svg>
          <filter id="pixelate" x="0" y="0">
             <feFlood x="2" y="2" height="1" width="1"/>
-            <feComposite width="2" height="2"/>
+            <feComposite width="2" height="2"/>b
             <feTile result="a"/>
             <feComposite in="SourceGraphic" in2="a" 
                operator="in"/>
@@ -208,8 +209,15 @@
             </div>
          </div>
       </div>
-      <div class="bar">
+      <button class="taskbarEntry" id="barToggleHidden" type="button" onclick="toggleDiv('bar','barToggleHidden', false, 'barToggle'), menuOpen(true)">
+         <img src="../apps/icons/Pin program in Start Menu.ico">
+      </button>
+      <div class="bar" id="bar">
          <div id="appIcons">
+         <button class="taskbarEntry" id="barToggle" type="button" onclick="toggleDiv('bar','barToggle', true, 'barToggleHidden'), menuOpen(false)">
+            <img src="../apps/icons/Pin program in Start Menu.ico">
+              <p>Close Menu</p>
+         </button>
          <button class="taskbarEntry" id="startbtn" type="button" onclick="toggleDiv('startmenu','startbtn', true)">
             <img src="INFO.ico">
             <p>Start</p>
@@ -243,25 +251,50 @@
          <div id="hider">
          </div>
          <script>
-            function toggleDiv(toToggle, toggler, indent) {
-              var div = document.getElementById(String(toToggle));
-              var div2 = document.getElementById(String(toggler));
-              var style = window.getComputedStyle(div);
-              if (style.display === "none") {
-                div.style.display = "block";
-                if (indent){
-                div2.style.boxShadow = "inset -1px -1px #f1f0f1, inset -2px -2px #eaebea,inset 1px 1px #323132, inset 2px 2px #414041";
-                div2.style.backgroundColor = "#E0E0E0"
-                }
-              } else {
-                div.style.display = "none";
-                if (indent){
-                div2.style.boxShadow = "inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041";
-                div2.style.backgroundColor = "#c6c3c6"
-                }
-              }
+            function toggleDiv(toToggle, toggler, indent, toReplace) {
+               toReplace = toReplace || null;
+               var div = document.getElementById(String(toToggle));
+               var div2 = document.getElementById(String(toggler));
+               var div3 = document.getElementById(String(toReplace));
+               var style = window.getComputedStyle(div);
+
+               if (toReplace){
+               var style2 = window.getComputedStyle(div3)
+
+               if (style2.display === "none") {
+                  div2.style.display = "none";
+               } else {
+                  div2.style.display = "flex";
+               }
+            }
+
+               if (style.display === "none") {
+                  div.style.display = "block";
+                  if (indent) {
+                     div2.style.boxShadow = "inset -1px -1px #f1f0f1, inset -2px -2px #eaebea,inset 1px 1px #323132, inset 2px 2px #414041";
+                     div2.style.backgroundColor = "#E0E0E0"
+                  }
+               } else {
+                  div.style.display = "none";
+                  if (indent) {
+                     div2.style.boxShadow = "inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041";
+                     div2.style.backgroundColor = "#c6c3c6"
+                  }
+               }
             }
          </script>
+      <script>
+         var tb = parent.document.getElementById("taskbar")
+         function menuOpen(bool){
+            if (bool){
+               tb.style.zIndex = 100
+               console.log(parent.window.getComputedStyle(tb).zIndex)
+            } else {
+               tb.style.zIndex = -10
+               console.log(parent.window.getComputedStyle(tb).zIndex)
+            }
+         }
+      </script>
       </div>
       <script src="musicPlayer/music.js"></script>
    </body>

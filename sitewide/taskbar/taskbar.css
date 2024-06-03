@@ -32,11 +32,12 @@
 /* at some point I need to refactor this to all be class based because each button is tedious and inflexible */
  #taskbarContainer{
      width: 100vw;
-     height: 50vh;
+     height: 100vh;
      position: absolute;
      left: 0;
      bottom: 0;
 }
+
  .bar{
    pointer-events:all;
      box-shadow: inset -2px 2px 0px #f1f0f1;
@@ -172,3 +173,48 @@
      right:2px;
      top: 0%;
 }
+
+@media only screen and  (max-width: 600px) {
+     body .bar {
+          width: fit-content;
+          height: 100vh ;
+          top: 0;
+     }
+
+     body #appIcons {
+          flex-direction: column;
+          align-items: stretch;
+     }
+
+     body #controlPanel {
+          display: none;
+     }
+
+     body .taskbarEntry {
+          height: 4vh;
+          width: 13vh;
+          margin-bottom: 8px;
+          padding-right: 0;
+          margin-right: 0;
+          overflow: hidden;
+     }
+
+     body #barToggle {
+          display: flex;
+     }
+
+     body #barToggleHidden {
+          width: fit-content;
+          padding-right: 5px;
+     }
+   }
+
+   @media only screen and  (min-width: 600px) {
+     body #barToggleHidden {
+          display: none;
+     }
+   }
+
+   #barToggle {
+     display: none;
+   }

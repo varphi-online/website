@@ -45,7 +45,7 @@ because class children are broken when it comes to ::hover pseudo element.
  }
   .menuEntry .menuPopout {
       display: none;
-      height: auto;
+      height: fit-content;
       position: absolute;
       width: 140%;
       font-family: "win95";
@@ -168,7 +168,7 @@ Links has very basic formatting because of all class definitions
  
   #linksOut{
       width: 70%;
-      height: auto;
+      height: fit-content;
       bottom: 0%;
       padding: 2px;
  }
@@ -185,7 +185,7 @@ indentation is used to show heirarchy
  
  #projectsOut{
       width: 70%;
-      height: auto;
+      height: fit-content;
       bottom: 0%;
       padding: 2px;
  }
@@ -198,7 +198,7 @@ indentation is used to show heirarchy
     #musicOut{
          position: absolute;
          width: 100%;
-         height: auto;
+         height: fit-content;
          bottom: 0%;
          left: 100%;
          padding: 2px;
@@ -216,7 +216,7 @@ indentation is used to show heirarchy
     #programmingOut{
         position: absolute;
         width: 100%;
-        height: auto;
+        height: fit-content;
         bottom: 0%;
         left: 101%;
         padding: 2px;
@@ -255,4 +255,32 @@ if more appear in the start menu.
      border: none;
      cursor: pointer;
      z-index: 10;
+ }
+
+ @media only screen and  (max-width: 600px) {
+     body #startmenu {
+          position: absolute;
+          top: 0;
+          left: 14vh;
+          height: fit-content;
+     }
+     body .menuEntry .menuPopout {
+          left: 0;
+          position: absolute;
+          top: 16vh;
+          height: fit-content;
+     }
+
+     body #projectsOut {
+          top: 12vh;
+          width: 15vh;
+     }
+
+     body #musicOut {
+          top: 0;
+     }
+     body #programmingOut {
+          top: 0;
+          width: 15vh;
+     }
  }

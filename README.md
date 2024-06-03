@@ -1,4 +1,5 @@
 # Todo
+- [ ] Make Mobile Experience usable
 - [ ] Playing God in JS
 - [ ] Incrimental game with sitewide stats/controls
 - [ ] Settings in start menu
