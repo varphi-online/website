@@ -1,13 +1,14 @@
 //Top down recursive descent
 //https://www.youtube.com/watch?v=SToUyjAsaFk
 
-const testExpression = "(x+6)*-a";
+const testExpression = "(3+6)*-5";
 
 class Tree {}
 
 class Num extends Tree {
   //Number
   constructor(value) {
+    super();
     this.value = value;
   }
 
@@ -22,9 +23,10 @@ class Num extends Tree {
 
 class ID extends Tree {
   //Variable
-  constructor(name, value) {
+  constructor(name) {
+    super();
     this.name = name;
-    this.value = value;
+    this.value = null;
   }
 
   toString() {
@@ -39,6 +41,7 @@ class ID extends Tree {
 class Add extends Tree {
   //Add
   constructor(left, right) {
+    super();
     this.left = left;
     this.right = right;
   }
@@ -55,6 +58,7 @@ class Add extends Tree {
 class Sub extends Tree {
   //Subtract
   constructor(left, right) {
+    super();
     this.left = left;
     this.right = right;
   }
@@ -71,6 +75,7 @@ class Sub extends Tree {
 class Mult extends Tree {
   //Multiply
   constructor(left, right) {
+    super();
     this.left = left;
     this.right = right;
   }
@@ -87,6 +92,7 @@ class Mult extends Tree {
 class Div extends Tree {
   //Divide
   constructor(left, right) {
+    super();
     this.left = left;
     this.right = right;
   }
@@ -103,6 +109,7 @@ class Div extends Tree {
 class Neg extends Tree {
   //Negate
   constructor(arg) {
+    super();
     this.arg = arg;
   }
 
@@ -115,17 +122,78 @@ class Neg extends Tree {
   }
 }
 
+function tokenize(string) {
+  let tokens = [];
+  let stringIndex = 0;
+  for (let stringIndex = 0; stringIndex < string.length; stringIndex++) {
+    // Working character from input string
+    let currentChar = string[stringIndex];
+
+    // Index [-1] of tokens
+    let lastIndex = tokens.length - 1;
+
+    // Non-terminal characters are pushed to the token array, otherwise do else
+    if ("+-*/^()".includes(currentChar)) {
+      tokens.push(currentChar);
+    } else {
+      // Push an empty string to token stream for mutation if current string is part of a terminal and preceding token is non-terminal
+      if ("+-*/^()".includes(tokens[lastIndex])) {
+        tokens.push("");
+        lastIndex++;
+      }
+
+      // If current character is part of an <ID> token, it must be alphabetic
+      if (currentChar.match(/[a-z]|[A-Z]/i)) {
+
+        // If previous term was numeric, we want to make a new token entry into the stream
+        if (parseFloat(tokens[lastIndex]) === NaN) {
+          tokens.push("");
+          lastIndex++;
+          tokens[lastIndex] += currentChar;
+        } else {
+          tokens[lastIndex] += currentChar;
+        }
+      } 
+      
+      // Check if currentChar is an integer or a decimal point
+      else if (currentChar.match(/[0-9]|\./i)) {
+        tokens[lastIndex] += currentChar;
+      }
+      //All other cases 
+      else {
+        tokens[lastIndex] = null;
+      }
+    }
+  }
+  for (let i = 0; i < tokens.length; i++) {
+    if (!"+-*/^()".includes(tokens[i])) {
+      if (isNaN(tokens[i])) {
+        tokens[i] = new ID(tokens[i]);
+      } else {
+        tokens[i] = new Num(tokens[i]);
+      }
+    }
+  }
+  return tokens;
+}
+
 function buildTree(expression) {
-  expression;
+    
+  expression = tokenize(expression);
+  console.log(expression)
   let nextToken = expression[0];
+  let currentToken = expression[-1];
   let index = -1;
 
   function scanToken() {
+    currentToken = expression[index];
     nextToken = expression[index + 1];
     index++;
+    console.log("Scanned to: ." + currentToken+". , "+nextToken)
   }
 
   function parseExpr() {
+    console.log("Expr Parse: " + nextToken)
     let out = parseTerm();
     while (true) {
       if (out === null) {
@@ -148,7 +216,8 @@ function buildTree(expression) {
   //Might have to do while loop here too idk
 
   function parseTerm() {
-    let out = parseTerm();
+    console.log("Term Parse " + nextToken)
+    let out = currentToken
     if (nextToken == "*") {
       scanToken();
       let second = parseTerm();
@@ -161,29 +230,16 @@ function buildTree(expression) {
       return out;
     } else {
       // Var or num
-      out = expression[index];
+      out = expression[index]
       if (out === null) {
         return null;
       }
-      if (isNaN(nextToken) || nextToken != ".") {
-        if (nextToken.match(/[a-z]/i)) {
-          scanToken();
-          out += parseTerm();
-        } else {
-          if (isNaN(out)) {
-            return new ID(out);
-          } else {
-            return new Num(out);
-          }
-        }
-      } else {
-        scanToken();
-        out += parseTerm();
-      }
+      return out;
     }
   }
 
   function parseFactor() {
+    console.log("Factor Parse " + nextToken)
     if (typeof nextToken === ID || typeof nextToken === Num) {
       return nextToken;
     } else if (nextToken == "(") {
