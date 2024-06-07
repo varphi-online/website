@@ -235,7 +235,7 @@ function tokenize(string) {
     return tokens;
 }
 
-const testExpression = "(sqrt[x]*3.14159pi)-4";
+const testExpression = "(sqrt[1/x]/3.14159varphi)-4";
 
 console.log(tokenize(testExpression));
 
