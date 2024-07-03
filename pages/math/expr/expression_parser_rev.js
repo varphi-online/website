@@ -5,9 +5,11 @@
 class Tree {
   constructor() {}
 }
+
 class TreeNode extends Tree {
   constructor() {
     super();
+    this.opType = "binary";
     this.parent = null;
     this.symbol = "";
     this.values = [];
@@ -15,8 +17,43 @@ class TreeNode extends Tree {
     this.precedence = 0;
   }
   toString() {
-    console.log(this);
-    return this.symbol + "(" + this.values.toString() + ")";
+    if ("()END".includes(this.symbol)) {
+      return this.symbol;
+    } else {
+      return this.symbol + "(" + this.values.toString() + ")";
+    }
+  }
+}
+
+class sentinel extends TreeNode {
+  constructor() {
+    super();
+    this.symbol = "SENTINEL";
+    this.precedence = 0;
+  }
+}
+
+class end extends TreeNode {
+  constructor() {
+    super();
+    this.symbol = "END";
+    this.precedence = 9999;
+  }
+}
+
+class openPar extends TreeNode {
+  constructor() {
+    super();
+    this.symbol = "(";
+    this.precedence = 0;
+  }
+}
+
+class closePar extends TreeNode {
+  constructor() {
+    super();
+    this.symbol = ")";
+    this.precedence = 0;
   }
 }
 
@@ -24,7 +61,7 @@ class Num extends TreeNode {
   //Number
   constructor(value = "none") {
     super();
-    this.symbol = "";
+    this.symbol = "num";
     this.values[0] = value;
   }
 }
@@ -86,6 +123,7 @@ class Neg extends TreeNode {
   //Negate
   constructor(arg = "none") {
     super();
+    this.opType = "unary";
     this.values[0] = arg;
     this.symbol = "-";
     this.precedence = 3;
@@ -107,6 +145,7 @@ class Sqrt extends TreeNode {
   //Negate
   constructor(arg = "none") {
     super();
+    this.opType = "unary";
     this.values[0] = arg;
     this.symbol = "√";
     this.precedence = 1;
@@ -123,9 +162,11 @@ function tokenize(string) {
   multiCharNTerminal.set("*", Mult);
   multiCharNTerminal.set("/", Div);
   multiCharNTerminal.set("^", Exp);
+  multiCharNTerminal.set("(", openPar);
+  multiCharNTerminal.set(")", closePar);
 
   // Grouping characters
-  let groupingChars = "(){}[]";
+  let groupingChars = "{}[]";
   let tokens = [];
   let stringIndex = 0;
   for (let stringIndex = 0; stringIndex < string.length; stringIndex++) {
@@ -197,35 +238,96 @@ function tokenize(string) {
     }
   }
   // End of expression
-  tokens.push("EOE");
+  tokens.push(new end());
   return tokens;
 }
 
 // Not done
 function shuntingYard(tokenStream) {
   let operands = [];
-  let operators = [new TreeNode()];
-  let currentToken = null;
+  let operators = [];
+  let next = tokenStream[0];
 
   function consume() {
-    currentToken = tokenStream[0];
+    next = tokenStream[1];
     tokenStream.shift();
   }
 
-  while (tokenStream[0] != "EOE" && operators[0].prescedence != 0) {
-    consume();
-    if (currentToken instanceof ID || currentToken instanceof Num) {
-      operands.push(currentToken);
+  function expect(type) {
+    if (next instanceof type) {
+      consume();
     } else {
-      if (currentToken == ")") {
-        while (operators[operators.length - 1] != "(") {
-          operators.pop();
-        }
-        operators.pop();
-        operators[operators.length - 1].values[0] = operands.pop();
-        operators[operators.length - 1].values[1] = operands.pop();
-        operands.push(currentToken);
-      }
+      console.error("Unexpected token, expected: " + type + "\n\nGot:");
+      console.error(next);
+      console.error("which is of type: " + typeof next);
     }
+  }
+
+  const sent = new sentinel();
+  operators.push(sent);
+  E();
+  expect(end);
+  return operands[operands.length - 1];
+
+  function E() {
+    console.log(tokenStream + "|" + operands + "|" + operators);
+    P();
+    while (!(next instanceof end) && next.opType == "binary") {
+      pushOperator(next);
+      consume();
+      P();
+    }
+    while (!(operators[operators.length - 1] instanceof sentinel)) {
+      popOperator();
+    }
+  }
+
+  function P() {
+    console.log(tokenStream + "|" + operands + "|" + operators);
+    if (next instanceof ID || next instanceof Num) {
+      operands.push(next);
+      consume();
+    } else if (next instanceof openPar) {
+      consume();
+      operators.push(sent);
+      E();
+      expect(closePar);
+      operators.pop();
+    } else if (next.opType == "unary") {
+      pushOperator(next);
+      consume();
+      P();
+    } else {
+      console.error("Not defined in grammar");
+    }
+  }
+
+  function popOperator() {
+    if (operators[operators.length - 1].opType == "binary") {
+      const t1 = operands.pop();
+      const t2 = operands.pop();
+      let toadd = operators.pop();
+      console.log("binary pop:");
+      console.log(toadd);
+      toadd.values[0] = t1;
+      toadd.values[1] = t2;
+      operands.push(toadd);
+    } else {
+      let toadd = operators.pop();
+      console.log(toadd);
+      toadd.values[0] = operands.pop();
+      operands.push(toadd);
+    }
+  }
+
+  function pushOperator(operator) {
+    while (
+      !(operators[operators.length - 1] instanceof sentinel) &&
+      operators[operators.length - 1].precedence < operator.precedence
+    ) {
+      console.log("popping op");
+      popOperator();
+    }
+    operators.push(operator);
   }
 }
