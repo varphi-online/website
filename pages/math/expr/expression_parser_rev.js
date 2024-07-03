@@ -11,13 +11,15 @@ class TreeNode extends Tree {
     super();
     this.opType = "binary";
     this.parent = null;
-    this.symbol = "";
+    this.symbol = null;
     this.values = [];
     // Lower number is higher precedence, 0 is reserved for parentheses
     this.precedence = 0;
   }
   toString() {
-    if ("()END".includes(this.symbol)) {
+    if (this.symbol === "") {
+      return this.values.toString();
+    } else if ("()END".includes(this.symbol)) {
       return this.symbol;
     } else {
       return this.symbol + "(" + this.values.toString() + ")";
@@ -28,6 +30,7 @@ class TreeNode extends Tree {
 class sentinel extends TreeNode {
   constructor() {
     super();
+    this.opType = "nullary";
     this.symbol = "SENTINEL";
     this.precedence = 0;
   }
@@ -36,6 +39,7 @@ class sentinel extends TreeNode {
 class end extends TreeNode {
   constructor() {
     super();
+    this.opType = "nullary";
     this.symbol = "END";
     this.precedence = 9999;
   }
@@ -44,6 +48,7 @@ class end extends TreeNode {
 class openPar extends TreeNode {
   constructor() {
     super();
+    this.opType = "nullary";
     this.symbol = "(";
     this.precedence = 0;
   }
@@ -52,6 +57,7 @@ class openPar extends TreeNode {
 class closePar extends TreeNode {
   constructor() {
     super();
+    this.opType = "nullary";
     this.symbol = ")";
     this.precedence = 0;
   }
@@ -61,7 +67,7 @@ class Num extends TreeNode {
   //Number
   constructor(value = "none") {
     super();
-    this.symbol = "num";
+    this.symbol = "";
     this.values[0] = value;
   }
 }
@@ -257,9 +263,9 @@ function shuntingYard(tokenStream) {
     if (next instanceof type) {
       consume();
     } else {
-      console.error("Unexpected token, expected: " + type + "\n\nGot:");
-      console.error(next);
-      console.error("which is of type: " + typeof next);
+      //console.error("Unexpected token, expected: " + type + "\n\nGot:");
+      //console.error(next);
+      //console.error("which is of type: " + typeof next);
     }
   }
 
@@ -270,7 +276,7 @@ function shuntingYard(tokenStream) {
   return operands[operands.length - 1];
 
   function E() {
-    console.log(tokenStream + "|" + operands + "|" + operators);
+    //console.log(tokenStream + "|" + operands + "|" + operators);
     P();
     while (!(next instanceof end) && next.opType == "binary") {
       pushOperator(next);
@@ -283,11 +289,12 @@ function shuntingYard(tokenStream) {
   }
 
   function P() {
-    console.log(tokenStream + "|" + operands + "|" + operators);
+    //console.log(tokenStream + "|" + operands + "|" + operators);
     if (next instanceof ID || next instanceof Num) {
       operands.push(next);
       consume();
     } else if (next instanceof openPar) {
+      console.log("openPar");
       consume();
       operators.push(sent);
       E();
@@ -298,7 +305,7 @@ function shuntingYard(tokenStream) {
       consume();
       P();
     } else {
-      console.error("Not defined in grammar");
+      //console.error("Not defined in grammar");
     }
   }
 
@@ -307,14 +314,11 @@ function shuntingYard(tokenStream) {
       const t1 = operands.pop();
       const t2 = operands.pop();
       let toadd = operators.pop();
-      console.log("binary pop:");
-      console.log(toadd);
-      toadd.values[0] = t1;
-      toadd.values[1] = t2;
+      toadd.values[1] = t1;
+      toadd.values[0] = t2;
       operands.push(toadd);
     } else {
       let toadd = operators.pop();
-      console.log(toadd);
       toadd.values[0] = operands.pop();
       operands.push(toadd);
     }
@@ -325,7 +329,6 @@ function shuntingYard(tokenStream) {
       !(operators[operators.length - 1] instanceof sentinel) &&
       operators[operators.length - 1].precedence < operator.precedence
     ) {
-      console.log("popping op");
       popOperator();
     }
     operators.push(operator);
