@@ -67,17 +67,34 @@ class Num extends TreeNode {
   //Number
   constructor(value = "none") {
     super();
+    this.opType = "nullary";
     this.symbol = "";
     this.values[0] = value;
   }
+  eval() {
+    return +this.values[0];
+  }
 }
-
+const constants = {
+  pi: [3.14159265, "π"],
+  e: [2.718281828459, "e"],
+  phi: [1.6180339887, "φ"],
+};
 class ID extends TreeNode {
   //Variable
   constructor(name = "none") {
     super();
-    this.symbol = name;
-    this.values[0] = "none";
+    this.opType = "nullary";
+    if (name in constants) {
+      this.symbol = constants[name][1];
+      this.values[0] = constants[name][0];
+    } else {
+      this.symbol = name;
+      this.values[0] = 0;
+    }
+  }
+  eval() {
+    return +this.values[0];
   }
 }
 
@@ -90,6 +107,9 @@ class Add extends TreeNode {
     this.symbol = "+";
     this.precedence = 4;
   }
+  eval() {
+    return this.values[0].eval() + this.values[1].eval();
+  }
 }
 
 class Sub extends TreeNode {
@@ -100,6 +120,9 @@ class Sub extends TreeNode {
     this.values[1] = right;
     this.symbol = "-";
     this.precedence = 4;
+  }
+  eval() {
+    return this.values[0].eval() - this.values[1].eval();
   }
 }
 
@@ -112,6 +135,9 @@ class Mult extends TreeNode {
     this.symbol = "*";
     this.precedence = 2;
   }
+  eval() {
+    return this.values[0].eval() * this.values[1].eval();
+  }
 }
 
 class Div extends TreeNode {
@@ -122,6 +148,9 @@ class Div extends TreeNode {
     this.values[1] = right;
     this.symbol = "/";
     this.precedence = 2;
+  }
+  eval() {
+    return this.values[0].eval() / this.values[1].eval();
   }
 }
 
@@ -134,6 +163,9 @@ class Neg extends TreeNode {
     this.symbol = "-";
     this.precedence = 3;
   }
+  eval() {
+    return -this.values[0].eval();
+  }
 }
 
 class Exp extends TreeNode {
@@ -144,6 +176,10 @@ class Exp extends TreeNode {
     this.values[1] = right;
     this.symbol = "^";
     this.precedence = 1;
+  }
+
+  eval() {
+    return this.values[0].eval() ** this.values[1].eval();
   }
 }
 
@@ -156,6 +192,9 @@ class Sqrt extends TreeNode {
     this.symbol = "√";
     this.precedence = 1;
   }
+  eval() {
+    return this.values[0].eval() ** 0.5;
+  }
 }
 
 function tokenize(string) {
@@ -163,7 +202,7 @@ function tokenize(string) {
   let multiCharNTerminal = new Map();
 
   multiCharNTerminal.set("sqrt", Sqrt);
-  multiCharNTerminal.set("-", Sub);
+  multiCharNTerminal.set("-", Neg);
   multiCharNTerminal.set("+", Add);
   multiCharNTerminal.set("*", Mult);
   multiCharNTerminal.set("/", Div);
@@ -248,7 +287,7 @@ function tokenize(string) {
   return tokens;
 }
 
-// Not done
+// Not done, need to figure out how to distinguish unary and binary - operator
 function shuntingYard(tokenStream) {
   let operands = [];
   let operators = [];
