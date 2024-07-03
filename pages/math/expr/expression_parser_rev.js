@@ -1,5 +1,6 @@
 //Top down recursive descent
 //https://www.youtube.com/watch?v=SToUyjAsaFk
+//https://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
 
 class Tree {
   constructor() {}
@@ -8,6 +9,14 @@ class TreeNode extends Tree {
   constructor() {
     super();
     this.parent = null;
+    this.symbol = "";
+    this.values = [];
+    // Lower number is higher precedence, 0 is reserved for parentheses
+    this.precedence = 0;
+  }
+  toString() {
+    console.log(this);
+    return this.symbol + "(" + this.values.toString() + ")";
   }
 }
 
@@ -15,15 +24,8 @@ class Num extends TreeNode {
   //Number
   constructor(value = "none") {
     super();
-    this.value = value;
-  }
-
-  toString() {
-    return this.value.toString();
-  }
-
-  eval() {
-    return this.value;
+    this.symbol = "";
+    this.values[0] = value;
   }
 }
 
@@ -31,16 +33,8 @@ class ID extends TreeNode {
   //Variable
   constructor(name = "none") {
     super();
-    this.name = name;
-    this.value = "none";
-  }
-
-  toString() {
-    return this.name + "(" + this.value.toString() + ")";
-  }
-
-  eval() {
-    return this.value;
+    this.symbol = name;
+    this.values[0] = "none";
   }
 }
 
@@ -48,17 +42,10 @@ class Add extends TreeNode {
   //Add
   constructor(left = "none", right = "none") {
     super();
-    this.left = left;
-    this.right = right;
-  }
-
-  toString() {
-    if (this.left)
-      return "+(" + this.left.toString() + "," + this.right.toString() + ")";
-  }
-
-  eval() {
-    return this.left.eval() + this.right.eval();
+    this.values[0] = left;
+    this.values[1] = right;
+    this.symbol = "+";
+    this.precedence = 4;
   }
 }
 
@@ -66,16 +53,10 @@ class Sub extends TreeNode {
   //Subtract
   constructor(left = "none", right = "none") {
     super();
-    this.left = left;
-    this.right = right;
-  }
-
-  toString() {
-    return "-(" + this.left.toString() + "," + this.right.toString() + ")";
-  }
-
-  eval() {
-    return this.left.eval() - this.right.eval();
+    this.values[0] = left;
+    this.values[1] = right;
+    this.symbol = "-";
+    this.precedence = 4;
   }
 }
 
@@ -83,16 +64,10 @@ class Mult extends TreeNode {
   //Multiply
   constructor(left = "none", right = "none") {
     super();
-    this.left = left;
-    this.right = right;
-  }
-
-  toString() {
-    return "*(" + this.left.toString() + "," + this.right.toString() + ")";
-  }
-
-  eval() {
-    return this.left.eval() * this.right.eval();
+    this.values[0] = left;
+    this.values[1] = right;
+    this.symbol = "*";
+    this.precedence = 2;
   }
 }
 
@@ -100,16 +75,10 @@ class Div extends TreeNode {
   //Divide
   constructor(left = "none", right = "none") {
     super();
-    this.left = left;
-    this.right = right;
-  }
-
-  toString() {
-    return "/(" + this.left.toString() + "," + this.right.toString() + ")";
-  }
-
-  eval() {
-    return this.left.eval() / this.right.eval();
+    this.values[0] = left;
+    this.values[1] = right;
+    this.symbol = "/";
+    this.precedence = 2;
   }
 }
 
@@ -117,15 +86,9 @@ class Neg extends TreeNode {
   //Negate
   constructor(arg = "none") {
     super();
-    this.arg = arg;
-  }
-
-  toString() {
-    return "-(" + this.arg.toString() + ")";
-  }
-
-  eval() {
-    return -this.arg.eval();
+    this.values[0] = arg;
+    this.symbol = "-";
+    this.precedence = 3;
   }
 }
 
@@ -133,16 +96,10 @@ class Exp extends TreeNode {
   //Divide
   constructor(left = "none", right = "none") {
     super();
-    this.left = left;
-    this.right = right;
-  }
-
-  toString() {
-    return "^(" + this.left.toString() + "," + this.right.toString() + ")";
-  }
-
-  eval() {
-    return this.left.eval() ^ this.right.eval();
+    this.values[0] = left;
+    this.values[1] = right;
+    this.symbol = "^";
+    this.precedence = 1;
   }
 }
 
@@ -150,15 +107,9 @@ class Sqrt extends TreeNode {
   //Negate
   constructor(arg = "none") {
     super();
-    this.arg = arg;
-  }
-
-  toString() {
-    return "√(" + this.arg.toString() + ")";
-  }
-
-  eval() {
-    return Math.sqrt(this.arg.eval());
+    this.values[0] = arg;
+    this.symbol = "√";
+    this.precedence = 1;
   }
 }
 
@@ -248,4 +199,33 @@ function tokenize(string) {
   // End of expression
   tokens.push("EOE");
   return tokens;
+}
+
+// Not done
+function shuntingYard(tokenStream) {
+  let operands = [];
+  let operators = [new TreeNode()];
+  let currentToken = null;
+
+  function consume() {
+    currentToken = tokenStream[0];
+    tokenStream.shift();
+  }
+
+  while (tokenStream[0] != "EOE" && operators[0].prescedence != 0) {
+    consume();
+    if (currentToken instanceof ID || currentToken instanceof Num) {
+      operands.push(currentToken);
+    } else {
+      if (currentToken == ")") {
+        while (operators[operators.length - 1] != "(") {
+          operators.pop();
+        }
+        operators.pop();
+        operators[operators.length - 1].values[0] = operands.pop();
+        operators[operators.length - 1].values[1] = operands.pop();
+        operands.push(currentToken);
+      }
+    }
+  }
 }
