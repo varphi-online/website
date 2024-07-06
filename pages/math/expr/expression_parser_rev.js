@@ -197,37 +197,84 @@ class Sqrt extends TreeNode {
   }
 }
 
+let nonTerminals = new Map();
+
+  nonTerminals.set("sqrt", Sqrt);
+  nonTerminals.set("-", Sub);
+  nonTerminals.set("+", Add);
+  nonTerminals.set("*", Mult);
+  nonTerminals.set("/", Div);
+  nonTerminals.set("^", Exp);
+  nonTerminals.set("(", openPar);
+  nonTerminals.set(")", closePar);
+  let singleChars = "";
+  for (const symbol of nonTerminals.keys()) {
+    if (symbol.toString().length === 1){
+      singleChars += symbol;
+    }
+  }
+  nonTerminals.set("singleChars",singleChars)
+
+function lexize(string) {
+  let lexemes = [""];
+  let numeric = new RegExp(/\d+(\.)?\d*/);
+  let alphabetic = new RegExp(/[a-z]|[A-Z]/);
+
+  for (let i = 0; i < string.length; i++) {
+    currentIndex = lexemes.length - 1;
+    modFlag = false;
+    while (
+      i < string.length &&
+      numeric.test(lexemes[currentIndex] + string[i])
+    ) {
+      lexemes[currentIndex] += string[i];
+      i++;
+      modFlag = true;
+    }
+    if (!modFlag) {
+      while (
+        i < string.length &&
+        alphabetic.test(lexemes[currentIndex] + string[i])
+      ) {
+        lexemes[currentIndex] += string[i];
+        i++;
+        modFlag = true;
+      }
+    }
+    if (!modFlag && nonTerminals.get("singleChars").includes(string[i])) {
+      console.log("Nonterm adding: "+string[i]);
+      lexemes.push(string[i]);
+      i++;
+    }
+    if (!modFlag) {
+      lexemes.push("");
+    }
+  }
+  return lexemes;
+}
+
 function tokenize(string) {
   // Map key strings to token types
-  let multiCharNTerminal = new Map();
-
-  multiCharNTerminal.set("sqrt", Sqrt);
-  multiCharNTerminal.set("-", Neg);
-  multiCharNTerminal.set("+", Add);
-  multiCharNTerminal.set("*", Mult);
-  multiCharNTerminal.set("/", Div);
-  multiCharNTerminal.set("^", Exp);
-  multiCharNTerminal.set("(", openPar);
-  multiCharNTerminal.set(")", closePar);
-
   // Grouping characters
   let groupingChars = "{}[]";
   let tokens = [];
-  let stringIndex = 0;
   for (let stringIndex = 0; stringIndex < string.length; stringIndex++) {
     // Working character from input string
     let currentChar = string[stringIndex];
+    if (currentChar === " ") {
+      continue;
+    }
 
     // Index [-1] of tokens
     let lastIndex = tokens.length > 0 ? tokens.length - 1 : 0;
 
     // Non-terminal characters are pushed to the token array, otherwise do else
     if (
-      multiCharNTerminal.has(currentChar) ||
+      nonTerminals.has(currentChar) ||
       groupingChars.includes(currentChar)
     ) {
-      if (multiCharNTerminal.has(currentChar)) {
-        tokens.push(new (multiCharNTerminal.get(currentChar))());
+      if (nonTerminals.has(currentChar)) {
+        tokens.push(new (nonTerminals.get(currentChar))());
       } else {
         tokens.push(currentChar);
       }
@@ -236,7 +283,7 @@ function tokenize(string) {
       if (
         groupingChars.includes(tokens[lastIndex]) ||
         (typeof tokens[lastIndex] == "object" &&
-          Array.from(multiCharNTerminal.values())
+          Array.from(nonTerminals.values())
             .join("")
             .includes(tokens[lastIndex].constructor.name))
       ) {
@@ -247,7 +294,7 @@ function tokenize(string) {
       }
 
       // If current character is part of an <ID> token, it must be alphabetic
-      if (currentChar.match(/[a-z]|[A-Z]/i)) {
+      if (currentChar.match(/[a-z]|[A-Z]/i) || currentChar === "_") {
         // If previous term was numeric, we want to make a new token entry into the stream
         if (tokens[lastIndex].length >= 1 && !isNaN(tokens[lastIndex])) {
           tokens.push("");
@@ -259,7 +306,7 @@ function tokenize(string) {
       }
 
       // Check if currentChar is an integer or a decimal point
-      else if (currentChar.match(/[0-9]|\./i)) {
+      else if (currentChar.match(/\d|\./i)) {
         tokens[lastIndex] += currentChar;
       }
       //All other cases
@@ -268,17 +315,32 @@ function tokenize(string) {
       }
     }
   }
+  let initialLength = tokens.length;
   for (let i = 0; i < tokens.length; i++) {
-    if (multiCharNTerminal.has(tokens[i])) {
-      tokens[i] = new (multiCharNTerminal.get(tokens[i]))();
+    if (nonTerminals.has(tokens[i])) {
+      tokens[i] = new (nonTerminals.get(tokens[i]))();
     } else if (
       typeof tokens[i] != "object" &&
       !groupingChars.includes(tokens[i])
     ) {
-      if (isNaN(tokens[i])) {
-        tokens[i] = new ID(tokens[i]);
-      } else {
+      // This handles what was meant when the user input a "-" sign, if it is supposed to be negative
+      let negFlag = false;
+      if ((initialLength <= 2 && tokens[i-1] instanceof Sub ) || (tokens[i-1] instanceof Sub && !((tokens[i-2] instanceof ID) || (tokens[i-2] instanceof Num)))){
+        //console.log("negative detected");
+        //console.log(tokens);
+        tokens.splice(i-1,0,new openPar(),new Num(0))
+        negFlag = true;
+        i += 2;
+      }
+      // If the unclassed token is numeric, create a number node of it
+      if (tokens[i].match(/\d+(\.\d+)?/g)) {
         tokens[i] = new Num(tokens[i]);
+      } else {
+        tokens[i] = new ID(tokens[i]);
+      }
+      if (negFlag){
+        tokens[i+1] = new closePar;
+        i++;
       }
     }
   }
@@ -333,7 +395,6 @@ function shuntingYard(tokenStream) {
       operands.push(next);
       consume();
     } else if (next instanceof openPar) {
-      console.log("openPar");
       consume();
       operators.push(sent);
       E();
