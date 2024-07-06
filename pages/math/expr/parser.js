@@ -6,30 +6,34 @@ function scanner(string) {
   let lexemes = [""];
   // Regex expressions to match lexemes
   let numeric = /\d+(\.)?\d*/;
-  let alphabetic = /([a-zA-Z])+(\_\w+)?/;
-  let operational = /[\*\/\-\+\(\)\{\}\[\]\<\>\^]/;
+  let alphabetic = /[a-zA-Z]+_{[.]*[}]?)?/; // Look into conditional lookbehind for _{.} sequences
+  let operational = /[\*\/\-\+\(\)\[\]\<\>\^]/;
 
   function stringType(string) {
     if (numeric.test(string)) {
-      return 0;
+      return 4;
     } else if (alphabetic.test(string)) {
-      return 1;
+      return 2;
     } else {
-      return 3;
+      return 1;
     }
   }
 
+  // Character matching flags are in big-endian representation (like base 10)
+  // bit 1 for numeric, bit 2 for alphabetic, and bit 3 for operational
   function charType(string) {
-    if (/[\.0-9]/.test(string)) {
-      return 0;
-    } else if (/[_a-zA-Z]/.test(string)) {
-      return 1;
-    } else if (operational.test(string)) {
-      return 2;
-    } else {
-      console.error("Unrecognized character: " + string);
-      return 3;
+    let out = 0;
+    if (/[\.\d]/.test(string)) {
+      out += 4;
     }
+    if (/[\w{}_]/.test(string)) {
+      out += 2;
+    }
+    if (operational.test(string)) {
+      out += 1;
+    }
+    console.log(out);
+    return out;
   }
 
   // Consumes characters, either adding them to the existing previous
@@ -39,9 +43,8 @@ function scanner(string) {
     let currentType = stringType(lexemes[currentIndex]);
     let characterType = charType(string[i]);
     if (
-      currentType == characterType ||
-      lexemes[currentIndex] === "" ||
-      (lexemes[currentIndex].includes("_") && characterType == 0)
+      (currentType & characterType) == currentType ||
+      lexemes[currentIndex] === ""
     ) {
       lexemes[currentIndex] += string[i];
     } else {
