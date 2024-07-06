@@ -5,17 +5,18 @@
     </head>
 <body>
 
-<h1>Tokenizer</h1>
+<h1>Textual Calculator</h1>
 
 <input id="input-box" oninput="inpUpdate(this.value);"/>
 
-<p id="out0">Lexized</p>
-<p id="out">Tokenized</p>
-<p id="out2">Shunting yard</p>
-<p id="out3">Evaluated</p>
+<p id="out0">Lexemes:</p>
+<p id="out">Tokens:</p>
+<p id="out2">Abstract Syntax Tree:</p>
+<p id="out3">Evaluated expression:</p>
 
-<script src="expression_parser_rev.js"></script>
-<script src="parser_page.js"></script>
+<script src="classes.js"></script>
+<script src="parser.js"></script>
+<script src="interface.js"></script>
 
 </body>
 </html>
