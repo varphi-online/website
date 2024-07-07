@@ -2,21 +2,23 @@
 //https://www.youtube.com/watch?v=SToUyjAsaFk
 //https://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
 
+let numeric = /[0-9]+(\.)?[0-9]*$/yg;
+let alphabetic = /([a-zA-Z]+)(_({(\w*(})?)?)?)?$/yg;
+let operational = /[\*\/\-\+\(\)\[\]\<\>\^\|]$/yg;
+
 function scanner(string) {
   let lexemes = [""];
   // Regex expressions to match lexemes
-  let numeric = /\d+(\.)?\d*/;
-  let alphabetic = /[a-zA-Z]+_{[.]*[}]?)?/; // Look into conditional lookbehind for _{.} sequences
-  let operational = /[\*\/\-\+\(\)\[\]\<\>\^]/;
 
   function stringType(string) {
-    if (numeric.test(string)) {
-      return 4;
-    } else if (alphabetic.test(string)) {
-      return 2;
-    } else {
-      return 1;
+    let out = 0;
+    if (string.match(numeric)==string) {
+      out += 4;
     }
+    if (string.match(alphabetic)==string) {
+      out += 2;
+    }
+    return out != 0 ? out : 8;
   }
 
   // Character matching flags are in big-endian representation (like base 10)
@@ -26,13 +28,12 @@ function scanner(string) {
     if (/[\.\d]/.test(string)) {
       out += 4;
     }
-    if (/[\w{}_]/.test(string)) {
+    if (/[\w\{\}\_]/.test(string)) {
       out += 2;
     }
     if (operational.test(string)) {
       out += 1;
     }
-    console.log(out);
     return out;
   }
 
@@ -40,10 +41,11 @@ function scanner(string) {
   // lexeme or making a new one of a different type.
   for (let i = 0; i < string.length; i++) {
     let currentIndex = lexemes.length > 0 ? lexemes.length - 1 : 0;
-    let currentType = stringType(lexemes[currentIndex]);
     let characterType = charType(string[i]);
+    let combinedType = stringType(lexemes[currentIndex]+string[i]);
+    //console.log(lexemes[currentIndex]+string[i]+":"+combinedType.toString(2) + " | " +string[i]+":"+ characterType.toString(2));
     if (
-      (currentType & characterType) == currentType ||
+      (combinedType & characterType) == combinedType ||
       lexemes[currentIndex] === ""
     ) {
       lexemes[currentIndex] += string[i];
@@ -60,14 +62,20 @@ function evaluator(lexemes) {
   for (let i = 0; i < lexemes.length; i++) {
     if (nonTerminals.has(lexemes[i])) {
       tokens.push(new (nonTerminals.get(lexemes[i]))());
-    } else if (/\d+(\.)?\d*/.test(lexemes[i])) {
+    } else if (lexemes[i].match(numeric)==lexemes[i]) {
       tokens.push(new Num(lexemes[i]));
     } else {
       tokens.push(new ID(lexemes[i]));
     }
   }
   // Second pass, apply rules like coefficient multiplication and - handling
+  let typeFlag = null;
   for (let i = 0; i < tokens.length; i++) {
+    if (typeFlag && tokens[i] instanceof typeFlag){
+      typeFlag = null;
+      tokens.splice(i,1, new closePar());
+      continue;
+    }
     // Unary vs Binary -
     if (
       tokens[i] instanceof Sub &&
@@ -94,6 +102,10 @@ function evaluator(lexemes) {
     ) {
       tokens.splice(i + 1, 0, new Mult());
       i += 1;
+    }
+    if (tokens[i] instanceof Abs){
+      typeFlag = Abs;
+      tokens.splice(i + 1, 0, new openPar());
     }
   }
   tokens.push(new end());

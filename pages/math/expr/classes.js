@@ -75,10 +75,11 @@ class Num extends TreeNode {
     return +this.values[0];
   }
 }
+
 const constants = {
-  pi: [3.14159265, "π"],
-  e: [2.718281828459, "e"],
-  phi: [1.6180339887, "φ"],
+  pi: [Math.PI, "π"],
+  e: [Math.E, "e"],
+  phi: [Math.phi, "φ"],
 };
 class ID extends TreeNode {
   //Variable
@@ -202,13 +203,58 @@ class Sqrt extends TreeNode {
   }
 }
 
+class Sine extends TreeNode {
+  //Negate
+  constructor(arg = "none") {
+    super();
+    this.opType = "unary";
+    this.values[0] = arg;
+    this.symbol = "sin";
+    this.precedence = 1;
+  }
+  eval() {
+    return Math.sin(this.values[0].eval());
+  }
+}
+
+class Cosine extends TreeNode {
+  //Negate
+  constructor(arg = "none") {
+    super();
+    this.opType = "unary";
+    this.values[0] = arg;
+    this.symbol = "cos";
+    this.precedence = 1;
+  }
+  eval() {
+    return Math.cos(this.values[0].eval());
+  }
+}
+
+class Abs extends TreeNode {
+  //Negate
+  constructor(arg = "none") {
+    super();
+    this.opType = "unary";
+    this.values[0] = arg;
+    this.symbol = "abs";
+    this.precedence = 1;
+  }
+  eval() {
+    return Math.abs(this.values[0].eval());
+  }
+}
+
 let nonTerminals = new Map();
 
 nonTerminals.set("sqrt", Sqrt);
+nonTerminals.set("sin", Sine);
+nonTerminals.set("cos", Cosine);
 nonTerminals.set("-", Sub);
 nonTerminals.set("+", Add);
 nonTerminals.set("*", Mult);
 nonTerminals.set("/", Div);
 nonTerminals.set("^", Exp);
+nonTerminals.set("|", Abs);
 nonTerminals.set("(", openPar);
 nonTerminals.set(")", closePar);
