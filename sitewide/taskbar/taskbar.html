@@ -1,145 +1,160 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-      <link rel="stylesheet" href="taskbar.css">
-      <link rel="stylesheet" href="taskbar_startmenu.css">
-      <link rel="stylesheet" href="taskbar_window.css">
-   </head>
-   <body onbeforeunload="return logVideoData()">
-      <svg>
-         <filter id="pixelate" x="0" y="0">
-            <feFlood x="2" y="2" height="1" width="1"/>
-            <feComposite width="2" height="2"/>b
-            <feTile result="a"/>
-            <feComposite in="SourceGraphic" in2="a" 
-               operator="in"/>
-            <feMorphology operator="dilate"
-               radius="1"/>
-         </filter>
-      </svg>
-      <svg>
-         <filter id="pixelate2" x="0" y="0">
-            <feFlood x="4" y="4" height="2" width="2"/>
-            <feComposite width="4" height="4"/>
-            <feTile result="a"/>
-            <feComposite in="SourceGraphic" in2="a" 
-               operator="in"/>
-            <feMorphology operator="dilate"
-               radius="1.7"/>
-         </filter>
-      </svg>
-      <div class="window movableWindow" id="musicPlayer">
-         <div class="windowHeader" id="musicPlayerheader">Music Player 2000</div>
-         <div style="margin-bottom: 6%;" class="windowContent">
-            <p>Current Song: <span id="currentSong">none</span></p>
-            <button class="playerButton" onclick="previousSong()"><img src=musicPlayer/prev.png></button>
-            <button class="playerButton" onclick="playPause()"><img id="musicPlayPause" src="musicPlayer/play.png"></button>
-            <button class="playerButton" onclick="nextSong()"><img src=musicPlayer/next.png></button>
-         </div>
-         <div class="windowContent" id="musicSelect">
-            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfazadVRIROx8J7FlpErhTPsA')">Website Music</button>
-            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxYuXG4rOLh8QaCXeXg78lo')">Discography</button>
-            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">Orbit</button>
-            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxZY9eF1L0obp7zmpESPLQa')">An End of Sorts</button>
-            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxA9_EO73LnUUJ5QJsehmC9')">FOTE6</button>
-            <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfayOwGFpd7C30W0lDwYx2_ey')">Singles</button>
-         </div>
-         <div id="musicPlayerFrame">
-            <div id="player"></div>
-         </div>
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+   <link rel="stylesheet" href="taskbar.css">
+   <link rel="stylesheet" href="taskbar_startmenu.css">
+   <link rel="stylesheet" href="taskbar_window.css">
+</head>
+
+<body onbeforeunload="return logVideoData()">
+   <svg>
+      <filter id="pixelate" x="0" y="0">
+         <feFlood x="2" y="2" height="1" width="1" />
+         <feComposite width="2" height="2" />b
+         <feTile result="a" />
+         <feComposite in="SourceGraphic" in2="a" operator="in" />
+         <feMorphology operator="dilate" radius="1" />
+      </filter>
+   </svg>
+   <svg>
+      <filter id="pixelate2" x="0" y="0">
+         <feFlood x="4" y="4" height="2" width="2" />
+         <feComposite width="4" height="4" />
+         <feTile result="a" />
+         <feComposite in="SourceGraphic" in2="a" operator="in" />
+         <feMorphology operator="dilate" radius="1.7" />
+      </filter>
+   </svg>
+   <div class="window movableWindow" id="musicPlayer">
+      <div class="windowHeader" id="musicPlayerheader">Music Player 2000</div>
+      <div style="margin-bottom: 6%;" class="windowContent">
+         <p>Current Song: <span id="currentSong">none</span></p>
+         <button class="playerButton" onclick="previousSong()"><img src=musicPlayer/prev.png></button>
+         <button class="playerButton" onclick="playPause()"><img id="musicPlayPause"
+               src="musicPlayer/play.png"></button>
+         <button class="playerButton" onclick="nextSong()"><img src=musicPlayer/next.png></button>
       </div>
-      <script src="window.js"></script>
-      <div id="taskbarContainer">
-         <div id="startmenu" style="display: none;">
-            <div class="menuEntry"  id="artistInfo">
-               <img src="https://f4.bcbits.com/img/0034404237_20.jpg">
-               <p>USR: VARPHI<br><br>
-                  STATUS: ONLINE<br>
-                  SUBSTATUS: AWAKE<br>
+      <div class="windowContent" id="musicSelect">
+         <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfazadVRIROx8J7FlpErhTPsA')">Website
+            Music</button>
+         <button class="playlistButton"
+            onclick="changePlaylist(this, 'PLZVAe2HWDfaxYuXG4rOLh8QaCXeXg78lo')">Discography</button>
+         <button class="playlistButton"
+            onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">Orbit</button>
+         <button class="playlistButton" onclick="changePlaylist(this, 'PLZVAe2HWDfaxZY9eF1L0obp7zmpESPLQa')">An End of
+            Sorts</button>
+         <button class="playlistButton"
+            onclick="changePlaylist(this, 'PLZVAe2HWDfaxA9_EO73LnUUJ5QJsehmC9')">FOTE6</button>
+         <button class="playlistButton"
+            onclick="changePlaylist(this, 'PLZVAe2HWDfayOwGFpd7C30W0lDwYx2_ey')">Singles</button>
+      </div>
+      <div id="musicPlayerFrame">
+         <div id="player"></div>
+      </div>
+   </div>
+   <script src="window.js"></script>
+   <div id="taskbarContainer">
+      <div id="startmenu" style="display: none;">
+         <div class="menuEntry" id="artistInfo">
+            <img src="https://f4.bcbits.com/img/0034404237_20.jpg">
+            <p>USR: VARPHI<br><br>
+               STATUS: ONLINE<br>
+               SUBSTATUS: AWAKE<br>
+            </p>
+            <div class="menuPopout" id="artistInfoOut">
+               <p style="text-align: center;">
+                  19yo. Musician/Programmer<br>
+                  I create what I want to see in the world.<br><br>
                </p>
-               <div class="menuPopout" id="artistInfoOut">
-                  <p style="text-align: center;">
-                     19yo. Musician/Programmer<br>
-                     I create what I want to see in the world.<br><br>
-                  </p>
-                  <div class="row">
-                     <div class="column">
-                        Genres:
-                        <ul>
-                           <li>Ambient</li>
-                           <li>Electronica</li>
-                           <li>OST</li>
-                           <li>Acoustic</li>
-                        </ul>
-                     </div>
-                     <div class="column">
-                        Interests:
-                        <ul>
-                           <li>Mathematics</li>
-                           <li>Graphics</li>
-                           <li>Games</li>
-                        </ul>
-                     </div>
+               <div class="row">
+                  <div class="column">
+                     Genres:
+                     <ul>
+                        <li>Ambient</li>
+                        <li>Electronica</li>
+                        <li>OST</li>
+                        <li>Acoustic</li>
+                     </ul>
+                  </div>
+                  <div class="column">
+                     Interests:
+                     <ul>
+                        <li>Mathematics</li>
+                        <li>Graphics</li>
+                        <li>Games</li>
+                     </ul>
                   </div>
                </div>
             </div>
-            <div class="menuEntry"  id="links">
-               <div class="menuImg">
-                  <img src="Sync Earth.ico">
+         </div>
+         <div class="menuEntry" id="links">
+            <div class="menuImg">
+               <img src="Sync Earth.ico">
+            </div>
+            <div class="menuText">LINKS</div>
+            <div class="contextArr"></div>
+            <div class="menuPopout" id="linksOut">
+               <div class="link">
+                  <img
+                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png">
+                  <div class="menuText">Spotify</div>
+                  <a target="_blank" rel="noopener noreferrer"
+                     href="https://open.spotify.com/artist/1hMrh5wetHbeiJYBezuEPs?si=aXMsvaFwT86NiAlWRh3fMw"
+                     class="fill-div"></a>
                </div>
-               <div class="menuText">LINKS</div>
-               <div class="contextArr"></div>
-               <div class="menuPopout" id="linksOut">
-                  <div class="link">
-                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png">
-                     <div class="menuText">Spotify</div>
-                     <a target="_blank" rel="noopener noreferrer" href="https://open.spotify.com/artist/1hMrh5wetHbeiJYBezuEPs?si=aXMsvaFwT86NiAlWRh3fMw" class="fill-div"></a>
-                  </div>
-                  <div class="link">
-                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Bandcamp-button-circle-green.svg/1200px-Bandcamp-button-circle-green.svg.png">
-                     <div class="menuText">Bandcamp</div>
-                     <a target="_blank" rel="noopener noreferrer" href="https://varphiartist.bandcamp.com/" class="fill-div"></a>
-                  </div>
-                  <div class="link">
-                     <img src="https://cdn.icon-icons.com/icons2/1211/PNG/512/1491580647-yumminkysocialmedia18_83093.png">
-                     <div class="menuText">Youtube</div>
-                     <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/@varphiartist" class="fill-div"></a>
-                  </div>
-                  <div class="link">
-                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Apple_Music_icon.svg/2048px-Apple_Music_icon.svg.png">
-                     <div class="menuText">Apple Music</div>
-                     <a target="_blank" rel="noopener noreferrer" href="https://music.apple.com/ee/artist/varphi/1648184088" class="fill-div"></a>
-                  </div>
-                  <div class="link">
-                     <img src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png">
-                     <div class="menuText">Github</div>
-                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/varphi-online" class="fill-div"></a>
-                  </div>
+               <div class="link">
+                  <img
+                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Bandcamp-button-circle-green.svg/1200px-Bandcamp-button-circle-green.svg.png">
+                  <div class="menuText">Bandcamp</div>
+                  <a target="_blank" rel="noopener noreferrer" href="https://varphiartist.bandcamp.com/"
+                     class="fill-div"></a>
                </div>
-               <div>
+               <div class="link">
+                  <img src="https://cdn.icon-icons.com/icons2/1211/PNG/512/1491580647-yumminkysocialmedia18_83093.png">
+                  <div class="menuText">Youtube</div>
+                  <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/@varphiartist"
+                     class="fill-div"></a>
+               </div>
+               <div class="link">
+                  <img
+                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Apple_Music_icon.svg/2048px-Apple_Music_icon.svg.png">
+                  <div class="menuText">Apple Music</div>
+                  <a target="_blank" rel="noopener noreferrer"
+                     href="https://music.apple.com/ee/artist/varphi/1648184088" class="fill-div"></a>
+               </div>
+               <div class="link">
+                  <img src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png">
+                  <div class="menuText">Github</div>
+                  <a target="_blank" rel="noopener noreferrer" href="https://github.com/varphi-online"
+                     class="fill-div"></a>
                </div>
             </div>
-            <div class="menuEntry"  id="projects">
-               <div class="menuImg">
-                  <img src="Blank sheets.ico">
-               </div>
-               <div class="menuText">PROJECTS</div>
-               <div class="contextArr"></div>
-               <div class="menuPopout" id="projectsOut">
-                  <div class="menuEntry"  id="music">
-                     <div class="menuImg">
-                        <img src="Music sheet.ico">
+            <div>
+            </div>
+         </div>
+         <div class="menuEntry" id="projects">
+            <div class="menuImg">
+               <img src="Blank sheets.ico">
+            </div>
+            <div class="menuText">PROJECTS</div>
+            <div class="contextArr"></div>
+            <div class="menuPopout" id="projectsOut">
+               <div class="menuEntry" id="music">
+                  <div class="menuImg">
+                     <img src="Music sheet.ico">
+                  </div>
+                  <div class="menuText">Music</div>
+                  <div class="contextArr"></div>
+                  <div class="menuPopout" id="musicOut">
+                     <div class="link">
+                        <img src="https://f4.bcbits.com/img/a2371408069_10.jpg">
+                        <div class="menuText">Orbit</div>
+                        <a target="_parent" rel="noopener noreferrer" href="../../pages/music/orbit/orbit.html"
+                           class="fill-div"></a>
                      </div>
-                     <div class="menuText">Music</div>
-                     <div class="contextArr"></div>
-                     <div class="menuPopout" id="musicOut">
-                        <div class="link">
-                           <img src="https://f4.bcbits.com/img/a2371408069_10.jpg">
-                           <div class="menuText">Orbit</div>
-                           <a target="_parent" rel="noopener noreferrer" href="../../pages/music/orbit/orbit.html" class="fill-div"></a>
-                        </div>
-                        <!--
+                     <!--
                         <div class="link">
                            <img src="https://f4.bcbits.com/img/a3155449451_10.jpg">
                            <div class="menuText">Faded Horizons</div>
@@ -161,70 +176,76 @@
                            <a target="_parent" rel="noopener noreferrer" href="../../pages/music/ergoempty.html" class="fill-div"></a>
                         </div>
                         -->
-                     </div>
-                     <div>
-                     </div>
                   </div>
-                  <div class="menuEntry"  id="programming">
-                     <div class="menuImg">
-                        <img src="Computer.ico">
-                     </div>
-                     <div class="menuText">Programming</div>
-                     <div class="contextArr"></div>
-                     <div class="menuPopout" id="programmingOut">
-                        <div class="link">
-                           <img src="playingGod.png">
-                           <div class="menuText">Playing God</div>
-                           <a target="_blank" rel="noopener noreferrer" href="https://github.com/varphi-online/conway" class="fill-div"></a>
-                        </div>
-                        <div class="link">
-                           <img src="Sync Earth.ico">
-                           <div class="menuText">THIS WEBSITE !?!?.1.1</div>
-                           <a target="_blank" rel="noopener noreferrer" href="https://github.com/varphi-online/varphi-online" class="fill-div"></a>
-                        </div>
-                     </div>
-                     <div>
-                     </div>
-                  </div>
+                  <div>
                   </div>
                </div>
-               <div class="menuEntry"  id="settings">
-                  <a target="_parent" rel="noopener noreferrer" href="../../pages/internal/sitemap/sitemap.html" class="fill-div">
-                     <div class="menuImg">
-                        <img src="Settings.ico">
-                     </div>
-                     <div class="menuText">Sitemap</div>
-                     <div class="contextArr" style="visibility: hidden;"></div>
-                  </a>
-                  <!-- <button onclick="toggleDiv('settingsWindow', 'settings', false);toggleDiv('settingsTaskbar', 'settings', false)"></button> -->
-               </a>
-               </div>
-               <div class="menuEntry"  id="home">
-                  <a target="_parent" rel="noopener noreferrer" href="../../index.html" class="fill-div">
+               <div class="menuEntry" id="programming">
                   <div class="menuImg">
-                     <img src="House.ico">
+                     <img src="Computer.ico">
                   </div>
-                  <div class="menuText">HOME</div>
-                  <div class="contextArr" style="visibility: hidden;"></div>
-               </a>
+                  <div class="menuText">Programming</div>
+                  <div class="contextArr"></div>
+                  <div class="menuPopout" id="programmingOut">
+                     <div class="link">
+                        <img src="playingGod.png">
+                        <div class="menuText">Playing God</div>
+                        <a target="_blank" rel="noopener noreferrer" href="https://github.com/varphi-online/conway"
+                           class="fill-div"></a>
+                     </div>
+                     <div class="link">
+                        <img src="Sync Earth.ico">
+                        <div class="menuText">THIS WEBSITE !?!?.1.1</div>
+                        <a target="_blank" rel="noopener noreferrer"
+                           href="https://github.com/varphi-online/varphi-online" class="fill-div"></a>
+                     </div>
+                  </div>
+                  <div>
+                  </div>
                </div>
             </div>
          </div>
+         <div class="menuEntry" id="settings">
+            <a target="_parent" rel="noopener noreferrer" href="../../pages/internal/sitemap/sitemap.html"
+               class="fill-div">
+               <div class="menuImg">
+                  <img src="../apps/icons/Web-documents.ico">
+               </div>
+               <div class="menuText">Sitemap</div>
+               <div class="contextArr" style="visibility: hidden;"></div>
+            </a>
+            <!-- <button onclick="toggleDiv('settingsWindow', 'settings', false);toggleDiv('settingsTaskbar', 'settings', false)"></button> -->
+            </a>
+         </div>
+         <div class="menuEntry" id="home">
+            <a target="_parent" rel="noopener noreferrer" href="../../index.html" class="fill-div">
+               <div class="menuImg">
+                  <img src="House.ico">
+               </div>
+               <div class="menuText">HOME</div>
+               <div class="contextArr" style="visibility: hidden;"></div>
+            </a>
+         </div>
       </div>
-      <button class="taskbarEntry" id="barToggleHidden" type="button" onclick="toggleDiv('bar','barToggleHidden', false, 'barToggle'), menuOpen(true)">
-         <img src="../apps/icons/Pin program in Start Menu.ico">
-      </button>
-      <div class="bar" id="bar">
-         <div id="appIcons">
-         <button class="taskbarEntry" id="barToggle" type="button" onclick="toggleDiv('bar','barToggle', true, 'barToggleHidden'), menuOpen(false)">
+   </div>
+   </div>
+   <button class="taskbarEntry" id="barToggleHidden" type="button"
+      onclick="toggleDiv('bar','barToggleHidden', false, 'barToggle'), menuOpen(true)">
+      <img src="../apps/icons/Pin program in Start Menu.ico">
+   </button>
+   <div class="bar" id="bar">
+      <div id="appIcons">
+         <button class="taskbarEntry" id="barToggle" type="button"
+            onclick="toggleDiv('bar','barToggle', true, 'barToggleHidden'), menuOpen(false)">
             <img src="../apps/icons/Pin program in Start Menu.ico">
-              <p>Close Menu</p>
+            <p>Close Menu</p>
          </button>
          <button class="taskbarEntry" id="startbtn" type="button" onclick="toggleDiv('startmenu','startbtn', true)">
             <img src="INFO.ico">
             <p>Start</p>
          </button>
-         <button class="taskbarEntry" id="musicPlayerTB" style="display: none;" type="button" onclick="toggleDiv('musicPlayer', 'musicPlayerTB', true)">
+         <button class="taskbarEntry" id="musicPlayerTB" style="display: none;" type="button"
+            onclick="toggleDiv('musicPlayer', 'musicPlayerTB', true)">
             <img src="Music Disc.ico">
             <p>Music Player 2000</p>
          </button>
@@ -232,35 +253,35 @@
             <img src="Opened Folder.ico">
             <p>Dreams</p>
          </a>
-         </div>
-         <div id=controlPanel>
-            <div id=cPanelVis>
-               <button id="volumeCPanel" type="button">
-                  <img src="Volume.ico" onclick="toggleDiv('volumeControl','volumeCPanel', false)">
-                  <div class="window" id="volumeControl">
-                     <div class="windowContent">
-                        <p>Volume</p>
-                        <input id=volumeSlider value="8" type="range" orient="vertical"/>
-                     </div>
+      </div>
+      <div id=controlPanel>
+         <div id=cPanelVis>
+            <button id="volumeCPanel" type="button">
+               <img src="Volume.ico" onclick="toggleDiv('volumeControl','volumeCPanel', false)">
+               <div class="window" id="volumeControl">
+                  <div class="windowContent">
+                     <p>Volume</p>
+                     <input id=volumeSlider value="8" type="range" orient="vertical" />
                   </div>
-               </button>
-               <div id="clock">
-                  <span id="swatchClock">@000</span>
-                  <script defer src="https://melonking.net/scripts/swatchTime.js"></script>
                </div>
+            </button>
+            <div id="clock">
+               <span id="swatchClock">@000</span>
+               <script defer src="https://melonking.net/scripts/swatchTime.js"></script>
             </div>
          </div>
-         <div id="hider">
-         </div>
-         <script>
-            function toggleDiv(toToggle, toggler, indent, toReplace) {
-               toReplace = toReplace || null;
-               var div = document.getElementById(String(toToggle));
-               var div2 = document.getElementById(String(toggler));
-               var div3 = document.getElementById(String(toReplace));
-               var style = window.getComputedStyle(div);
+      </div>
+      <div id="hider">
+      </div>
+      <script>
+         function toggleDiv(toToggle, toggler, indent, toReplace) {
+            toReplace = toReplace || null;
+            var div = document.getElementById(String(toToggle));
+            var div2 = document.getElementById(String(toggler));
+            var div3 = document.getElementById(String(toReplace));
+            var style = window.getComputedStyle(div);
 
-               if (toReplace){
+            if (toReplace) {
                var style2 = window.getComputedStyle(div3)
 
                if (style2.display === "none") {
@@ -270,25 +291,25 @@
                }
             }
 
-               if (style.display === "none") {
-                  div.style.display = "block";
-                  if (indent) {
-                     div2.style.boxShadow = "inset -1px -1px #f1f0f1, inset -2px -2px #eaebea,inset 1px 1px #323132, inset 2px 2px #414041";
-                     div2.style.backgroundColor = "#E0E0E0"
-                  }
-               } else {
-                  div.style.display = "none";
-                  if (indent) {
-                     div2.style.boxShadow = "inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041";
-                     div2.style.backgroundColor = "#c6c3c6"
-                  }
+            if (style.display === "none") {
+               div.style.display = "block";
+               if (indent) {
+                  div2.style.boxShadow = "inset -1px -1px #f1f0f1, inset -2px -2px #eaebea,inset 1px 1px #323132, inset 2px 2px #414041";
+                  div2.style.backgroundColor = "#E0E0E0"
+               }
+            } else {
+               div.style.display = "none";
+               if (indent) {
+                  div2.style.boxShadow = "inset 1px 1px #f1f0f1, inset 2px 2px #eaebea, 1px 1px #323132, 2px 2px #414041";
+                  div2.style.backgroundColor = "#c6c3c6"
                }
             }
-         </script>
+         }
+      </script>
       <script>
          var tb = parent.document.getElementById("taskbar")
-         function menuOpen(bool){
-            if (bool){
+         function menuOpen(bool) {
+            if (bool) {
                tb.style.zIndex = 100
                console.log(parent.window.getComputedStyle(tb).zIndex)
             } else {
@@ -297,6 +318,6 @@
             }
          }
       </script>
-      </div>
-      <script src="musicPlayer/music.js"></script>
-   </body>
+   </div>
+   <script src="musicPlayer/music.js"></script>
+</body>

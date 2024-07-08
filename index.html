@@ -1,68 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-   <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-      <title>varphi.online</title>
-      <link rel="stylesheet" href="sitewide/primary.css">
-      <link rel="stylesheet" href="pages/index/index.css">
-      <link rel="stylesheet" href="sitewide/taskbar/taskbar_window.css">
-      <script src="sitewide/apps/apps.js"></script>
-      <script src="sitewide\taskbar\window.js"></script>
-      <link rel="icon" type="image/x-icon" href="sitewide/taskbar/Sync Earth.ico">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap">
-   </head>
-   <body>
-   <svg>
-         <filter id="pixelate" x="0" y="0">
-            <feFlood x="2" y="2" height="1" width="1"/>
-            <feComposite width="2" height="2"/>
-            <feTile result="a"/>
-            <feComposite in="SourceGraphic" in2="a"
-               operator="in"/>
-            <feMorphology operator="dilate"
-               radius="1"/>
-         </filter>
-      </svg>
-      <svg>
-         <filter id="pixelate2" x="0" y="0">
-            <feFlood x="4" y="4" height="2" width="2"/>
-            <feComposite width="4" height="4"/>
-            <feTile result="a"/>
-            <feComposite in="SourceGraphic" in2="a"
-               operator="in"/>
-            <feMorphology operator="dilate"
-               radius="1.7"/>
-         </filter>
-      </svg>
-      <h1>varphi.online</h1>
-      <div class="main" id="main">
-         <div class="cube">
-            <div class="cube__face cube__face--front"><a target="_parent" rel="noopener noreferrer" href="../../pages/music/orbit/orbit.html"><img src="sitewide\images\mini\orbit.png"></a></div>
-            <div class="cube__face cube__face--back"><img src="sitewide\images\mini\eos.jpg"></div>
-            <div class="cube__face cube__face--right"><img src="sitewide\images\mini\faded-horizons.jpg"></div>
-            <div class="cube__face cube__face--left"><img src="sitewide\images\mini\fote6.jpg"></div>
-            <div class="cube__face cube__face--top"><img src="sitewide\images\mini\ergo-empty.jpg"></div>
-            <div class="cube__face cube__face--bottom"><a href="/pages/willow/willow.html"><img src="/pages/willow/her.png"></a></div>
-         </div>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+    <title>varphi.online</title>
+    <link rel="stylesheet" href="sitewide/primary.css" />
+    <link rel="stylesheet" href="pages/index/index.css" />
+    <link rel="stylesheet" href="sitewide/taskbar/taskbar_window.css" />
+    <script src="sitewide/apps/apps.js"></script>
+    <script src="sitewide\taskbar\window.js"></script>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="sitewide/taskbar/Sync Earth.ico"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap"
+    />
+  </head>
+
+  <body>
+    <svg>
+      <filter id="pixelate" x="0" y="0">
+        <feFlood x="2" y="2" height="1" width="1" />
+        <feComposite width="2" height="2" />
+        <feTile result="a" />
+        <feComposite in="SourceGraphic" in2="a" operator="in" />
+        <feMorphology operator="dilate" radius="1" />
+      </filter>
+    </svg>
+    <svg>
+      <filter id="pixelate2" x="0" y="0">
+        <feFlood x="4" y="4" height="2" width="2" />
+        <feComposite width="4" height="4" />
+        <feTile result="a" />
+        <feComposite in="SourceGraphic" in2="a" operator="in" />
+        <feMorphology operator="dilate" radius="1.7" />
+      </filter>
+    </svg>
+    <h1>varphi.online</h1>
+    <div class="main" id="main">
+      <div class="cube">
+        <div class="cube__face cube__face--front">
+          <a
+            target="_parent"
+            rel="noopener noreferrer"
+            href="../../pages/music/orbit/orbit.html"
+            ><img src="sitewide\images\mini\orbit.png"
+          /></a>
+        </div>
+        <div class="cube__face cube__face--back">
+          <img src="sitewide\images\mini\eos.jpg" />
+        </div>
+        <div class="cube__face cube__face--right">
+          <img src="sitewide\images\mini\faded-horizons.jpg" />
+        </div>
+        <div class="cube__face cube__face--left">
+          <img src="sitewide\images\mini\fote6.jpg" />
+        </div>
+        <div class="cube__face cube__face--top">
+          <img src="sitewide\images\mini\ergo-empty.jpg" />
+        </div>
+        <div class="cube__face cube__face--bottom">
+          <a href="/pages/willow/willow.html"
+            ><img src="/pages/willow/her.png"
+          /></a>
+        </div>
       </div>
-      <script src="pages/index/cube.js"></script>
+    </div>
+    <script src="pages/index/cube.js"></script>
 
-      <div class="app" data-title="Info" data-icon="Book.ico">
-         <div class="window movableWindow" id="infoBox" style="display: none;">
-             <div class="windowHeader" id="infoBoxheader">General Info</div>
-             <div class="windowContent whiteBg">
-                <p>
-                Varphi is the collective works of musician, programmer and jack of trades ██████<br><br>
-                This site is a compilation of all works that can be faithfully brought to the world-wide-web and is very much alive! Constantly
-                being updated, with changes plainly visible on the accompanying Github Repo. A <a target="_blank" href="http://varphi-online.neocities.org">sister site</a>
-                is available as well and is updated whenever is most convienient, so older versions may be available there!<br><br>
-                If you are viewing this on mobile and cannot access all the great stuff here, click <a href="https://varphi.carrd.co">this link</a>
-                to access the music of Varphi on a site made for mobile.
-             </p>
-             </div>
-          </div>
-     </div>
+    <div class="app" data-title="Info" data-icon="Book.ico">
+      <div class="window movableWindow" id="infoBox" style="display: none">
+        <div class="windowHeader" id="infoBoxheader">General Info</div>
+        <div class="windowContent whiteBg">
+          <p>
+            Varphi is the collective works of musician, programmer and jack of
+            trades Willow Rose<br /><br />
+            This site is a compilation of all works that can be faithfully
+            brought to the world-wide-web and is very much alive! Constantly
+            being updated, with changes plainly visible on the accompanying
+            Github Repo. A
+            <a target="_blank" href="http://varphi-online.neocities.org"
+              >sister site</a
+            >
+            is available as well and is updated whenever is most convienient, so
+            older versions may be available there!<br /><br />
+            If you are viewing this on mobile and cannot access all the great
+            stuff here, click <a href="https://varphi.carrd.co">this link</a>
+            to access the music of Varphi on a site made for mobile.
+          </p>
+        </div>
+      </div>
+    </div>
 
-      <iframe id=taskbar style="position: absolute; left:0; top:0; height: 100vh; width: 100vw;" src="sitewide/taskbar/taskbar.html" seamless frameBorder="0" allow-same-origi></iframe>
-   </body>
+    <iframe
+      id="taskbar"
+      style="position: absolute; left: 0; top: 0; height: 100vh; width: 100vw"
+      src="sitewide/taskbar/taskbar.html"
+      seamless
+      frameborder="0"
+      allow-same-origi
+    ></iframe>
+  </body>
 </html>
