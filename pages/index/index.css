@@ -19,7 +19,7 @@
     top: 25%;
     left: 25%;
     transform-style: preserve-3d;
-    transform: translateZ(-20px);
+    transform: translateZ(-0px);
     transition: transform 0.01s;
     pointer-events: all;
   }
