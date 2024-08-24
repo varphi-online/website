@@ -11,7 +11,7 @@ function createFileStructure(rootElement, fileList) {
   var subpwd = document.createElement("span");
   var folder_img = document.createElement("img");
   folder_img.style.display = "inline";
-  folder_img.src = "/sitewide/apps/icons/Folder.ico";
+  folder_img.src = "/sitewide/images/icons/Folder.ico";
   pwdname.appendChild(folder_img);
   var p = document.createElement("p");
   p.innerHTML = fileList[0];

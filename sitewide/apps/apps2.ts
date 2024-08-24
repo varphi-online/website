@@ -1,12 +1,13 @@
 // Wait for page to load
 
 window.addEventListener("DOMContentLoaded", () => {
+  // Grab all divs with the app class to inject meaningful data
   var collection = document.getElementsByClassName("app");
-  var taskbarDoc = document.getElementById("taskbar");
+  var taskbarDoc = <HTMLIFrameElement>document.getElementById("taskbar");
 
   // wait for tb to load
   taskbarDoc.addEventListener("load", function () {
-    var bar = taskbarDoc.contentWindow.document;
+    var bar = taskbarDoc.contentWindow?.document;
     //get appicons flexbox
     bar = bar.getElementsByClassName("bar")[0];
     bar = bar.childNodes[1];

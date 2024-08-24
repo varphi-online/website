@@ -9,11 +9,11 @@ body {
 
 #bgScroll{
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    height: 110vh;
     z-index: -100;
     filter: url(#pixelate2);
     image-rendering: pixelated;
+    overflow:hidden;
     background: none;
     background-color: none;
 }
