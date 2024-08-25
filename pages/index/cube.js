@@ -13,7 +13,19 @@ let pos = [
     parseInt(getComputedStyle(container).left, 10) - prim.containerWidth / 2,
     parseInt(getComputedStyle(container).top, 10) - prim.containerHeight / 2,
 ];
-let dir = [Math.sign(Math.random() * 2 - 1), Math.sign(Math.random() * 2 - 1)];
+let dir = [0, 0];
+let rotSpeed = [0, 0];
+let impulsed = false;
+cube.addEventListener('mousemove', (event) => {
+    if (!impulsed) {
+        dir = [event.movementX / 10, event.movementY / 10];
+        rotSpeed = [event.movementX / 6, event.movementY / 6];
+        impulsed = true;
+    }
+});
+cube.addEventListener('mouseleave', () => {
+    impulsed = false;
+});
 var rotate = [0, 0, 0];
 let speed = 5;
 function play() {
@@ -28,8 +40,8 @@ function play() {
     pos = [pos[0] + dir[0] * speed, pos[1] + dir[1] * speed];
     container.style.left = `${pos[0]}px`;
     container.style.top = `${pos[1]}px`;
-    rotate[0] = rotate[0] + 0.6 * 2;
-    rotate[1] = rotate[1] + 0.4 * 2;
+    rotate[0] = rotate[0] + 0.6 * 2 + rotSpeed[0];
+    rotate[1] = rotate[1] + 0.4 * 2 + rotSpeed[1];
 }
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
