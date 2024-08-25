@@ -82,8 +82,12 @@ export function initializeApplication(
   newTaskbarIconLabel.htmlFor = newTaskbarIcon.id;
   newTaskbarIconLabel.className = "win95";
   let taskbarIconImage = document.createElement("img");
+  if (element.dataset.icon){
   taskbarIconImage.src =
     "/sitewide/images/icons/" + <string>element.dataset.icon;
+  } else {
+    "/sitewide/images/icons/Program.ico";
+  }
   let taskbarIconText = document.createElement("p");
   taskbarIconText.innerHTML = <string>element.dataset.icon_name;
   newTaskbarIconLabel.appendChild(taskbarIconImage);
@@ -147,12 +151,12 @@ function makeDraggable(element: HTMLDivElement) {
     if (mouseDownOnApp){
       mouseEvent.preventDefault();
       shadow.style.display = "inline-block";
-      shadow.style.top = String(initialDivPosition[0] - initialMousePosition[1] + mouseEvent.clientY) + "px";
-      shadow.style.left = String(initialDivPosition[1] - initialMousePosition[0] + mouseEvent.clientX)+"px";
+      shadow.style.top = String(100*(initialDivPosition[0] - initialMousePosition[1] + mouseEvent.clientY)/window.innerHeight) + "vh";
+      shadow.style.left = String(100*(initialDivPosition[1] - initialMousePosition[0] + mouseEvent.clientX)/window.innerWidth)+"vw";
     }
   });
   window.addEventListener('mouseup',async (mouseEvent)=>{
-    mouseEvent.preventDefault();
+
     shadow.style.display = "none";
     mouseDownOnApp = false;
     await new Promise(resolve => setTimeout(resolve, 100));
@@ -160,8 +164,7 @@ function makeDraggable(element: HTMLDivElement) {
       parseInt(getComputedStyle(shadow).top,10),
       parseInt(getComputedStyle(shadow).left,10),
     ];
-    element.style.top = String(initialDivPosition[0] )+ "px";
-    element.style.left = String(initialDivPosition[1])+"px";
+    element.style.top = String(100*(initialDivPosition[0])/window.innerHeight) + "vh";
+      element.style.left = String(100*(initialDivPosition[1])/window.innerWidth)+"vw";
   });
 }
-// TODO STATIC MOVEMENT

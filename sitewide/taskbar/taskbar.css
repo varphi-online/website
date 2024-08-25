@@ -209,7 +209,7 @@ button{
 }
 
 .noReferrer{
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .startMenuFolder .contextArrow{

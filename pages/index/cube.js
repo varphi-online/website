@@ -13,7 +13,7 @@ let pos = [
     parseInt(getComputedStyle(container).left, 10) - prim.containerWidth / 2,
     parseInt(getComputedStyle(container).top, 10) - prim.containerHeight / 2,
 ];
-let dir = [1, 1];
+let dir = [Math.sign(Math.random() * 2 - 1), Math.sign(Math.random() * 2 - 1)];
 var rotate = [0, 0, 0];
 let speed = 5;
 function play() {

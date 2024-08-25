@@ -20,6 +20,7 @@ function createFileStructure(rootElement, fileList) {
     if (typeof entry === "string") {
       const li = document.createElement("summary");
       const a = document.createElement("a");
+      a.target = "_blank";
       if (entry.split("|").length >= 2) {
         a.href = "/" + entry.split("|")[1] + "/" + entry.split("|")[0];
       } else {

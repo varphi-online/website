@@ -9,7 +9,7 @@ body {
 
 #bgScroll{
     position: absolute;
-    height: 110vh;
+    width: 100vw;
     z-index: -100;
     filter: url(#pixelate2);
     image-rendering: pixelated;
@@ -34,64 +34,4 @@ h1{
     font-family: c64;
     letter-spacing: 1vh;
     filter: url(#pixelate);
-}
-
-.windowContent img{
-    margin-top: 1%;
-    position: relative;
-    aspect-ratio: 1/1;
-    height: 33vh;
-}
-#infoBox{
-    position: absolute;
-    left: 8vw;
-    top: 30vh;
-
-}
-
-#infoBox .windowContent{
-    text-wrap: balance;
-    width: 45vh;
-}
-
-#albumCover{
-    aspect-ratio: 1/1;
-    position:absolute;
-    right: 0px;
-    bottom: 0px;
-}
-
-#tracklist {
-    width: 36vh;
-    height: 30vh;
-    position: absolute;
-    top: 0px;
-    left:0px;
-    font-size: 1.8cqh;
-}
-
-#tracklist .windowContent{
-    width: 36vh;
-    height: 27cqh;
-    width: 35.3cqh;
-}
-
-#tracklist ol{
-    padding: 8px;
-    text-align: left;
-    font-family: win95;
-    color: black;
-    padding-inline-start: 2cqw;
-    padding-right: 1cqw;
-    margin: 0;
-}
-
-#sisterWindows{
-    height: auto;
-    width: auto;
-    width: 52vh;
-    height: 50vh;
-    position:absolute;
-    left:64vw;
-    top: 20vh;
 }

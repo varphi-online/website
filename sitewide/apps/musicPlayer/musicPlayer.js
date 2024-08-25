@@ -48,22 +48,22 @@ slider.oninput = function() {
 }
 
 function nextSong() {
-    image.src = "sitewide/apps/musicPlayer/pause.png"
+    image.src = "/sitewide/apps/musicPlayer/pause.png"
     player.nextVideo();
 }
 
 function previousSong() {
-    image.src = "sitewide/apps/musicPlayer/play.png"
+    image.src = "/sitewide/apps/musicPlayer/play.png"
     player.previousVideo()
 }
 
 function playPause() {
     if (player.getPlayerState() == 1) {
-        image.src = "sitewide/apps/musicPlayer/play.png"
+        image.src = "/sitewide/apps/musicPlayer/play.png"
         player.pauseVideo();
         localStorage.setItem("paused", true);
     } else {
-        image.src = "sitewide/apps/musicPlayer/pause.png"
+        image.src = "/sitewide/apps/musicPlayer/pause.png"
         player.playVideo();
         localStorage.setItem("paused", false);
     }
@@ -102,10 +102,10 @@ function onPlayerReady(event) {
     });
   if (localStorage.getItem("paused") == "true"){
    player.pauseVideo();
-   image.src = "sitewide/apps/musicPlayer/play.png"
+   image.src = "/sitewide/apps/musicPlayer/play.png"
   } else {
         player.playVideo();
-        image.src = "sitewide/apps/musicPlayer/pause.png"
+        image.src = "/sitewide/apps/musicPlayer/pause.png"
   }
   event.target.setVolume(localStorage.getItem("volume"));
 }

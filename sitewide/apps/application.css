@@ -13,6 +13,9 @@ body {
     padding: 2px;
     padding-top: 2px;
     width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .windowTitlebar{
@@ -71,4 +74,12 @@ body {
 .app {
     width: fit-content;
     height: fit-content;
+}
+
+.whiteBackground{
+    background-color: #f1f0f1;
+    color: black;
+    padding: 2px;
+
+    box-shadow: inset -1px -1px #f1f0f1, inset -2px -2px #eaebea,inset 1px 1px #323132, inset 2px 2px #414041;
 }
