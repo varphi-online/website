@@ -26,7 +26,7 @@ let impulsed:boolean = false;
 cube.addEventListener('mousemove',(event)=>{
   if (!impulsed){
   dir = [event.movementX/10, event.movementY/10];
-  rotSpeed = [event.movementX/6, event.movementY/6];
+  rotSpeed = [event.movementX/6, -event.movementY/6];
   impulsed = true;
   }
 })
