@@ -1,0 +1,74 @@
+@font-face {
+    font-family: win95;
+    src: url("/sitewide/W95FA.otf") format("opentype");
+}
+
+body {
+    font-family: "win95";
+    overflow: hidden;
+}
+
+.window{
+    z-index: 900;
+    padding: 2px;
+    padding-top: 2px;
+    width: fit-content;
+}
+
+.windowTitlebar{
+    height: 2vh;
+    width: 100%;
+    background-color: #180981;
+    color: #f1f0f1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.windowTitleArea{
+    margin-right: auto;
+    padding: 0px;
+    padding-left: 3px;
+    width: 100%;
+    flex-grow: 2;
+}
+.windowTitleArea p{
+    margin: 0px;
+}
+
+.windowTitlebarInteractableArea{
+    display: flex;
+    height: 100%;
+    padding: 2px;
+    gap: 4px;
+    padding-right: 4px;
+    align-items: center;
+}
+
+.windowTitlebarInteractableArea button{
+    display: flex;
+    align-items: center;
+    border: none;
+    color: black;
+    padding: none;
+    height: calc(100%);
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    cursor: pointer;
+}
+.windowSurface{
+    width: fit-content;
+}
+
+.movingWindow {
+    background-color: rgba(0, 0, 0, 0);
+    border: 4px solid gray;
+    mix-blend-mode: difference;
+}
+
+.app {
+    width: fit-content;
+    height: fit-content;
+}

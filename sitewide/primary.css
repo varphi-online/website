@@ -24,7 +24,6 @@ body {
    height: 100%;
    overflow-y: hidden;
    overflow-x: hidden;
-   color: white;
    z-index: 2;
    background-image: url("stars.gif");
    background-repeat: no-repeat;
@@ -60,6 +59,7 @@ body::after{
  }
 
 h1 {
+  color: white;
   filter: url(#pixelate2);
   font-family: "Kode Mono";
   font-size: 3em;

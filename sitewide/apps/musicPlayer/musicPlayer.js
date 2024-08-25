@@ -20,12 +20,14 @@ if (localStorage.getItem("playlist") === null || localStorage.getItem("playlist"
 if (localStorage.getItem("volume") === null) {
     localStorage.setItem("volume", 8);
 } else {
+    if (slider){
     var vol = localStorage.getItem("volume")
-    var difference = slider.value - vol
+    var difference = slider.value - vol;
     if (difference >= 0) {
         slider.stepDown(difference)
     } else {
         slider.stepUp(-difference)
+    }
     }
 }
 
@@ -38,29 +40,30 @@ if (localStorage.getItem("videoIndex") === null || localStorage.getItem("videoIn
     localStorage.setItem("videoSeek", 0);
 }
 
-
+if (slider){
 slider.oninput = function() {
     localStorage.setItem("volume", this.value);
     player.setVolume(this.value);
 }
+}
 
 function nextSong() {
-    image.src = "musicPlayer/pause.png"
+    image.src = "sitewide/apps/musicPlayer/pause.png"
     player.nextVideo();
 }
 
 function previousSong() {
-    image.src = "musicPlayer/pause.png"
+    image.src = "sitewide/apps/musicPlayer/play.png"
     player.previousVideo()
 }
 
 function playPause() {
     if (player.getPlayerState() == 1) {
-        image.src = "musicPlayer/play.png"
+        image.src = "sitewide/apps/musicPlayer/play.png"
         player.pauseVideo();
         localStorage.setItem("paused", true);
     } else {
-        image.src = "musicPlayer/pause.png"
+        image.src = "sitewide/apps/musicPlayer/pause.png"
         player.playVideo();
         localStorage.setItem("paused", false);
     }
@@ -99,10 +102,10 @@ function onPlayerReady(event) {
     });
   if (localStorage.getItem("paused") == "true"){
    player.pauseVideo();
-   image.src = "musicPlayer/play.png"
+   image.src = "sitewide/apps/musicPlayer/play.png"
   } else {
-    player.playVideo();
-    image.src = "musicPlayer/pause.png"
+        player.playVideo();
+        image.src = "sitewide/apps/musicPlayer/pause.png"
   }
   event.target.setVolume(localStorage.getItem("volume"));
 }
@@ -110,8 +113,6 @@ function onPlayerReady(event) {
 
 function openPlayer() {
     player.setLoop(true);
-    var taskbar = document.getElementById("musicPlayerTB");
-    taskbar.style.display = "inline-flex";
     //player.playVideo();
     //player.nextVideo();
     player.playVideoAt(localStorage.getItem("videoIndex"))
@@ -128,8 +129,11 @@ function logVideoData() {
     localStorage.setItem("videoSeek", player.getCurrentTime())
 }
 
+window.onbeforeunload = function(){return logVideoData()};
+
+
 function changePlaylist(elem, pid){
-    buttons = document.getElementsByClassName("playlistButton")
+    buttons = document.getElementById("playlistSelect").getElementsByTagName("button");
 
     for (let i = 0; i < buttons.length; i++) {
          if (buttons[i].innerText.startsWith("> ")){
