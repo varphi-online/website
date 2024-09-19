@@ -99,6 +99,10 @@ button{
     display: flex;
  }
 
+#startButton{
+    anchor-name: --startButtonAnchor;
+}
+
  #startMenuBanner{
     display: flex;
     width: 3.6vh;
@@ -131,11 +135,14 @@ button{
     display: none;
     flex-direction: row;
     position:fixed;
+    position-anchor: --startButtonAnchor;
     bottom: 4cqh;
+    left: calc(anchor(start));
     padding: 2px;
     padding-left: 4px;
     padding-top: 4px;
     gap: 3px;
+    anchor-name: --startMenuAnchor;
  }
 
  #startMenuContents{
@@ -194,14 +201,6 @@ button{
     width: 60%;
 }
 
-.startMenuEntry::before{
-    position:absolute;
-    content: '';
-    width: 100%;
-    transform: translateX(50%);
-    height: 13%;
-}
-
 .startMenuLink{
     color: black;
     text-decoration: none;
@@ -219,27 +218,33 @@ button{
     right: 4px;
 }
 
+.startMenuFolder{
+    anchor-name: --startMenuFolderAnchor;
+}
+
 .startSubMenu {
+    position-anchor: --startMenuFolderAnchor;
     height: fit-content;
     width: 20vh;
     display: none;
-    position: absolute;
+    position: fixed;
     flex-direction: column;
     flex-wrap: nowrap;
-    left: calc(100% + 1px);
+    left: calc(anchor(right) + 1px);
     padding: 2px;
 }
 
 .startMenuFolder:first-of-type .growFromTop{
-    top: calc(0% - 1px);
+    top: calc(anchor(--startMenuFolderAnchor start) - 4px);
 }
 
 .growFromTop{
-    transform: translateY(-3px);
+    top: calc(anchor(--startMenuFolderAnchor start));
 }
 
 .growFromBottom{
-    transform: translateY(calc(-25% - 5px));
+    position-anchor: --startMenuFolderAnchor;
+    bottom: calc(anchor(end) + 1px);
 }
 
 .startMenuFolder:hover .startSubMenu{
@@ -303,16 +308,18 @@ button{
     height: 70%;
     margin-left: 2px;
     cursor: pointer;
+    anchor-name: --volumeIconLabelAnchor;
 }
 
 #volumeControl{
-    left: 0%;
-    bottom: 150%;
-    transform: translateX(-27%);
+    position-anchor: --volumeIconLabelAnchor;
+    right: calc(anchor(right));
+    bottom: calc(anchor(top) + 1.3vh);
+    transform: translateX(27%);
     display: none;
     width: 6vh;
     height: max-content;
-    position: absolute;
+    position: fixed;
     flex-direction: column;
     align-items: center;
     padding-top: 6px;

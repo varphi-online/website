@@ -4,11 +4,12 @@
 }
 
 body {
-    overflow:hidden;
+    overflow: hidden;
 }
 
 #bgScroll{
     position: absolute;
+    bottom: 0px;
     width: 100vw;
     z-index: -100;
     filter: url(#pixelate2);
@@ -28,6 +29,7 @@ body {
     image-rendering: pixelated;
     background: none;
     background-color: none;
+    overflow: hidden;
 }
 
 h1{

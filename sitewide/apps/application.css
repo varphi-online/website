@@ -17,8 +17,33 @@ body {
     flex-direction: column;
     gap: 2px;
 }
+.maximizedSurface{
+    position-anchor: --windowTitlebarAnchor;
+    width: 100vw !important;
+    height: 94vh !important;
+    position: fixed !important;
+    left: 0px !important;
+    top: calc(anchor(bottom)) !important;
+}
+
+.maximizedTitlebar{
+    width: calc(100vw - 2px) !important;
+    position: fixed !important;
+    left: 2px !important;
+    top: 2px !important;
+}
+
+.maximizedWindow{
+    z-index: 950 !important;
+}
+
+.maximizedWindow:focus-within{
+    z-index: 995 !important;
+}
+
 
 .windowTitlebar{
+    anchor-name: --windowTitlebarAnchor;
     height: 2vh;
     width: 100%;
     background-color: #180981;
@@ -53,19 +78,23 @@ body {
     align-items: center;
     border: none;
     color: black;
-    padding: none;
+    padding: 0px;
+    margin: 0px;
     height: calc(100%);
-    padding-left: 3px;
-    padding-right: 3px;
-    padding-top: 0px;
-    padding-bottom: 0px;
     cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    aspect-ratio: 1 / 1;
+    justify-content: center;
 }
 .windowSurface{
     width: fit-content;
+    height: fit-content;
+    padding-right: 2px;
+    padding-bottom: 2px;
 }
 
-.movingWindow {
+.windowShadow {
     background-color: rgba(0, 0, 0, 0);
     border: 4px solid gray;
     mix-blend-mode: difference;

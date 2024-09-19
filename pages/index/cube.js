@@ -16,10 +16,30 @@ let pos = [
 let dir = [0, 0];
 let rotSpeed = [0, 0];
 let impulsed = false;
+function clamp(num, lower, upper) {
+    return Math.min(Math.max(num, lower), upper);
+}
 cube.addEventListener('mousemove', (event) => {
     if (!impulsed) {
-        dir = [event.movementX / 10, event.movementY / 10];
-        rotSpeed = [event.movementX / 6, -event.movementY / 6];
+        // Only add speed if coming from the same direction
+        if (Math.sign(dir[0]) == Math.sign(event.movementX)) {
+            dir[0] += event.movementX / 10;
+            rotSpeed[0] += event.movementX / 6;
+        }
+        else {
+            dir[0] = event.movementX / 10;
+            rotSpeed[0] = event.movementX / 6;
+        }
+        if (Math.sign(dir[1]) == Math.sign(event.movementY)) {
+            dir[1] += event.movementY / 10;
+            rotSpeed[1] -= event.movementY / 6;
+        }
+        else {
+            dir[1] = event.movementY / 10;
+            rotSpeed[1] = -event.movementY / 6;
+        }
+        dir = [clamp(dir[0], -20, 20), clamp(dir[1], -20, 20)];
+        rotSpeed = [clamp(rotSpeed[0], -10, 10), clamp(rotSpeed[1], -10, 10)];
         impulsed = true;
     }
 });
@@ -28,8 +48,7 @@ cube.addEventListener('mouseleave', () => {
 });
 var rotate = [0, 0, 0];
 let speed = 5;
-function play() {
-    cube.style.transform = `translateZ(0px) rotateY(${rotate[0]}deg) rotateX(${rotate[1]}deg) rotateZ(${rotate[2]}deg)`;
+function playMovement() {
     container.style.transform = `translate(0%,0%)`;
     if (pos[0] + prim.containerWidth > prim.windowWidth || pos[0] <= 0) {
         dir[0] = dir[0] * -1;
@@ -37,9 +56,12 @@ function play() {
     if (pos[1] + prim.containerHeight > prim.windowHeight || pos[1] <= 0) {
         dir[1] = dir[1] * -1;
     }
-    pos = [pos[0] + dir[0] * speed, pos[1] + dir[1] * speed];
+    pos = [pos[0] + dir[0] / 2 * speed, pos[1] + dir[1] / 2 * speed];
     container.style.left = `${pos[0]}px`;
     container.style.top = `${pos[1]}px`;
+}
+function playRotation() {
+    cube.style.transform = `translateZ(0px) rotateY(${rotate[0]}deg) rotateX(${rotate[1]}deg) rotateZ(${rotate[2]}deg)`;
     rotate[0] = rotate[0] + 0.6 * 2 + rotSpeed[0];
     rotate[1] = rotate[1] + 0.4 * 2 + rotSpeed[1];
 }
@@ -48,7 +70,8 @@ function sleep(ms) {
 }
 async function pause() {
     await sleep(1000);
-    setInterval(play, 100);
+    setInterval(playMovement, 100);
+    setInterval(playRotation, 100);
 }
 pause();
 window.addEventListener("resize", () => {

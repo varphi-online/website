@@ -49,7 +49,7 @@
                <!-- prettier-ignore -->
                <div style="writing-mode: vertical-lr; transform: rotate(180deg)">
                   <!-- prettier-ignore -->
-                  <b>epsilon</b><p>OS</p><sub style="color: black; font-size: 0.5em">v2</sub>
+                  <b>epsilon</b><p>OS</p><sub style="color: black; font-size: 0.5em">v2.1</sub>
                </div>
             </div>
             <div id="startMenuContents">
@@ -216,88 +216,96 @@
                <p class="windowTitle">TEST TITLE</p>
             </div>
             <div class="windowTitlebarInteractableArea">
-               <button class="windowMinimize win95">_</button>
-               <button class="windowMaximize win95">X</button>
+               <button class="windowMinimize win95">&#9149;</button>
+               <button class="windowMaximize win95">&#10720;</button>
+               <button class="windowClose win95">&Cross;</button>
             </div>
          </div>
          <div class="windowSurface">TEST CONTENT</div>
       </div>
    </div>
+<!-- The optional attributes for an app are as follows (prefixed with "data-"):
 
-   <!---->
-   <div id="musicPlayer" class="app" data-window_title="Music Player 2000" data-icon_name="Music Player 2000"
-      data-icon="Music Disc.ico" data-state="dynamic" data-closable="false" style="top: 4vh; right: 5vh; display: none">
-      <style>
-         #playlistSelect {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-bottom: 2px;
-            padding-left: 4px;
-            padding-right: 4px;
-         }
+      window_title=""
+      icon_name=""
+      icon=""
+      data-movable
+      data-closable
+      data-fullScreenCapable 
+   -->
+<div id="musicPlayer" class="app" data-window_title="Music Player 2000" data-icon_name="Music Player 2000"
+   data-icon="Music Disc.ico" data-movable style="top: 4vh; right: 5vh; display: flex">
+   <style>
+      #playlistSelect {
+         display: flex;
+         flex-direction: column;
+         gap: 5px;
+         margin-bottom: 2px;
+         padding-left: 4px;
+         padding-right: 4px;
+      }
 
-         #playlistSelect button {
-            border: none;
-         }
+      #playlistSelect button {
+         border: none;
+      }
 
-         #musicControls {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            justify-content: center;
-            gap: 8px;
-         }
+      #musicControls {
+         display: flex;
+         flex-direction: row;
+         width: 100%;
+         justify-content: center;
+         gap: 8px;
+      }
 
-         #musicControls button {
-            border: none;
-         }
+      #musicControls button {
+         border: none;
+      }
 
-         #songInfo {
-            text-align: center;
-            margin: 1vh;
-            padding: 0px;
-            width: 30vh;
-            text-wrap: wrap;
-            text-wrap-mode: wrap;
-         }
-      </style>
-      <p id="songInfo">Current Song: <span id="currentSong">none</span></p>
-      <div id="musicControls" style="margin-bottom: 6%">
-         <button class="win95" onclick="previousSong()">
-            <img src="/sitewide/apps/musicPlayer/prev.png" />
-         </button>
-         <button class="win95" onclick="playPause()">
-            <img id="musicPlayPause" src="/sitewide/apps/musicPlayer/play.png" />
-         </button>
-         <button class="win95" onclick="nextSong()">
-            <img src="/sitewide/apps/musicPlayer/next.png" />
-         </button>
-      </div>
-      <div id="playlistSelect">
-         <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfazadVRIROx8J7FlpErhTPsA')">
-            Website Music
-         </button>
-         <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxYuXG4rOLh8QaCXeXg78lo')">
-            Discography
-         </button>
-         <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">
-            Orbit
-         </button>
-         <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxZY9eF1L0obp7zmpESPLQa')">
-            An End of Sorts
-         </button>
-         <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxA9_EO73LnUUJ5QJsehmC9')">
-            FOTE6
-         </button>
-         <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfayOwGFpd7C30W0lDwYx2_ey')">
-            Singles
-         </button>
-      </div>
-      <div id="musicPlayerFrame">
-         <div id="player" style="display: none"></div>
-      </div>
+      #songInfo {
+         text-align: center;
+         margin: 1vh;
+         padding: 0px;
+         width: 30vh;
+         text-wrap: wrap;
+         text-wrap-mode: wrap;
+      }
+   </style>
+   <p id="songInfo">Current Song: <span id="currentSong">none</span></p>
+   <div id="musicControls" style="margin-bottom: 6%">
+      <button class="win95" onclick="previousSong()">
+         <img src="/sitewide/apps/musicPlayer/prev.png" />
+      </button>
+      <button class="win95" onclick="playPause()">
+         <img id="musicPlayPause" src="/sitewide/apps/musicPlayer/play.png" />
+      </button>
+      <button class="win95" onclick="nextSong()">
+         <img src="/sitewide/apps/musicPlayer/next.png" />
+      </button>
    </div>
+   <div id="playlistSelect">
+      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfazadVRIROx8J7FlpErhTPsA')">
+         Website Music
+      </button>
+      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxYuXG4rOLh8QaCXeXg78lo')">
+         Discography
+      </button>
+      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">
+         Orbit
+      </button>
+      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxZY9eF1L0obp7zmpESPLQa')">
+         An End of Sorts
+      </button>
+      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxA9_EO73LnUUJ5QJsehmC9')">
+         FOTE6
+      </button>
+      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfayOwGFpd7C30W0lDwYx2_ey')">
+         Singles
+      </button>
+   </div>
+   <div id="musicPlayerFrame">
+      <div id="player" style="display: none"></div>
+   </div>
+</div>
 </body>
 
 </html>
