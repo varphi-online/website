@@ -197,7 +197,8 @@ button{
 .startMenuEntry::before{
     position:absolute;
     content: '';
-    width: 100%;
+    width: 5%;
+    right: 0%;
     transform: translateX(50%);
     height: 13%;
 }
