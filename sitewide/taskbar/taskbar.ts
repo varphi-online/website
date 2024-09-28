@@ -1,33 +1,38 @@
 // This is just so I may instantiate a single taskbar div wherever I choose and
 // still benefit from html linting :3
 
-import { Application, initializeApplications, webpageAsApp } from "../apps/applicationManager.js";
+import {
+  Application,
+  initializeApplications,
+  webpageAsApp,
+} from "../apps/applicationManager.js";
+
+// Get stylesheets for different sub modules
+// TODO: Switch to using anchor version of stylesheet when all major browsers support
+const taskbarCSS = document.createElement("link");
+taskbarCSS.href = "/sitewide/taskbar/taskbar.css";
+taskbarCSS.type = "text/css";
+taskbarCSS.rel = "stylesheet";
+document.head.appendChild(taskbarCSS);
+
+const applicationCSS = document.createElement("link");
+applicationCSS.href = "/sitewide/apps/application.css";
+applicationCSS.type = "text/css";
+applicationCSS.rel = "stylesheet";
+document.head.appendChild(applicationCSS);
 
 // Realistically, I should create two separate navigation layouts, for desktop
 // and mobile, and decide to import a specific version based on detected os.
-fetch("/sitewide/taskbar/taskbar.html").then(response=> response.text()).then(text=>{
-    // Get stylesheets for different sub modules
-    // TODO: Switch to using anchor version of stylesheet when all major browsers support
-    const taskbarCSS = document.createElement("link");
-    taskbarCSS.href = "/sitewide/taskbar/taskbar.css";
-    taskbarCSS.type = "text/css";
-    taskbarCSS.rel = "stylesheet";
-    document.head.appendChild(taskbarCSS);
-
-    const applicationCSS = document.createElement("link");
-    applicationCSS.href = "/sitewide/apps/application.css";
-    applicationCSS.type = "text/css";
-    applicationCSS.rel = "stylesheet";
-    document.head.appendChild(applicationCSS);
-
+fetch("/sitewide/taskbar/taskbar.html")
+  .then((response) => response.text())
+  .then((text) => {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(text, 'text/html');
-
+    const doc = parser.parseFromString(text, "text/html");
 
     // Grab taskbar for injection
-    const taskbarDiv = <HTMLDivElement>doc.querySelector('#taskbar');
+    const taskbarDiv = <HTMLDivElement>doc.querySelector("#taskbar");
     document.body.appendChild(taskbarDiv);
-    const musicPlayer = <HTMLDivElement>doc.querySelector('#musicPlayer');
+    const musicPlayer = <HTMLDivElement>doc.querySelector("#musicPlayer");
     document.body.appendChild(musicPlayer);
 
     // Get various scripts
@@ -35,20 +40,27 @@ fetch("/sitewide/taskbar/taskbar.html").then(response=> response.text()).then(te
     musicPlayerScript.src = "/sitewide/apps/musicPlayer/musicPlayer.js";
     document.head.appendChild(musicPlayerScript);
 
+    //const musicPlayerScript2 = document.createElement("script");
+    //musicPlayerScript2.type = "module";
+    //musicPlayerScript2.src = "/sitewide/apps/musicPlayer/musicPlayerRevamp.js";
+    //document.head.appendChild(musicPlayerScript2);
+
     const clockScript = document.createElement("script");
     clockScript.src = "https://melonking.net/scripts/swatchTime.js";
     document.head.appendChild(clockScript);
-    
+
     // Super stupid fix but apparently just importing the script as a DOM node
     // directly will not execute, so i have to basically stringify and destring
     // to get this to run
     const deferred = document.createElement("script");
-    deferred.innerHTML = (<HTMLScriptElement>doc.querySelector('#deferred')).innerHTML;
+    deferred.innerHTML = (<HTMLScriptElement>(
+      doc.querySelector("#deferred")
+    )).innerHTML;
     document.body.appendChild(deferred);
 
-    const windowTemplate = <HTMLDivElement>doc.querySelector('#windowTemplate');
-    
-   let [apps,zList] = initializeApplications(windowTemplate, taskbarDiv);
-   //apps.push(webpageAsApp(windowTemplate,taskbarDiv,"https://youtube.com"));
-   //zList.push(<Application>apps.at(-1));
-});
+    const windowTemplate = <HTMLDivElement>doc.querySelector("#windowTemplate");
+
+    let [apps, zList] = initializeApplications(windowTemplate, taskbarDiv);
+    //apps.push(webpageAsApp(windowTemplate,taskbarDiv,"https://youtube.com"));
+    //zList.push(<Application>apps.at(-1));
+  });
