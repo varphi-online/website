@@ -25,6 +25,8 @@ fetch("/sitewide/taskbar/taskbar.html")
     document.body.appendChild(taskbarDiv);
     const musicPlayer = doc.querySelector("#musicPlayer");
     document.body.appendChild(musicPlayer);
+    const guestbook = doc.querySelector("#guestbook");
+    document.body.appendChild(guestbook);
     // Get various scripts
     const musicPlayerScript = document.createElement("script");
     musicPlayerScript.src = "/sitewide/apps/musicPlayer/musicPlayer.js";
