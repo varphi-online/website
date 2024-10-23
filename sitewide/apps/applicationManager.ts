@@ -88,6 +88,7 @@ export class Application {
 		this.shadow = new Shadow(this);
 
 		this.addAppWindowEvents();
+		this.addButtonEvents();
 		let appIconDiv: HTMLDivElement = <HTMLDivElement>(
 			taskbar.querySelector("#appIcons")
 		);
@@ -146,11 +147,12 @@ export class Application {
 		return [iconCheckbox, iconLabel];
 	}
 
-	addAppWindowEvents() {
-		// Using event delegation
-		let self = this;
-		this.appDiv.addEventListener("click", (mouseEvent) => {
-			switch (mouseEvent.target as HTMLElement) {
+	addButtonEvents() {
+		const self = this;
+
+		// Function to prevent double-firing on mobile devices
+		const handleButtonAction = (target: HTMLElement) => {
+			switch (target) {
 				case self.minimizeButton:
 					self.taskbarIcon.checked = false;
 					self.appDiv.style.display = "none";
@@ -165,29 +167,98 @@ export class Application {
 						self.maximizeButton.innerHTML = "⧉";
 					}
 					break;
+				case self.closeButton:
+					self.appDiv.style.display = "none";
+					self.taskbarIcon.checked = false;
+					break;
 				default:
 					self.moveToFront();
-					// TODO MOVE TO TOP OF Z-INDEX USING FUNCTION
 					break;
 			}
-		});
+		};
+
+		// Add touch events for buttons
+		[this.minimizeButton, this.maximizeButton, this.closeButton].forEach(
+			(button) => {
+				if (button) {
+					button.addEventListener("touchstart", (e: TouchEvent) => {
+						e.preventDefault();
+					});
+
+					button.addEventListener("touchend", (e: TouchEvent) => {
+						e.preventDefault();
+						handleButtonAction(e.target as HTMLElement);
+					});
+
+					button.addEventListener("click", (e: MouseEvent) => {
+						if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
+							handleButtonAction(e.target as HTMLElement);
+						}
+					});
+				}
+			},
+		);
+	}
+
+	addAppWindowEvents() {
+		// Using event delegation
+		let self = this;
+
 		if (this.appDiv.hasAttribute("data-movable")) {
 			this.appDiv.style.position = "absolute";
-			this.titleBar.addEventListener("mousedown", (mouseEvent) => {
-				self.shadow.mouseDown(mouseEvent);
-			});
-			window.addEventListener("mousemove", (mouseEvent) => {
-				if (self.shadow.mouseDownOnApp) {
-					mouseEvent.preventDefault();
-					self.shadow.mouseMove(mouseEvent);
-				}
-			});
-			window.addEventListener("mouseup", async (mouseEvent) => {
-				if (self.shadow.mouseDownOnApp) {
+
+			// mobile functionality
+			if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
+				this.titleBar.addEventListener("mousedown", (mouseEvent) => {
+					self.shadow.mouseDown(mouseEvent);
+				});
+				window.addEventListener("mousemove", (mouseEvent) => {
+					if (self.shadow.mouseDownOnApp) {
+						mouseEvent.preventDefault();
+						self.shadow.mouseMove(mouseEvent);
+					}
+				});
+				window.addEventListener("mouseup", async () => {
+					if (self.shadow.mouseDownOnApp) {
+						self.moveToFront();
+						self.shadow.mouseUp();
+					}
+				});
+			} else {
+				let initialTouchPos: { x: number; y: number };
+				let initialWindowPos: { x: number; y: number };
+
+				this.titleBar.addEventListener("touchstart", (e: TouchEvent) => {
+					e.preventDefault();
+					const touch = e.touches[0];
+					initialTouchPos = {
+						x: touch.clientX,
+						y: touch.clientY,
+					};
+					initialWindowPos = {
+						x: this.appDiv.offsetLeft,
+						y: this.appDiv.offsetTop,
+					};
 					self.moveToFront();
-					self.shadow.mouseUp();
-				}
-			});
+				});
+
+				this.titleBar.addEventListener("touchmove", (e: TouchEvent) => {
+					e.preventDefault();
+					const touch = e.touches[0];
+					const deltaX = touch.clientX - initialTouchPos.x;
+					const deltaY = touch.clientY - initialTouchPos.y;
+
+					const newTop =
+						((initialWindowPos.y + deltaY) / window.innerHeight) * 100;
+					const newLeft =
+						((initialWindowPos.x + deltaX) / window.innerWidth) * 100;
+
+					this.appDiv.style.top = `${newTop}vh`;
+					this.appDiv.style.left = `${newLeft}vw`;
+				});
+
+				this.titleBar.addEventListener("touchend", () => {});
+			}
 		}
 	}
 
