@@ -71,6 +71,7 @@ button {
     inset 1.5px 2px #eaebea,
     1px 1px #323132,
     2px 2px #414041;
+  text-wrap-mode: nowrap;
 }
 
 .taskbarIcon:checked + label {
@@ -118,6 +119,20 @@ button {
 
 .taskbarIcon:checked + label #startMenu {
   display: flex;
+}
+
+#appIcons {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-grow: 1;
+  overflow-x: scroll;
+  overflow-y: clip;
+  gap: 6px;
+}
+
+#appIcons::-webkit-scrollbar {
+  display: none;
 }
 
 #startMenu #startMenuBanner {
@@ -305,8 +320,6 @@ button {
   height: 70%;
   gap: 5px;
   align-items: center;
-  right: 8px;
-  position: inherit;
   padding-right: 4px;
   padding-left: 4px;
 }

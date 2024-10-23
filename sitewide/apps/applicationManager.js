@@ -64,8 +64,9 @@ export class Application {
         [this.taskbarIcon, this.taskbarLabel] = this.makeForTaskbar();
         this.shadow = new Shadow(this);
         this.addAppWindowEvents();
-        taskbar.appendChild(this.taskbarIcon);
-        taskbar.appendChild(this.taskbarLabel);
+        let appIconDiv = (taskbar.querySelector("#appIcons"));
+        appIconDiv.appendChild(this.taskbarIcon);
+        appIconDiv.appendChild(this.taskbarLabel);
     }
     makeForTaskbar() {
         // Create elements of a taskbar icon
@@ -165,9 +166,9 @@ export class Application {
 }
 class Shadow {
     /* This class is used in the dragging of windows, visually it is the grey
-    box that indicates to the user where the window will be placed after a drag
-    and drop, but it also contains info about styles and movement.
-    */
+  box that indicates to the user where the window will be placed after a drag
+  and drop, but it also contains info about styles and movement.
+  */
     object;
     initialDivPosition;
     initialMousePosition;
@@ -235,9 +236,9 @@ class Shadow {
 }
 export function initializeApplications(windowTemplate, taskbar) {
     /*
-      Here we loop through each application element to format it into a window
-      we define
-      */
+    Here we loop through each application element to format it into a window
+    we define
+    */
     // Create some primitives that are replicated in every window.
     let appDefinitions = Array.from(document.getElementsByClassName("app"));
     let apps = [];
@@ -251,7 +252,7 @@ export function initializeApplications(windowTemplate, taskbar) {
     return [apps, zList];
 }
 export function webpageAsApp(windowTemplate, taskbar, link) {
-    let embed = document.createElement('iframe');
+    let embed = document.createElement("iframe");
     embed.src = link;
     let out = new Application(embed, windowTemplate, taskbar);
     return out;
