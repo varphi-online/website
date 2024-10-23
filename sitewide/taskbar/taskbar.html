@@ -52,7 +52,12 @@
           id="startMenu"
           class="win95"
           anchor="startButton"
-          onclick="(e => { e.stopPropagation(); if (e.target.tagName === 'DIV'){e.preventDefault();} })(event)"
+          onclick="(e => {
+            e.stopPropagation();
+            const parent = e.target.closest('.startMenuFolder');
+            if (e.target.tagName === 'DIV' || (parent && parent === e.target.parentElement )){
+              e.preventDefault();
+            }})(event)"
         >
           <div id="startMenuBanner">
             <!-- prettier-ignore -->
