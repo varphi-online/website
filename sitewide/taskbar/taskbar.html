@@ -36,9 +36,11 @@
       window, any app's window/containing div should be a child of the "confident"
       icon to reap the benefit of CSS's :checked pseudo-class.
       -->
-      <button id="startButton" class="win95 taskbarButton">
+      <input type="checkbox" id="startButton" class="taskbarIcon win95" />
+      <label for="startButton">
         <img src="/sitewide/images/icons/INFO.ico" />
         <p style="-webkit-text-stroke: 1px black">Start</p>
+
         <!--
          The start menu itself is contained in this button for the fact that
          visual state can be handled by as much CSS as possible. A little bit of
@@ -46,7 +48,12 @@
          be inherently focused and thus CSS only will not allow it to function
          like a traditional Windows Start button.
          -->
-        <div id="startMenu" class="win95" anchor="startButton">
+        <div
+          id="startMenu"
+          class="win95"
+          anchor="startButton"
+          onclick="(e => { e.stopPropagation(); e.preventDefault(); })(event)"
+        >
           <div id="startMenuBanner">
             <!-- prettier-ignore -->
             <div style="writing-mode: vertical-lr; transform: rotate(180deg)">
@@ -209,8 +216,7 @@
             </a>
           </div>
         </div>
-      </button>
-
+      </label>
       <!--
       <input id="EXAMPLE" type="checkbox" class="taskbarIcon">
       <label for="EXAMPLE" class="win95">
