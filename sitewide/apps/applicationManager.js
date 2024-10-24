@@ -92,6 +92,7 @@ export class Application {
         else {
             ("/sitewide/images/icons/Program.ico");
         }
+        iconImage.alt = "";
         iconText.innerHTML = this.appDiv.dataset.icon_name;
         iconLabel.appendChild(iconImage);
         iconLabel.appendChild(iconText);
@@ -222,9 +223,9 @@ export class Application {
 }
 class Shadow {
     /* This class is used in the dragging of windows, visually it is the grey
-  box that indicates to the user where the window will be placed after a drag
-  and drop, but it also contains info about styles and movement.
-  */
+      box that indicates to the user where the window will be placed after a drag
+      and drop, but it also contains info about styles and movement.
+      */
     object;
     initialDivPosition;
     initialMousePosition;
@@ -292,9 +293,9 @@ class Shadow {
 }
 export function initializeApplications(windowTemplate, taskbar) {
     /*
-    Here we loop through each application element to format it into a window
-    we define
-    */
+          Here we loop through each application element to format it into a window
+          we define
+          */
     // Create some primitives that are replicated in every window.
     let appDefinitions = Array.from(document.getElementsByClassName("app"));
     let apps = [];
