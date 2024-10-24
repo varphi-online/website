@@ -348,9 +348,8 @@ button {
 }
 
 #volumeControl {
-  left: 0%;
   bottom: 150%;
-  transform: translateX(-27%);
+  transform: translateX(-40%);
   display: none;
   width: 6vh;
   height: max-content;
