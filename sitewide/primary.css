@@ -3,8 +3,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap");
 
 @font-face {
-    font-family: win95;
-    src: url("W95FA.otf") format("opentype");
+  font-family: win95;
+  src: url("W95FA.otf") format("opentype");
 }
 
 svg {
@@ -19,44 +19,33 @@ svg {
 }
 
 body {
-  margin:0px;
+  margin: 0px;
   background-color: #000000;
-   height: 100%;
-   overflow-y: hidden;
-   overflow-x: hidden;
-   z-index: 2;
-   background-image: url("stars.gif");
-   background-repeat: no-repeat;
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  z-index: 2;
+  background-image: url("stars.gif");
+  background-repeat: no-repeat;
   background-size: 100vw 100vh;
   /* backdrop-filter: url(#pixelate2); */
   image-rendering: pixelated;
 }
 
 /* Scanlines overlay */
-body::after{
+body::after {
   z-index: 99999;
-  content:'';
+  content: "";
   position: absolute;
-  top:0;
-  left:0;
-  width:100%;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   background-image: linear-gradient(rgba(39, 43, 46, 0.1) 3px, transparent 3px);
   background-size: 6px 6px;
   background-attachment: fixed;
-  pointer-events:none;
+  pointer-events: none;
 }
-
-
-@media only screen and (max-width: 600px) {
- body #taskbar {
-  z-index: 100;
- }
-}
-
-#taskbar {
-  z-index: -10;
- }
 
 h1 {
   color: white;
@@ -73,4 +62,6 @@ h1 {
   -webkit-filter: url(#pixelate2);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}

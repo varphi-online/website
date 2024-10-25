@@ -36,7 +36,7 @@
       -->
     <input type="checkbox" id="startButton" class="taskbarIcon win95" />
     <label for="startButton">
-      <img src="/sitewide/images/icons/INFO.ico" />
+      <img src="/sitewide/images/icons/INFO.ico" alt="" />
       <p style="-webkit-text-stroke: 1px black">Start</p>
 
       <!--
@@ -46,8 +46,12 @@
          be inherently focused and thus CSS only will not allow it to function
          like a traditional Windows Start button.
          -->
-      <div id="startMenu" class="win95" anchor="startButton"
-        onclick="(e => { e.stopPropagation(); if (e.target.tagName === 'DIV'){e.preventDefault();} })(event)">
+      <div id="startMenu" class="win95" anchor="startButton" onclick="(e => {
+            e.stopPropagation();
+            const parent = e.target.closest('.startMenuFolder');
+            if (e.target.tagName === 'DIV' || (parent && parent === e.target.parentElement )){
+              e.preventDefault();
+            }})(event)">
         <div id="startMenuBanner">
           <!-- prettier-ignore -->
           <div style="writing-mode: vertical-lr; transform: rotate(180deg)">
@@ -126,8 +130,7 @@
             <img src="/sitewide/images/icons/Network Drive.ico" />
             <p>Selfhosted</p>
             <div class="startSubMenu growFromTop win95">
-              <a class="startSubMenuLink startSubMenuEntry" href="https://mcmap-main.varphi.online"
-                target="_blank">
+              <a class="startSubMenuLink startSubMenuEntry" href="https://mcmap-main.varphi.online" target="_blank">
                 <img src="/sitewide/taskbar/logos/mcmap.ico" />
                 <p>SquareMap</p>
               </a>
@@ -180,13 +183,14 @@
       </label>
       -->
 
+    <div id="appIcons"></div>
     <div id="controlPanel">
       <input id="volumeIcon" type="checkbox" />
       <label id="volumeIconLabel" for="volumeIcon">
-        <img src="/sitewide/images/icons/Volume.ico" />
+        <img src="/sitewide/images/icons/Volume.ico" alt="" />
         <div id="volumeControl" class="win95">
           <p style="margin: 0px">Volume</p>
-          <input id="volumeSlider" value="8" type="range" orient="vertical" />
+          <input id="volumeSlider" value="0.5" type="range" step="0.0000001" min="0" max="1" orient="vertical" />
         </div>
       </label>
 
@@ -280,36 +284,70 @@
         text-wrap: wrap;
         text-wrap-mode: wrap;
       }
+
+      #seekSlider {
+        -webkit-appearance: none;
+        width: 80%;
+        height: 15px;
+        margin-left: 10%;
+        background: #f1f0f1;
+        outline: none;
+        opacity: 0.7;
+        box-shadow:
+          inset -1px -1px #ffffff,
+          inset -2px -2px #eaebea,
+          inset 1px 1px #323132,
+          inset 2px 2px #414041;
+        margin-bottom: 10px;
+      }
+
+      #seekSlider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 10px;
+        height: 20px;
+        background: #c6c3c6;
+        cursor: pointer;
+        box-shadow:
+          inset 1px 1px #f1f0f1,
+          inset 1.5px 2px #eaebea,
+          1px 1px #323132,
+          2px 2px #414041;
+      }
+
+
+      }
     </style>
     <p id="songInfo">Current Song: <span id="currentSong">none</span></p>
     <div id="musicControls" style="margin-bottom: 6%">
-      <button class="win95" onclick="previousSong()">
+      <button class="win95" id="prevSongButton">
         <img src="/sitewide/apps/musicPlayer/prev.png" />
       </button>
-      <button class="win95" onclick="playPause()">
+      <button class="win95" id="playPauseButton">
         <img id="musicPlayPause" src="/sitewide/apps/musicPlayer/play.png" />
       </button>
-      <button class="win95" onclick="nextSong()">
+      <button class="win95" id="nextSongButton">
         <img src="/sitewide/apps/musicPlayer/next.png" />
       </button>
     </div>
+    <input type="range" id="seekSlider" min="0" step="0.00001" />
     <div id="playlistSelect">
-      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfazadVRIROx8J7FlpErhTPsA')">
+      <button class="win95" onclick="changePlaylist(this, 'website')">
         Website Music
       </button>
-      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxYuXG4rOLh8QaCXeXg78lo')">
+      <button class="win95" onclick="changePlaylist(this, 'discography')">
         Discography
       </button>
-      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfayTn076m6xs4CKfGcaCF7KS')">
+      <button class="win95" onclick="changePlaylist(this, 'orbit')">
         Orbit
       </button>
-      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxZY9eF1L0obp7zmpESPLQa')">
+      <button class="win95" onclick="changePlaylist(this, 'eos')">
         An End of Sorts
       </button>
-      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfaxA9_EO73LnUUJ5QJsehmC9')">
+      <button class="win95" onclick="changePlaylist(this, 'fote6')">
         FOTE6
       </button>
-      <button class="win95" onclick="changePlaylist(this, 'PLZVAe2HWDfayOwGFpd7C30W0lDwYx2_ey')">
+      <button class="win95" onclick="changePlaylist(this, 'singles')">
         Singles
       </button>
     </div>
@@ -317,8 +355,8 @@
       <div id="player" style="display: none"></div>
     </div>
   </div>
-  <div id="guestbook" class="app" data-window_title="Guestbook" data-icon="Book 2.ico" data-icon_name="Guestbook"
-    data-movable data-fullScreenCapable style="width: 35vh; height: 45vh; display: none; left: 10vh; top: 6vh">
+  <div id="guestbook" class="app" data-window_title="NetGuest 3.0" data-icon="Book 2.ico" data-icon_name="Guestbook"
+    data-movable data-fullScreenCapable style="width: 35vh; height: 45vh; display: none; left: 6vw; top: 6vw">
     <iframe src="https://guestbook.varphi.online" style="height: 100%; width: 100%"></iframe>
   </div>
 </body>

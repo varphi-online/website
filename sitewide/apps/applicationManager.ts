@@ -17,18 +17,18 @@ export class Application {
   constructor(
     element: HTMLDivElement,
     windowTemplate: HTMLDivElement,
-    taskbar: HTMLDivElement
+    taskbar: HTMLDivElement,
   ) {
     this.appDiv = element;
     this.zList = [];
     let windowTemplateInstance = windowTemplate.cloneNode(
-      true
+      true,
     ) as HTMLDivElement;
 
     // Get some unique ID from the window header, to be used in all other places
     this.applicationID = (<string>this.appDiv.dataset.window_title).replace(
       /\s+/g,
-      "_"
+      "_",
     );
     this.appDiv.id = this.applicationID + "-window";
 
@@ -44,7 +44,7 @@ export class Application {
       windowTemplateInstance.getElementsByClassName("windowSurface")[0],
       windowTemplateInstance.getElementsByClassName("window")[0],
       windowTemplateInstance.getElementsByClassName(
-        "windowTitlebarInteractableArea"
+        "windowTitlebarInteractableArea",
       )[0],
       windowTemplateInstance.getElementsByClassName("windowTitlebar")[0],
     ] as [
@@ -52,7 +52,7 @@ export class Application {
       HTMLDivElement,
       HTMLDivElement,
       HTMLDivElement,
-      HTMLDivElement
+      HTMLDivElement,
     ];
 
     [this.minimizeButton, this.maximizeButton, this.closeButton] = [
@@ -88,9 +88,12 @@ export class Application {
     this.shadow = new Shadow(this);
 
     this.addAppWindowEvents();
-
-    taskbar.appendChild(this.taskbarIcon);
-    taskbar.appendChild(this.taskbarLabel);
+    this.addButtonEvents();
+    let appIconDiv: HTMLDivElement = <HTMLDivElement>(
+      taskbar.querySelector("#appIcons")
+    );
+    appIconDiv.appendChild(this.taskbarIcon);
+    appIconDiv.appendChild(this.taskbarLabel);
   }
 
   makeForTaskbar(): [HTMLInputElement, HTMLLabelElement] {
@@ -104,7 +107,7 @@ export class Application {
       HTMLInputElement,
       HTMLLabelElement,
       HTMLImageElement,
-      HTMLParagraphElement
+      HTMLParagraphElement,
     ];
 
     Object.assign(iconCheckbox, {
@@ -123,6 +126,7 @@ export class Application {
     } else {
       ("/sitewide/images/icons/Program.ico");
     }
+    iconImage.alt = "";
     iconText.innerHTML = <string>this.appDiv.dataset.icon_name;
     iconLabel.appendChild(iconImage);
     iconLabel.appendChild(iconText);
@@ -144,11 +148,12 @@ export class Application {
     return [iconCheckbox, iconLabel];
   }
 
-  addAppWindowEvents() {
-    // Using event delegation
-    let self = this;
-    this.appDiv.addEventListener("click", (mouseEvent) => {
-      switch (mouseEvent.target as HTMLElement) {
+  addButtonEvents() {
+    const self = this;
+
+    // Function to prevent double-firing on mobile devices
+    const handleButtonAction = (target: HTMLElement) => {
+      switch (target) {
         case self.minimizeButton:
           self.taskbarIcon.checked = false;
           self.appDiv.style.display = "none";
@@ -163,29 +168,98 @@ export class Application {
             self.maximizeButton.innerHTML = "⧉";
           }
           break;
+        case self.closeButton:
+          self.appDiv.style.display = "none";
+          self.taskbarIcon.checked = false;
+          break;
         default:
           self.moveToFront();
-          // TODO MOVE TO TOP OF Z-INDEX USING FUNCTION
           break;
       }
-    });
+    };
+
+    // Add touch events for buttons
+    [this.minimizeButton, this.maximizeButton, this.closeButton].forEach(
+      (button) => {
+        if (button) {
+          button.addEventListener("touchstart", (e: TouchEvent) => {
+            e.preventDefault();
+          });
+
+          button.addEventListener("touchend", (e: TouchEvent) => {
+            e.preventDefault();
+            handleButtonAction(e.target as HTMLElement);
+          });
+
+          button.addEventListener("click", (e: MouseEvent) => {
+            if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
+              handleButtonAction(e.target as HTMLElement);
+            }
+          });
+        }
+      },
+    );
+  }
+
+  addAppWindowEvents() {
+    // Using event delegation
+    let self = this;
+
     if (this.appDiv.hasAttribute("data-movable")) {
       this.appDiv.style.position = "absolute";
-      this.titleBar.addEventListener("mousedown", (mouseEvent) => {
-        self.shadow.mouseDown(mouseEvent);
-      });
-      window.addEventListener("mousemove", (mouseEvent) => {
-        if (self.shadow.mouseDownOnApp) {
-          mouseEvent.preventDefault();
-          self.shadow.mouseMove(mouseEvent);
-        }
-      });
-      window.addEventListener("mouseup", async (mouseEvent) => {
-        if (self.shadow.mouseDownOnApp) {
+
+      // mobile functionality
+      if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
+        this.titleBar.addEventListener("mousedown", (mouseEvent) => {
+          self.shadow.mouseDown(mouseEvent);
+        });
+        window.addEventListener("mousemove", (mouseEvent) => {
+          if (self.shadow.mouseDownOnApp) {
+            mouseEvent.preventDefault();
+            self.shadow.mouseMove(mouseEvent);
+          }
+        });
+        window.addEventListener("mouseup", async () => {
+          if (self.shadow.mouseDownOnApp) {
+            self.moveToFront();
+            self.shadow.mouseUp();
+          }
+        });
+      } else {
+        let initialTouchPos: { x: number; y: number };
+        let initialWindowPos: { x: number; y: number };
+
+        this.titleBar.addEventListener("touchstart", (e: TouchEvent) => {
+          e.preventDefault();
+          const touch = e.touches[0];
+          initialTouchPos = {
+            x: touch.clientX,
+            y: touch.clientY,
+          };
+          initialWindowPos = {
+            x: this.appDiv.offsetLeft,
+            y: this.appDiv.offsetTop,
+          };
           self.moveToFront();
-          self.shadow.mouseUp();
-        }
-      });
+        });
+
+        this.titleBar.addEventListener("touchmove", (e: TouchEvent) => {
+          e.preventDefault();
+          const touch = e.touches[0];
+          const deltaX = touch.clientX - initialTouchPos.x;
+          const deltaY = touch.clientY - initialTouchPos.y;
+
+          const newTop =
+            ((initialWindowPos.y + deltaY) / window.innerHeight) * 100;
+          const newLeft =
+            ((initialWindowPos.x + deltaX) / window.innerWidth) * 100;
+
+          this.appDiv.style.top = `${newTop}vh`;
+          this.appDiv.style.left = `${newLeft}vw`;
+        });
+
+        this.titleBar.addEventListener("touchend", () => {});
+      }
     }
   }
 
@@ -202,9 +276,9 @@ export class Application {
 
 class Shadow {
   /* This class is used in the dragging of windows, visually it is the grey
-  box that indicates to the user where the window will be placed after a drag
-  and drop, but it also contains info about styles and movement.
-  */
+	box that indicates to the user where the window will be placed after a drag
+	and drop, but it also contains info about styles and movement.
+	*/
   public object: HTMLDivElement;
   public initialDivPosition: [number, number];
   public initialMousePosition: [number, number];
@@ -258,7 +332,7 @@ class Shadow {
           (this.initialDivPosition[0] -
             this.initialMousePosition[1] +
             event.clientY)) /
-          window.innerHeight
+          window.innerHeight,
       ) + "vh";
 
     this.object.style.left =
@@ -267,7 +341,7 @@ class Shadow {
           (this.initialDivPosition[1] -
             this.initialMousePosition[0] +
             event.clientX)) /
-          window.innerWidth
+          window.innerWidth,
       ) + "vw";
   }
 
@@ -290,16 +364,16 @@ class Shadow {
 
 export function initializeApplications(
   windowTemplate: HTMLDivElement,
-  taskbar: HTMLDivElement
+  taskbar: HTMLDivElement,
 ): [Application[], Application[]] {
   /*
-    Here we loop through each application element to format it into a window
-    we define
-    */
+		Here we loop through each application element to format it into a window
+		we define
+		*/
 
   // Create some primitives that are replicated in every window.
   let appDefinitions = Array.from(
-    document.getElementsByClassName("app")
+    document.getElementsByClassName("app"),
   ) as Array<HTMLDivElement>;
 
   let apps: Application[] = [];
@@ -311,12 +385,16 @@ export function initializeApplications(
     zList.unshift(app);
     app.zList = zList;
   });
-  return [apps,zList]
+  return [apps, zList];
 }
 
-export function webpageAsApp(windowTemplate: HTMLDivElement, taskbar: HTMLDivElement, link: string): Application{
-  let embed = document.createElement('iframe');
+export function webpageAsApp(
+  windowTemplate: HTMLDivElement,
+  taskbar: HTMLDivElement,
+  link: string,
+): Application {
+  let embed = document.createElement("iframe");
   embed.src = link;
-  let out = new Application(embed,windowTemplate,taskbar);
+  let out = new Application(embed, windowTemplate, taskbar);
   return out;
 }

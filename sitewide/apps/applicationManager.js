@@ -64,8 +64,10 @@ export class Application {
         [this.taskbarIcon, this.taskbarLabel] = this.makeForTaskbar();
         this.shadow = new Shadow(this);
         this.addAppWindowEvents();
-        taskbar.appendChild(this.taskbarIcon);
-        taskbar.appendChild(this.taskbarLabel);
+        this.addButtonEvents();
+        let appIconDiv = (taskbar.querySelector("#appIcons"));
+        appIconDiv.appendChild(this.taskbarIcon);
+        appIconDiv.appendChild(this.taskbarLabel);
     }
     makeForTaskbar() {
         // Create elements of a taskbar icon
@@ -90,6 +92,7 @@ export class Application {
         else {
             ("/sitewide/images/icons/Program.ico");
         }
+        iconImage.alt = "";
         iconText.innerHTML = this.appDiv.dataset.icon_name;
         iconLabel.appendChild(iconImage);
         iconLabel.appendChild(iconText);
@@ -108,11 +111,11 @@ export class Application {
         };
         return [iconCheckbox, iconLabel];
     }
-    addAppWindowEvents() {
-        // Using event delegation
-        let self = this;
-        this.appDiv.addEventListener("click", (mouseEvent) => {
-            switch (mouseEvent.target) {
+    addButtonEvents() {
+        const self = this;
+        // Function to prevent double-firing on mobile devices
+        const handleButtonAction = (target) => {
+            switch (target) {
                 case self.minimizeButton:
                     self.taskbarIcon.checked = false;
                     self.appDiv.style.display = "none";
@@ -128,29 +131,84 @@ export class Application {
                         self.maximizeButton.innerHTML = "⧉";
                     }
                     break;
+                case self.closeButton:
+                    self.appDiv.style.display = "none";
+                    self.taskbarIcon.checked = false;
+                    break;
                 default:
                     self.moveToFront();
-                    // TODO MOVE TO TOP OF Z-INDEX USING FUNCTION
                     break;
             }
+        };
+        // Add touch events for buttons
+        [this.minimizeButton, this.maximizeButton, this.closeButton].forEach((button) => {
+            if (button) {
+                button.addEventListener("touchstart", (e) => {
+                    e.preventDefault();
+                });
+                button.addEventListener("touchend", (e) => {
+                    e.preventDefault();
+                    handleButtonAction(e.target);
+                });
+                button.addEventListener("click", (e) => {
+                    if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
+                        handleButtonAction(e.target);
+                    }
+                });
+            }
         });
+    }
+    addAppWindowEvents() {
+        // Using event delegation
+        let self = this;
         if (this.appDiv.hasAttribute("data-movable")) {
             this.appDiv.style.position = "absolute";
-            this.titleBar.addEventListener("mousedown", (mouseEvent) => {
-                self.shadow.mouseDown(mouseEvent);
-            });
-            window.addEventListener("mousemove", (mouseEvent) => {
-                if (self.shadow.mouseDownOnApp) {
-                    mouseEvent.preventDefault();
-                    self.shadow.mouseMove(mouseEvent);
-                }
-            });
-            window.addEventListener("mouseup", async (mouseEvent) => {
-                if (self.shadow.mouseDownOnApp) {
+            // mobile functionality
+            if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
+                this.titleBar.addEventListener("mousedown", (mouseEvent) => {
+                    self.shadow.mouseDown(mouseEvent);
+                });
+                window.addEventListener("mousemove", (mouseEvent) => {
+                    if (self.shadow.mouseDownOnApp) {
+                        mouseEvent.preventDefault();
+                        self.shadow.mouseMove(mouseEvent);
+                    }
+                });
+                window.addEventListener("mouseup", async () => {
+                    if (self.shadow.mouseDownOnApp) {
+                        self.moveToFront();
+                        self.shadow.mouseUp();
+                    }
+                });
+            }
+            else {
+                let initialTouchPos;
+                let initialWindowPos;
+                this.titleBar.addEventListener("touchstart", (e) => {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    initialTouchPos = {
+                        x: touch.clientX,
+                        y: touch.clientY,
+                    };
+                    initialWindowPos = {
+                        x: this.appDiv.offsetLeft,
+                        y: this.appDiv.offsetTop,
+                    };
                     self.moveToFront();
-                    self.shadow.mouseUp();
-                }
-            });
+                });
+                this.titleBar.addEventListener("touchmove", (e) => {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    const deltaX = touch.clientX - initialTouchPos.x;
+                    const deltaY = touch.clientY - initialTouchPos.y;
+                    const newTop = ((initialWindowPos.y + deltaY) / window.innerHeight) * 100;
+                    const newLeft = ((initialWindowPos.x + deltaX) / window.innerWidth) * 100;
+                    this.appDiv.style.top = `${newTop}vh`;
+                    this.appDiv.style.left = `${newLeft}vw`;
+                });
+                this.titleBar.addEventListener("touchend", () => { });
+            }
         }
     }
     moveToFront() {
@@ -165,9 +223,9 @@ export class Application {
 }
 class Shadow {
     /* This class is used in the dragging of windows, visually it is the grey
-    box that indicates to the user where the window will be placed after a drag
-    and drop, but it also contains info about styles and movement.
-    */
+      box that indicates to the user where the window will be placed after a drag
+      and drop, but it also contains info about styles and movement.
+      */
     object;
     initialDivPosition;
     initialMousePosition;
@@ -235,9 +293,9 @@ class Shadow {
 }
 export function initializeApplications(windowTemplate, taskbar) {
     /*
-      Here we loop through each application element to format it into a window
-      we define
-      */
+          Here we loop through each application element to format it into a window
+          we define
+          */
     // Create some primitives that are replicated in every window.
     let appDefinitions = Array.from(document.getElementsByClassName("app"));
     let apps = [];
@@ -251,7 +309,7 @@ export function initializeApplications(windowTemplate, taskbar) {
     return [apps, zList];
 }
 export function webpageAsApp(windowTemplate, taskbar, link) {
-    let embed = document.createElement('iframe');
+    let embed = document.createElement("iframe");
     embed.src = link;
     let out = new Application(embed, windowTemplate, taskbar);
     return out;
