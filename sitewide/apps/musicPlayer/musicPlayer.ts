@@ -147,15 +147,15 @@ class musicPlayer {
     // fill local storage with default values if not exist
     Object.entries(this.defaultState).forEach(([key, value]) => {
       if (
-        !localStorage.getItem(key) ||
-        localStorage.getItem(key) === "undefined"
+        !sessionStorage.getItem(key) ||
+        sessionStorage.getItem(key) === "undefined"
       ) {
-        localStorage.setItem(key, JSON.stringify(value));
+        sessionStorage.setItem(key, JSON.stringify(value));
       }
     });
 
     if (this.elements.volumeSlider) {
-      const storedVolume = localStorage.getItem("volume");
+      const storedVolume = sessionStorage.getItem("volume");
       const difference: number =
         parseFloat(this.elements.volumeSlider.value) -
         parseFloat(storedVolume as string);
@@ -164,12 +164,19 @@ class musicPlayer {
         : this.elements.volumeSlider.stepUp(-difference);
     }
 
-    this.playlist = JSON.parse(localStorage.getItem("playlist") as string);
-    this.songIndex = JSON.parse(localStorage.getItem("songIndex") as string);
-    this.paused = JSON.parse(localStorage.getItem("paused") as string);
+    if (
+      null !== localStorage.getItem("videoIndex") ||
+      localStorage.getItem("videoIndex") !== "undefined"
+    ) {
+      localStorage.clear();
+    }
 
-    this.seekTime = JSON.parse(localStorage.getItem("seekTime") as string);
-    this.volume = JSON.parse(localStorage.getItem("volume") as string);
+    this.playlist = JSON.parse(sessionStorage.getItem("playlist") as string);
+    this.songIndex = JSON.parse(sessionStorage.getItem("songIndex") as string);
+    this.paused = JSON.parse(sessionStorage.getItem("paused") as string);
+
+    this.seekTime = JSON.parse(sessionStorage.getItem("seekTime") as string);
+    this.volume = JSON.parse(sessionStorage.getItem("volume") as string);
     // IMPORTANT, REPLACE SOURCE INSTEAD OF WHOLE MEDIA ELEM
     this.currentSong = new Audio(
       "/sitewide/apps/musicPlayer/songs/" + this.playlist[this.songIndex][0],
@@ -208,27 +215,27 @@ class musicPlayer {
 
     this.elements.volumeSlider.oninput = (e: Event) => {
       let slider = e.target as HTMLInputElement;
-      localStorage.setItem("volume", slider.value);
+      sessionStorage.setItem("volume", slider.value);
       song.volume = parseFloat(slider.value);
     };
 
     this.elements.seekSlider.onmouseup = (e: Event) => {
       let slider = e.target as HTMLInputElement;
-      localStorage.setItem("seekTime", slider.value);
+      sessionStorage.setItem("seekTime", slider.value);
       song.currentTime = parseFloat(slider.value);
       self.seeking = false;
     };
 
-    this.elements.seekSlider.onmousedown = function() {
+    this.elements.seekSlider.onmousedown = function () {
       self.seeking = true;
     };
 
     song.ontimeupdate = (e: Event) => {
       let med = e.target as HTMLMediaElement;
       let slider = self.elements.seekSlider;
-      localStorage.setItem("playlist", JSON.stringify(this.playlist));
-      localStorage.setItem("songIndex", String(this.songIndex));
-      localStorage.setItem("seekTime", String(song.currentTime));
+      sessionStorage.setItem("playlist", JSON.stringify(this.playlist));
+      sessionStorage.setItem("songIndex", String(this.songIndex));
+      sessionStorage.setItem("seekTime", String(song.currentTime));
 
       if (!this.seeking) slider.value = String(med.currentTime);
     };
@@ -284,13 +291,13 @@ class musicPlayer {
       this.elements.playbackButtonImage.src =
         "/sitewide/apps/musicPlayer/play.png";
       this.paused = true;
-      localStorage.setItem("paused", "true");
+      sessionStorage.setItem("paused", "true");
       this.currentSong.pause();
     } else {
       this.elements.playbackButtonImage.src =
         "/sitewide/apps/musicPlayer/pause.png";
       this.currentSong.play();
-      localStorage.setItem("paused", "false");
+      sessionStorage.setItem("paused", "false");
     }
   }
 }
@@ -334,9 +341,9 @@ function changePlaylist(element: HTMLButtonElement, playlist: string) {
     default:
       newPlaylist = player.playlists.website;
   }
-  localStorage.setItem("playlist", JSON.stringify(newPlaylist));
-  localStorage.setItem("songIndex", "0");
-  player.playlist = JSON.parse(localStorage.getItem("playlist") as string);
+  sessionStorage.setItem("playlist", JSON.stringify(newPlaylist));
+  sessionStorage.setItem("songIndex", "0");
+  player.playlist = JSON.parse(sessionStorage.getItem("playlist") as string);
   player.songIndex = 0;
   player.updateSong();
   player.currentSong.play();
