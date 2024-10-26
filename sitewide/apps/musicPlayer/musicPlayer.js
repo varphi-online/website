@@ -16,6 +16,8 @@ class musicPlayer {
         playPauseButton: document.getElementById("playPauseButton"),
         nextSongButton: document.getElementById("nextSongButton"),
         prevSongButton: document.getElementById("prevSongButton"),
+        currentTime: document.getElementById("currentTime"),
+        songLen: document.getElementById("songLen"),
     };
     playlists = {
         website: [
@@ -195,6 +197,10 @@ class musicPlayer {
         this.elements.seekSlider.onmousedown = function () {
             self.seeking = true;
         };
+        this.elements.seekSlider.oninput = function () {
+            if (self.seeking)
+                self.elements.currentTime.innerHTML = convTime(parseFloat(self.elements.seekSlider.value));
+        };
         song.ontimeupdate = (e) => {
             let med = e.target;
             let slider = self.elements.seekSlider;
@@ -203,6 +209,8 @@ class musicPlayer {
             sessionStorage.setItem("seekTime", String(song.currentTime));
             if (!this.seeking)
                 slider.value = String(med.currentTime);
+            if (!this.seeking)
+                self.elements.currentTime.innerHTML = convTime(med.currentTime);
         };
         song.onended = () => {
             this.nextSong();
@@ -225,6 +233,7 @@ class musicPlayer {
         this.elements.songTitle.innerHTML = this.playlist[this.songIndex][1];
         this.currentSong.addEventListener("loadedmetadata", () => {
             this.elements.seekSlider.max = String(this.currentSong.duration);
+            this.elements.songLen.innerHTML = convTime(this.currentSong.duration);
         }, { once: true });
     }
     nextSong() {
@@ -260,6 +269,13 @@ class musicPlayer {
     }
 }
 let player = new musicPlayer();
+function convTime(input) {
+    let mins = Math.floor(input / 60);
+    let secs = Math.floor(input - mins * 60) > 10
+        ? String(Math.floor(input - mins * 60))
+        : "0" + String(Math.floor(input - mins * 60));
+    return String(mins + ":" + secs);
+}
 function changePlaylist(element, playlist) {
     const buttons = document
         .getElementById("playlistSelect")

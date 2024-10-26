@@ -289,7 +289,6 @@
         -webkit-appearance: none;
         width: 80%;
         height: 15px;
-        margin-left: 10%;
         background: #f1f0f1;
         outline: none;
         opacity: 0.7;
@@ -298,7 +297,6 @@
           inset -2px -2px #eaebea,
           inset 1px 1px #323132,
           inset 2px 2px #414041;
-        margin-bottom: 10px;
       }
 
       #seekSlider::-webkit-slider-thumb {
@@ -314,8 +312,6 @@
           1px 1px #323132,
           2px 2px #414041;
       }
-
-
       }
     </style>
     <p id="songInfo">Current Song: <span id="currentSong">none</span></p>
@@ -330,7 +326,20 @@
         <img src="/sitewide/apps/musicPlayer/next.png" />
       </button>
     </div>
-    <input type="range" id="seekSlider" min="0" step="0.00001" />
+    <div style="
+          width: 90%;
+          left: 5%;
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          gap: 5px;
+        ">
+      <p id="currentTime" style="width: 30px">0:00</p>
+      <input type="range" id="seekSlider" min="0" step="0.00001" />
+      <p id="songLen" style="width: 30px">0:00</p>
+    </div>
     <div id="playlistSelect">
       <button class="win95" onclick="changePlaylist(this, 'website')">
         Website Music
