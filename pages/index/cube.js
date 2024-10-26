@@ -19,7 +19,7 @@ let impulsed = false;
 function clamp(num, lower, upper) {
     return Math.min(Math.max(num, lower), upper);
 }
-cube.addEventListener('mousemove', (event) => {
+cube.addEventListener("mousemove", (event) => {
     if (!impulsed) {
         // Only add speed if coming from the same direction
         if (Math.sign(dir[0]) == Math.sign(event.movementX)) {
@@ -43,7 +43,7 @@ cube.addEventListener('mousemove', (event) => {
         impulsed = true;
     }
 });
-cube.addEventListener('mouseleave', () => {
+cube.addEventListener("mouseleave", () => {
     impulsed = false;
 });
 var rotate = [0, 0, 0];
@@ -56,12 +56,12 @@ function playMovement() {
     if (pos[1] + prim.containerHeight > prim.windowHeight || pos[1] <= 0) {
         dir[1] = dir[1] * -1;
     }
-    pos = [pos[0] + dir[0] / 2 * speed, pos[1] + dir[1] / 2 * speed];
+    pos = [pos[0] + (dir[0] / 2) * speed, pos[1] + (dir[1] / 2) * speed];
     container.style.left = `${pos[0]}px`;
     container.style.top = `${pos[1]}px`;
 }
 function playRotation() {
-    cube.style.transform = `translateZ(0px) rotateY(${rotate[0]}deg) rotateX(${rotate[1]}deg) rotateZ(${rotate[2]}deg)`;
+    cube.style.transform = `translateZ(calc(9vw - 146.3px)) rotateY(${rotate[0]}deg) rotateX(${rotate[1]}deg) rotateZ(${rotate[2]}deg)`;
     rotate[0] = rotate[0] + 0.6 * 2 + rotSpeed[0];
     rotate[1] = rotate[1] + 0.4 * 2 + rotSpeed[1];
 }

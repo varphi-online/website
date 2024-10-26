@@ -18,8 +18,8 @@
   position: relative;
   top: 25%;
   left: 25%;
+  transform: translateZ(calc(9vw - 146.3px));
   transform-style: preserve-3d;
-  transform: translateZ(-0px);
   transition: transform 0.01s;
   pointer-events: all;
 }

@@ -157,13 +157,8 @@ class musicPlayer {
 		});
 
 		if (this.elements.volumeSlider) {
-			const storedVolume = sessionStorage.getItem("volume");
-			const difference: number =
-				parseFloat(this.elements.volumeSlider.value) -
-				parseFloat(storedVolume as string);
-			difference >= 0
-				? this.elements.volumeSlider.stepDown(difference)
-				: this.elements.volumeSlider.stepUp(-difference);
+			const storedVolume = sessionStorage.getItem("volume") as string;
+			this.elements.volumeSlider.value = storedVolume;
 		}
 
 		if (
@@ -195,6 +190,7 @@ class musicPlayer {
 				"loadedmetadata",
 				() => {
 					this.elements.seekSlider.max = String(this.currentSong.duration);
+					this.elements.songLen.innerHTML = convTime(this.currentSong.duration);
 				},
 				{ once: true },
 			);
@@ -228,10 +224,10 @@ class musicPlayer {
 			self.seeking = false;
 		};
 
-		this.elements.seekSlider.onmousedown = function () {
+		this.elements.seekSlider.onmousedown = function() {
 			self.seeking = true;
 		};
-		this.elements.seekSlider.oninput = function () {
+		this.elements.seekSlider.oninput = function() {
 			if (self.seeking)
 				self.elements.currentTime.innerHTML = convTime(
 					parseFloat(self.elements.seekSlider.value),

@@ -144,11 +144,7 @@ class musicPlayer {
         });
         if (this.elements.volumeSlider) {
             const storedVolume = sessionStorage.getItem("volume");
-            const difference = parseFloat(this.elements.volumeSlider.value) -
-                parseFloat(storedVolume);
-            difference >= 0
-                ? this.elements.volumeSlider.stepDown(difference)
-                : this.elements.volumeSlider.stepUp(-difference);
+            this.elements.volumeSlider.value = storedVolume;
         }
         if (null !== localStorage.getItem("videoIndex") ||
             localStorage.getItem("videoIndex") !== "undefined") {
@@ -171,6 +167,7 @@ class musicPlayer {
                 "/sitewide/apps/musicPlayer/pause.png";
             this.currentSong.addEventListener("loadedmetadata", () => {
                 this.elements.seekSlider.max = String(this.currentSong.duration);
+                this.elements.songLen.innerHTML = convTime(this.currentSong.duration);
             }, { once: true });
         }
         this.songLength = 0;
