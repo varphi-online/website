@@ -152,7 +152,7 @@ class musicPlayer {
         }
         this.playlist = JSON.parse(sessionStorage.getItem("playlist"));
         this.songIndex = JSON.parse(sessionStorage.getItem("songIndex"));
-        this.paused = JSON.parse(sessionStorage.getItem("paused"));
+        this.paused = JSON.parse(localStorage.getItem("paused"));
         this.seekTime = JSON.parse(sessionStorage.getItem("seekTime"));
         this.volume = JSON.parse(sessionStorage.getItem("volume"));
         // IMPORTANT, REPLACE SOURCE INSTEAD OF WHOLE MEDIA ELEM
@@ -254,14 +254,14 @@ class musicPlayer {
             this.elements.playbackButtonImage.src =
                 "/sitewide/apps/musicPlayer/play.png";
             this.paused = true;
-            sessionStorage.setItem("paused", "true");
+            localStorage.setItem("paused", "true");
             this.currentSong.pause();
         }
         else {
             this.elements.playbackButtonImage.src =
                 "/sitewide/apps/musicPlayer/pause.png";
             this.currentSong.play();
-            sessionStorage.setItem("paused", "false");
+            localStorage.setItem("paused", "false");
         }
     }
 }

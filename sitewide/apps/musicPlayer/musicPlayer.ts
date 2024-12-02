@@ -314,7 +314,7 @@ let player = new musicPlayer();
 function convTime(input: number): string {
 	let mins = Math.floor(input / 60);
 	let secs: string =
-		Math.floor(input - mins * 60) > 10
+		Math.floor(input - mins * 60) >= 10
 			? String(Math.floor(input - mins * 60))
 			: "0" + String(Math.floor(input - mins * 60));
 	return String(mins + ":" + secs);
