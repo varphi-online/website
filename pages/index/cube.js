@@ -69,7 +69,6 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 async function pause() {
-    await sleep(1000);
     setInterval(playMovement, 100);
     setInterval(playRotation, 100);
 }

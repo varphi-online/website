@@ -128,10 +128,10 @@ class musicPlayer {
     defaultState = {
         playlist: this.playlists.website,
         songIndex: 0,
-        paused: false,
+        paused: true,
         seekPerformed: false,
         seekTime: 0,
-        volume: 0.5,
+        volume: 0.15,
     };
     constructor() {
         let self = this;
@@ -152,11 +152,12 @@ class musicPlayer {
         }
         this.playlist = JSON.parse(sessionStorage.getItem("playlist"));
         this.songIndex = JSON.parse(sessionStorage.getItem("songIndex"));
-        this.paused = JSON.parse(localStorage.getItem("paused"));
+        this.paused = JSON.parse(sessionStorage.getItem("paused"));
         this.seekTime = JSON.parse(sessionStorage.getItem("seekTime"));
         this.volume = JSON.parse(sessionStorage.getItem("volume"));
         // IMPORTANT, REPLACE SOURCE INSTEAD OF WHOLE MEDIA ELEM
         this.currentSong = new Audio("/sitewide/apps/musicPlayer/songs/" + this.playlist[this.songIndex][0]);
+        this.currentSong.preload = "auto"; // Preload the song
         let song = this.currentSong;
         song.currentTime = this.seekTime;
         song.volume = this.volume;
@@ -172,12 +173,14 @@ class musicPlayer {
         }
         this.songLength = 0;
         window.addEventListener("click", () => {
-            if (song.paused && !this.paused) {
-                this.elements.playbackButtonImage.src =
-                    "/sitewide/apps/musicPlayer/pause.png";
+            if (song.paused) {
+                this.elements.playbackButtonImage.src = !this.paused
+                    ? "/sitewide/apps/musicPlayer/pause.png"
+                    : "/sitewide/apps/musicPlayer/play.png";
                 this.updateSong();
                 song.currentTime = this.seekTime;
-                song.play();
+                if (!this.paused)
+                    song.play();
             }
         }, { once: true });
         this.elements.volumeSlider.oninput = (e) => {
@@ -227,6 +230,7 @@ class musicPlayer {
         this.currentSong.src =
             "/sitewide/apps/musicPlayer/songs/" + this.playlist[this.songIndex][0];
         this.currentSong.load();
+        this.currentSong.preload = "auto";
         this.elements.songTitle.innerHTML = this.playlist[this.songIndex][1];
         this.currentSong.addEventListener("loadedmetadata", () => {
             this.elements.seekSlider.max = String(this.currentSong.duration);
@@ -254,21 +258,21 @@ class musicPlayer {
             this.elements.playbackButtonImage.src =
                 "/sitewide/apps/musicPlayer/play.png";
             this.paused = true;
-            localStorage.setItem("paused", "true");
+            sessionStorage.setItem("paused", "true");
             this.currentSong.pause();
         }
         else {
             this.elements.playbackButtonImage.src =
                 "/sitewide/apps/musicPlayer/pause.png";
             this.currentSong.play();
-            localStorage.setItem("paused", "false");
+            sessionStorage.setItem("paused", "false");
         }
     }
 }
 let player = new musicPlayer();
 function convTime(input) {
     let mins = Math.floor(input / 60);
-    let secs = Math.floor(input - mins * 60) > 10
+    let secs = Math.floor(input - mins * 60) >= 10
         ? String(Math.floor(input - mins * 60))
         : "0" + String(Math.floor(input - mins * 60));
     return String(mins + ":" + secs);

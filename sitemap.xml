@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <url>
+        <loc>https://varphi.online/index.html</loc>
+    </url>
+    <url>
+        <loc>https://varphi.online/pages/willow/willow.html</loc>
+    </url>
+    <url>
+        <loc>https://varphi.online/pages/internal/icons/icons.html</loc>
+    </url>
+    <url>
+        <loc>https://varphi.online/pages/internal/sitemap/sitemap.html</loc>
+    </url>
+    <url>
+        <loc>https://varphi.online/pages/math/text_calc/calc.html</loc>
+    </url>
+    <url>
+        <loc>https://varphi.online/pages/test/test.html</loc>
+    </url>
+    <url>
+        <loc>https://varphi.online/pages/music/orbit/orbit.html</loc>
+    </url>
+    <url>
+        <loc>https://varphi.online/sitewide/taskbar/taskbar.html</loc>
+    </url>
+    <url>
+        <loc>https://varphi.online/sitewide/apps/app_test.html</loc>
+    </url>
+</urlset>

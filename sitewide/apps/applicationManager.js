@@ -5,6 +5,7 @@ export class Application {
     surface;
     appWindow;
     titleBarInteractiveArea;
+    externButton;
     minimizeButton;
     maximizeButton;
     closeButton;
@@ -34,10 +35,16 @@ export class Application {
             windowTemplateInstance.getElementsByClassName("windowTitlebarInteractableArea")[0],
             windowTemplateInstance.getElementsByClassName("windowTitlebar")[0],
         ];
-        [this.minimizeButton, this.maximizeButton, this.closeButton] = [
+        [
+            this.minimizeButton,
+            this.maximizeButton,
+            this.closeButton,
+            this.externButton,
+        ] = [
             this.titleBarInteractiveArea.getElementsByClassName("windowMinimize")[0],
             this.titleBarInteractiveArea.getElementsByClassName("windowMaximize")[0],
             this.titleBarInteractiveArea.getElementsByClassName("windowClose")[0],
+            this.titleBarInteractiveArea.getElementsByClassName("windowExtern")[0],
         ];
         // Store contained html for usage later.
         this.surface.innerHTML = this.appDiv.innerHTML;
@@ -60,6 +67,9 @@ export class Application {
             this.surface.style.height = this.appDiv.style.height;
             this.appDiv.style.width = "fit-content";
             this.appDiv.style.height = "fit-content";
+        }
+        if (!this.appDiv.hasAttribute("data-link")) {
+            this.externButton.style.display = "none";
         }
         [this.taskbarIcon, this.taskbarLabel] = this.makeForTaskbar();
         this.shadow = new Shadow(this);
@@ -86,8 +96,8 @@ export class Application {
         iconLabel.htmlFor = iconCheckbox.id;
         iconLabel.className = "win95";
         if (this.appDiv.dataset.icon) {
-            iconImage.src =
-                "/sitewide/images/icons/" + this.appDiv.dataset.icon;
+            let src = this.appDiv.dataset.icon;
+            iconImage.src = src.includes("/") ? src : "/sitewide/images/icons/" + src;
         }
         else {
             ("/sitewide/images/icons/Program.ico");
@@ -132,16 +142,26 @@ export class Application {
                     }
                     break;
                 case self.closeButton:
-                    self.appDiv.style.display = "none";
-                    self.taskbarIcon.checked = false;
+                    self.taskbarLabel.innerHTML = "";
+                    self.taskbarIcon.innerHTML = "";
+                    self.appDiv.innerHTML = "";
+                    self.taskbarIcon.remove();
+                    self.appDiv.remove();
                     break;
+                case self.externButton:
+                    window.open(this.appDiv.dataset.link, "_blank")?.focus();
                 default:
                     self.moveToFront();
                     break;
             }
         };
         // Add touch events for buttons
-        [this.minimizeButton, this.maximizeButton, this.closeButton].forEach((button) => {
+        [
+            this.minimizeButton,
+            this.maximizeButton,
+            this.closeButton,
+            this.externButton,
+        ].forEach((button) => {
             if (button) {
                 button.addEventListener("touchstart", (e) => {
                     e.preventDefault();
@@ -308,9 +328,27 @@ export function initializeApplications(windowTemplate, taskbar) {
     });
     return [apps, zList];
 }
-export function webpageAsApp(windowTemplate, taskbar, link) {
+export function addApp(app, appStorage, heightList) {
+    appStorage.unshift(app);
+    heightList.unshift(app);
+    app.zList = heightList;
+}
+export function webpageAsApp(windowTemplate, taskbar, link, appStorage, heightList, style, windowTitle, icon, iconTitle) {
+    let div = document.createElement("div");
     let embed = document.createElement("iframe");
     embed.src = link;
-    let out = new Application(embed, windowTemplate, taskbar);
-    return out;
+    embed.style.cssText = "height: 100%; width: 100%";
+    div.appendChild(embed);
+    div.className = "app";
+    div.style.cssText = style || "";
+    div.dataset.window_title = windowTitle || "Webpage";
+    div.dataset.icon_name = iconTitle || "Web App";
+    div.dataset.icon = icon || "";
+    div.dataset.link = link;
+    div.setAttribute("data-movable", "");
+    div.setAttribute("data-fullScreenCapable", "");
+    div.setAttribute("data-closable", "");
+    document.body.appendChild(div);
+    let app = new Application(div, windowTemplate, taskbar);
+    addApp(app, appStorage, heightList);
 }

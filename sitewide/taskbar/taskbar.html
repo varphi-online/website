@@ -130,9 +130,27 @@
             <img src="/sitewide/images/icons/Network Drive.ico" />
             <p>Selfhosted</p>
             <div class="startSubMenu growFromTop win95">
-              <a class="startSubMenuLink startSubMenuEntry" href="https://mcmap-main.varphi.online" target="_blank">
+              <a class="startSubMenuLink startSubMenuEntry" href="javascript:void(0);" style="cursor: pointer;"
+                onclick="instantiateApp({
+                  link: 'https://mcmap-main.varphi.online/',
+                  style: 'position: absolute; left: 20%; top: 30vh; height: 50vh; width: 50vh;',
+                  windowTitle: 'Minecraft World Map - Main',
+                  icon: '/sitewide/taskbar/logos/mcmap.ico',
+                  iconTitle: 'World Map - Main'
+                  })">
                 <img src="/sitewide/taskbar/logos/mcmap.ico" />
-                <p>SquareMap</p>
+                <p>WorldMap - Main</p>
+              </a>
+              <a class="startSubMenuLink startSubMenuEntry" href="javascript:void(0);" style="cursor: pointer;"
+                onclick="instantiateApp({
+                  link: 'https://mcmap-vault.varphi.online/',
+                  style: 'position: absolute; left: 50%; top: 20vh; height: 50vh; width: 50vh;',
+                  windowTitle: 'Minecraft World Map - Vault',
+                  icon: '/sitewide/taskbar/logos/mcmap.ico',
+                  iconTitle: 'World Map - Vault'
+                  })">
+                <img src="/sitewide/taskbar/logos/mcmap.ico" />
+                <p>WorldMap - Vault</p>
               </a>
             </div>
           </div>
@@ -140,8 +158,9 @@
             <img src="/sitewide/images/icons/Folder catalog.ico" />
             <p>Other Projects</p>
             <div class="startSubMenu growFromBottom win95">
-              
-              <a class="startSubMenuLink startSubMenuEntry" href="https://github.com/varphi-online/conway" target="_blank">
+
+              <a class="startSubMenuLink startSubMenuEntry" href="https://github.com/varphi-online/conway"
+                target="_blank">
                 <img src="/sitewide/taskbar/logos/playingGod_logo.png" />
                 <p>Playing God</p>
               </a>
@@ -236,6 +255,7 @@
           <p class="windowTitle">TEST TITLE</p>
         </div>
         <div class="windowTitlebarInteractableArea">
+          <button class="windowExtern win95">&#129109;</button>
           <button class="windowMinimize win95">&#9149;</button>
           <button class="windowMaximize win95">&#10720;</button>
           <button class="windowClose win95">&Cross;</button>
@@ -317,7 +337,6 @@
           1px 1px #323132,
           2px 2px #414041;
       }
-      
     </style>
     <p id="songInfo">Current Song: <span id="currentSong">none</span></p>
     <div id="musicControls" style="margin-bottom: 6%">

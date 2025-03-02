@@ -2,7 +2,6 @@
 // still benefit from html linting :3
 
 import {
-  Application,
   initializeApplications,
   webpageAsApp,
 } from "../apps/applicationManager.js";
@@ -63,6 +62,22 @@ fetch("/sitewide/taskbar/taskbar.html")
     const windowTemplate = <HTMLDivElement>doc.querySelector("#windowTemplate");
 
     let [apps, zList] = initializeApplications(windowTemplate, taskbarDiv);
-    //apps.push(webpageAsApp(windowTemplate,taskbarDiv,"https://youtube.com"));
-    //zList.push(<Application>apps.at(-1));
+
+    function instantiateApp({
+      link,
+      style,
+      windowTitle,
+      icon,
+      iconTitle,
+    }: {
+      link: string;
+      style?: string;
+      windowTitle?: string;
+      icon?: string;
+      iconTitle?: string;
+    }) {
+      webpageAsApp(windowTemplate, taskbarDiv, link, apps, zList, style, windowTitle, icon, iconTitle);
+    }
+
+    (window as any).instantiateApp = instantiateApp;
   });

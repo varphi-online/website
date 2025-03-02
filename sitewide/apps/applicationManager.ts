@@ -5,6 +5,7 @@ export class Application {
   public surface: HTMLDivElement;
   public appWindow: HTMLDivElement;
   public titleBarInteractiveArea: HTMLDivElement;
+  public externButton: HTMLButtonElement;
   public minimizeButton: HTMLButtonElement;
   public maximizeButton: HTMLButtonElement;
   public closeButton: HTMLButtonElement;
@@ -17,18 +18,18 @@ export class Application {
   constructor(
     element: HTMLDivElement,
     windowTemplate: HTMLDivElement,
-    taskbar: HTMLDivElement,
+    taskbar: HTMLDivElement
   ) {
     this.appDiv = element;
     this.zList = [];
     let windowTemplateInstance = windowTemplate.cloneNode(
-      true,
+      true
     ) as HTMLDivElement;
 
     // Get some unique ID from the window header, to be used in all other places
     this.applicationID = (<string>this.appDiv.dataset.window_title).replace(
       /\s+/g,
-      "_",
+      "_"
     );
     this.appDiv.id = this.applicationID + "-window";
 
@@ -44,7 +45,7 @@ export class Application {
       windowTemplateInstance.getElementsByClassName("windowSurface")[0],
       windowTemplateInstance.getElementsByClassName("window")[0],
       windowTemplateInstance.getElementsByClassName(
-        "windowTitlebarInteractableArea",
+        "windowTitlebarInteractableArea"
       )[0],
       windowTemplateInstance.getElementsByClassName("windowTitlebar")[0],
     ] as [
@@ -52,14 +53,25 @@ export class Application {
       HTMLDivElement,
       HTMLDivElement,
       HTMLDivElement,
-      HTMLDivElement,
+      HTMLDivElement
     ];
 
-    [this.minimizeButton, this.maximizeButton, this.closeButton] = [
+    [
+      this.minimizeButton,
+      this.maximizeButton,
+      this.closeButton,
+      this.externButton,
+    ] = [
       this.titleBarInteractiveArea.getElementsByClassName("windowMinimize")[0],
       this.titleBarInteractiveArea.getElementsByClassName("windowMaximize")[0],
       this.titleBarInteractiveArea.getElementsByClassName("windowClose")[0],
-    ] as [HTMLButtonElement, HTMLButtonElement, HTMLButtonElement];
+      this.titleBarInteractiveArea.getElementsByClassName("windowExtern")[0],
+    ] as [
+      HTMLButtonElement,
+      HTMLButtonElement,
+      HTMLButtonElement,
+      HTMLButtonElement
+    ];
 
     // Store contained html for usage later.
     this.surface.innerHTML = this.appDiv.innerHTML;
@@ -82,6 +94,10 @@ export class Application {
       this.surface.style.height = this.appDiv.style.height;
       this.appDiv.style.width = "fit-content";
       this.appDiv.style.height = "fit-content";
+    }
+
+    if (!this.appDiv.hasAttribute("data-link")) {
+      this.externButton.style.display = "none";
     }
 
     [this.taskbarIcon, this.taskbarLabel] = this.makeForTaskbar();
@@ -107,7 +123,7 @@ export class Application {
       HTMLInputElement,
       HTMLLabelElement,
       HTMLImageElement,
-      HTMLParagraphElement,
+      HTMLParagraphElement
     ];
 
     Object.assign(iconCheckbox, {
@@ -121,8 +137,8 @@ export class Application {
     iconLabel.className = "win95";
 
     if (this.appDiv.dataset.icon) {
-      iconImage.src =
-        "/sitewide/images/icons/" + <string>this.appDiv.dataset.icon;
+      let src = <string>this.appDiv.dataset.icon;
+      iconImage.src = src.includes("/") ? src : "/sitewide/images/icons/" + src;
     } else {
       ("/sitewide/images/icons/Program.ico");
     }
@@ -169,9 +185,14 @@ export class Application {
           }
           break;
         case self.closeButton:
-          self.appDiv.style.display = "none";
-          self.taskbarIcon.checked = false;
+          self.taskbarLabel.innerHTML = "";
+          self.taskbarIcon.innerHTML = "";
+          self.appDiv.innerHTML = "";
+          self.taskbarIcon.remove();
+          self.appDiv.remove();
           break;
+        case self.externButton:
+          window.open(<string>this.appDiv.dataset.link, "_blank")?.focus();
         default:
           self.moveToFront();
           break;
@@ -179,26 +200,29 @@ export class Application {
     };
 
     // Add touch events for buttons
-    [this.minimizeButton, this.maximizeButton, this.closeButton].forEach(
-      (button) => {
-        if (button) {
-          button.addEventListener("touchstart", (e: TouchEvent) => {
-            e.preventDefault();
-          });
+    [
+      this.minimizeButton,
+      this.maximizeButton,
+      this.closeButton,
+      this.externButton,
+    ].forEach((button) => {
+      if (button) {
+        button.addEventListener("touchstart", (e: TouchEvent) => {
+          e.preventDefault();
+        });
 
-          button.addEventListener("touchend", (e: TouchEvent) => {
-            e.preventDefault();
+        button.addEventListener("touchend", (e: TouchEvent) => {
+          e.preventDefault();
+          handleButtonAction(e.target as HTMLElement);
+        });
+
+        button.addEventListener("click", (e: MouseEvent) => {
+          if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
             handleButtonAction(e.target as HTMLElement);
-          });
-
-          button.addEventListener("click", (e: MouseEvent) => {
-            if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
-              handleButtonAction(e.target as HTMLElement);
-            }
-          });
-        }
-      },
-    );
+          }
+        });
+      }
+    });
   }
 
   addAppWindowEvents() {
@@ -332,7 +356,7 @@ class Shadow {
           (this.initialDivPosition[0] -
             this.initialMousePosition[1] +
             event.clientY)) /
-          window.innerHeight,
+          window.innerHeight
       ) + "vh";
 
     this.object.style.left =
@@ -341,7 +365,7 @@ class Shadow {
           (this.initialDivPosition[1] -
             this.initialMousePosition[0] +
             event.clientX)) /
-          window.innerWidth,
+          window.innerWidth
       ) + "vw";
   }
 
@@ -364,7 +388,7 @@ class Shadow {
 
 export function initializeApplications(
   windowTemplate: HTMLDivElement,
-  taskbar: HTMLDivElement,
+  taskbar: HTMLDivElement
 ): [Application[], Application[]] {
   /*
 		Here we loop through each application element to format it into a window
@@ -373,7 +397,7 @@ export function initializeApplications(
 
   // Create some primitives that are replicated in every window.
   let appDefinitions = Array.from(
-    document.getElementsByClassName("app"),
+    document.getElementsByClassName("app")
   ) as Array<HTMLDivElement>;
 
   let apps: Application[] = [];
@@ -388,13 +412,42 @@ export function initializeApplications(
   return [apps, zList];
 }
 
+export function addApp(
+  app: Application,
+  appStorage: Application[],
+  heightList: Application[]
+) {
+  appStorage.unshift(app);
+  heightList.unshift(app);
+  app.zList = heightList;
+}
+
 export function webpageAsApp(
   windowTemplate: HTMLDivElement,
   taskbar: HTMLDivElement,
   link: string,
-): Application {
+  appStorage: Application[],
+  heightList: Application[],
+  style?: string,
+  windowTitle?: string,
+  icon?: string,
+  iconTitle?: string
+) {
+  let div = document.createElement("div");
   let embed = document.createElement("iframe");
   embed.src = link;
-  let out = new Application(embed, windowTemplate, taskbar);
-  return out;
+  embed.style.cssText = "height: 100%; width: 100%";
+  div.appendChild(embed);
+  div.className = "app";
+  div.style.cssText = style || "";
+  div.dataset.window_title = windowTitle || "Webpage";
+  div.dataset.icon_name = iconTitle || "Web App";
+  div.dataset.icon = icon || "";
+  div.dataset.link = link;
+  div.setAttribute("data-movable", "");
+  div.setAttribute("data-fullScreenCapable", "");
+  div.setAttribute("data-closable", "");
+  document.body.appendChild(div);
+  let app = new Application(div, windowTemplate, taskbar);
+  addApp(app, appStorage, heightList);
 }
