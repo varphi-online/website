@@ -32,17 +32,17 @@ cube.addEventListener("mousemove", (event) => {
 		// Only add speed if coming from the same direction
 		if (Math.sign(dir[0]) == Math.sign(event.movementX)) {
 			dir[0] += event.movementX / 10;
-			rotSpeed[0] += event.movementX / 6;
+			rotSpeed[0] += event.movementX / 4;
 		} else {
 			dir[0] = event.movementX / 10;
-			rotSpeed[0] = event.movementX / 6;
+			rotSpeed[0] = event.movementX / 4;
 		}
 		if (Math.sign(dir[1]) == Math.sign(event.movementY)) {
 			dir[1] += event.movementY / 10;
-			rotSpeed[1] -= event.movementY / 6;
+			rotSpeed[1] -= event.movementY / 4;
 		} else {
 			dir[1] = event.movementY / 10;
-			rotSpeed[1] = -event.movementY / 6;
+			rotSpeed[1] = -event.movementY / 4;
 		}
 		dir = [clamp(dir[0], -20, 20), clamp(dir[1], -20, 20)];
 		rotSpeed = [clamp(rotSpeed[0], -10, 10), clamp(rotSpeed[1], -10, 10)];
