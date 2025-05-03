@@ -58,15 +58,6 @@ class musicPlayer {
             ],
             ["eos/all_the_little_things.mp3", "All The Little Things"],
             ["eos/moonlight.mp3", "Moonlight"],
-            ["orbit/future.mp3", "future"],
-            ["orbit/bliss.mp3", "bliss"],
-            ["orbit/chiral.mp3", "chiral"],
-            ["orbit/distorted_arp.mp3", "distorted_arp"],
-            ["orbit/ww_ilude.mp3", "interlude"],
-            ["orbit/catacombs.mp3", "catacombs"],
-            ["orbit/later-vill_de_la_line.mp3", "ville de la lune"],
-            ["orbit/wander.mp3", "wander"],
-            ["orbit/dusk.mp3", "dusk"],
             ["website/jrpg_end.mp3", "JRPG End"],
             ["website/Birds.mp3", "birds/egodeath"],
             ["fote6/dark_forest_hypothesis.mp3", "Dark Forest Hypothesis"],
@@ -77,17 +68,6 @@ class musicPlayer {
             ["website/whole_heart.mp3", "Whole Heart"],
             ["website/after_the_end.mp3", "After the End"],
             ["website/poolside.mp3", "Poolside"],
-        ],
-        orbit: [
-            ["orbit/future.mp3", "future"],
-            ["orbit/bliss.mp3", "bliss"],
-            ["orbit/chiral.mp3", "chiral"],
-            ["orbit/distorted_arp.mp3", "distorted_arp"],
-            ["orbit/ww_ilude.mp3", "interlude"],
-            ["orbit/catacombs.mp3", "catacombs"],
-            ["orbit/later-vill_de_la_line.mp3", "ville de la lune"],
-            ["orbit/wander.mp3", "wander"],
-            ["orbit/dusk.mp3", "dusk"],
         ],
         eos: [
             ["eos/gnosienne.mp3", "Gnosienne"],
@@ -294,9 +274,6 @@ function changePlaylist(element, playlist) {
             break;
         case "discography":
             newPlaylist = player.playlists.discography;
-            break;
-        case "orbit":
-            newPlaylist = player.playlists.orbit;
             break;
         case "eos":
             newPlaylist = player.playlists.eos;
