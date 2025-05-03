@@ -4,6 +4,7 @@
   width: 400px;
   height: 400px;
   perspective: 400px;
+  z-index: 20;
 
   position: absolute;
   top: 50%;
@@ -83,4 +84,84 @@
 #infoBox .windowContent {
   text-wrap: balance;
   width: 30vh;
+}
+
+/*Wormhole related ----------------------------------------------------*/
+
+#wormhole>img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  max-width: none;
+  position: absolute;
+  left: 0;
+  top: -250cqh;
+  overflow: none;
+  z-index: 19;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 5s linear 10s;
+  cursor:default;
+}
+
+#wormhole:hover>img {
+  transform: translateY(350cqh);
+  transition: transform 7s linear 0.8s;
+  animation: flash 0.5s ease-in-out alternate;
+}
+
+#wormhole>a {
+  animation: hover 3s ease-in-out infinite alternate;
+  animation-delay: 0.5s;
+  top: 5%;
+  z-index: 5;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  filter: url(#pixelate2);
+}
+
+#wormhole>a>img{
+  transform: rotateX(50deg) rotateY(-10deg);
+  filter: drop-shadow(0 0 0.7rem #0088ff);
+  width: 80%;
+  height: 80%;
+  transition: filter 1s ease;
+  grid-row: 1;
+  grid-column: 1;
+  border-radius: calc(infinity * 1px);
+  object-fit: cover;
+}
+#wormhole>a>img:hover{
+  transform: rotateX(50deg) rotateY(-10deg);
+  filter: drop-shadow(0 0 0.9rem #77bfff);
+}
+
+#wormhole {
+  container-type: size;
+  overflow: hidden;
+  position: absolute;
+  left: 20vw;
+  top: 50vh;
+  width: 20vh;
+  height: 20vh;
+  display: grid;
+}
+
+@keyframes hover {
+  0% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateY(5%);
+  }
+}
+@keyframes flash {
+  0%{
+    filter: contrast(90%);
+  }
+  100%{
+    filter: contrast(100%);
+  }
 }
