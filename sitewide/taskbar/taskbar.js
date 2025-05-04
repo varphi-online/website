@@ -1,6 +1,7 @@
 // This is just so I may instantiate a single taskbar div wherever I choose and
 // still benefit from html linting :3
 import { initializeApplications, webpageAsApp, } from "../apps/applicationManager.js";
+import startSaveLoop from "../misc/points.js";
 // Get stylesheets for different sub modules
 // TODO: Switch to using anchor version of stylesheet when all major browsers support
 const taskbarCSS = document.createElement("link");
@@ -50,4 +51,5 @@ fetch("/sitewide/taskbar/taskbar.html")
         webpageAsApp(windowTemplate, taskbarDiv, link, apps, zList, style, windowTitle, icon, iconTitle);
     }
     window.instantiateApp = instantiateApp;
+    const saveLoop = startSaveLoop();
 });

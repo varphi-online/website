@@ -5,6 +5,7 @@ import {
   initializeApplications,
   webpageAsApp,
 } from "../apps/applicationManager.js";
+import startSaveLoop from "../misc/points.js";
 
 // Get stylesheets for different sub modules
 // TODO: Switch to using anchor version of stylesheet when all major browsers support
@@ -80,4 +81,5 @@ fetch("/sitewide/taskbar/taskbar.html")
     }
 
     (window as any).instantiateApp = instantiateApp;
+    const saveLoop = startSaveLoop();
   });
