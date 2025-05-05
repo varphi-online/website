@@ -14,12 +14,20 @@ export class Application {
     taskbarLabel;
     shadow;
     zList;
-    constructor(element, windowTemplate, taskbar) {
+    constructor(element, windowTemplate, taskbar, allowMultiple) {
         this.appDiv = element;
         this.zList = [];
         let windowTemplateInstance = windowTemplate.cloneNode(true);
         // Get some unique ID from the window header, to be used in all other places
         this.applicationID = this.appDiv.dataset.window_title.replace(/\s+/g, "_");
+        // "Singleton" enforcement
+        if (!allowMultiple &&
+            window.appManager.apps.some((a) => a.applicationID === this.applicationID)) {
+            console.warn(
+            // Use warn instead of error for less noise
+            `Application with ID: ${this.applicationID} already exists and multiple are not allowed. Aborting creation.`);
+            throw new Error();
+        }
         this.appDiv.id = this.applicationID + "-window";
         // Window template parts we want to change.
         [
@@ -97,7 +105,9 @@ export class Application {
         iconLabel.className = "win95";
         if (this.appDiv.dataset.icon) {
             let src = this.appDiv.dataset.icon;
-            iconImage.src = src.includes("/") ? src : "/sitewide/images/icons/" + src;
+            iconImage.src = src.includes("/")
+                ? src
+                : "/sitewide/images/icons/" + src;
         }
         else {
             ("/sitewide/images/icons/Program.ico");
@@ -142,14 +152,12 @@ export class Application {
                     }
                     break;
                 case self.closeButton:
-                    self.taskbarLabel.innerHTML = "";
-                    self.taskbarIcon.innerHTML = "";
-                    self.appDiv.innerHTML = "";
-                    self.taskbarIcon.remove();
-                    self.appDiv.remove();
+                    this.delete();
                     break;
                 case self.externButton:
-                    window.open(this.appDiv.dataset.link, "_blank")?.focus();
+                    window
+                        .open(this.appDiv.dataset.link, "_blank")
+                        ?.focus();
                 default:
                     self.moveToFront();
                     break;
@@ -171,12 +179,39 @@ export class Application {
                     handleButtonAction(e.target);
                 });
                 button.addEventListener("click", (e) => {
-                    if (!("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
+                    if (!("ontouchstart" in window ||
+                        navigator.maxTouchPoints > 0)) {
                         handleButtonAction(e.target);
                     }
                 });
             }
         });
+    }
+    delete() {
+        if (this.appDiv && this.appDiv.parentNode) {
+            this.appDiv.remove();
+        }
+        if (this.taskbarIcon && this.taskbarIcon.parentNode) {
+            this.taskbarIcon.remove();
+        }
+        if (this.taskbarLabel && this.taskbarLabel.parentNode) {
+            this.taskbarLabel.remove();
+        }
+        if (this.shadow &&
+            this.shadow.object &&
+            this.shadow.object.parentNode) {
+            this.shadow.object.remove();
+        }
+        if (window.appManager) {
+            const appIndex = window.appManager.apps.indexOf(this);
+            if (appIndex > -1) {
+                window.appManager.apps.splice(appIndex, 1);
+            }
+            const zIndex = window.appManager.zList.indexOf(this);
+            if (zIndex > -1) {
+                window.appManager.zList.splice(zIndex, 1);
+            }
+        }
     }
     addAppWindowEvents() {
         // Using event delegation
@@ -222,8 +257,10 @@ export class Application {
                     const touch = e.touches[0];
                     const deltaX = touch.clientX - initialTouchPos.x;
                     const deltaY = touch.clientY - initialTouchPos.y;
-                    const newTop = ((initialWindowPos.y + deltaY) / window.innerHeight) * 100;
-                    const newLeft = ((initialWindowPos.x + deltaX) / window.innerWidth) * 100;
+                    const newTop = ((initialWindowPos.y + deltaY) / window.innerHeight) *
+                        100;
+                    const newLeft = ((initialWindowPos.x + deltaX) / window.innerWidth) *
+                        100;
                     this.appDiv.style.top = `${newTop}vh`;
                     this.appDiv.style.left = `${newLeft}vw`;
                 });
@@ -243,9 +280,9 @@ export class Application {
 }
 class Shadow {
     /* This class is used in the dragging of windows, visually it is the grey
-      box that indicates to the user where the window will be placed after a drag
-      and drop, but it also contains info about styles and movement.
-      */
+    box that indicates to the user where the window will be placed after a drag
+    and drop, but it also contains info about styles and movement.
+    */
     object;
     initialDivPosition;
     initialMousePosition;
@@ -269,11 +306,9 @@ class Shadow {
     }
     mouseDown(event) {
         this.object.style.width =
-            String(parseInt(getComputedStyle(this.attachedApp.appDiv).width, 10)) +
-                "px";
+            String(parseInt(getComputedStyle(this.attachedApp.appDiv).width, 10)) + "px";
         this.object.style.height =
-            String(parseInt(getComputedStyle(this.attachedApp.appDiv).height, 10)) +
-                "px";
+            String(parseInt(getComputedStyle(this.attachedApp.appDiv).height, 10)) + "px";
         this.initialDivPosition = [
             parseInt(getComputedStyle(this.attachedApp.appDiv).top, 10),
             parseInt(getComputedStyle(this.attachedApp.appDiv).left, 10),
@@ -311,29 +346,63 @@ class Shadow {
         this.attachedApp.appDiv.style.left = this.object.style.left;
     }
 }
+export const appInitEvent = new Event("applicationsInitialized");
 export function initializeApplications(windowTemplate, taskbar) {
     /*
-          Here we loop through each application element to format it into a window
-          we define
-          */
+        Here we loop through each application element to format it into a window
+        we define
+        */
     // Create some primitives that are replicated in every window.
     let appDefinitions = Array.from(document.getElementsByClassName("app"));
     let apps = [];
     let zList = [];
+    window.appManager = {
+        apps,
+        zList,
+        windowTemplate,
+        taskbar,
+        instantiateApp,
+    };
     appDefinitions.forEach((element) => {
         let app = new Application(element, windowTemplate, taskbar);
         apps.unshift(app);
         zList.unshift(app);
         app.zList = zList;
     });
-    return [apps, zList];
+    document.dispatchEvent(appInitEvent);
+    console.log(window.appManager);
 }
-export function addApp(app, appStorage, heightList) {
-    appStorage.unshift(app);
-    heightList.unshift(app);
-    app.zList = heightList;
+export function addApp(app, allowMultiple) {
+    if (!allowMultiple &&
+        window.appManager.apps.some((a) => a.applicationID === app.applicationID))
+        throw new Error("App with associated ID already exists");
+    window.appManager.apps.unshift(app);
+    window.appManager.zList.unshift(app);
+    app.zList = window.appManager.zList;
 }
-export function webpageAsApp(windowTemplate, taskbar, link, appStorage, heightList, style, windowTitle, icon, iconTitle) {
+export async function fetchApp(url, appId, allowMultiple) {
+    const response = await fetch(url);
+    const parser = new DOMParser();
+    if (response.ok) {
+        const parsedDoc = parser.parseFromString(await response.text(), "text/html");
+        const appElement = parsedDoc.getElementById(appId);
+        if (appElement === null)
+            throw new Error("app id does not exist");
+        document.body.appendChild(appElement);
+        return new Application(appElement, window.appManager.windowTemplate, window.appManager.taskbar);
+    }
+    else {
+        throw new Error("failed to fetch");
+    }
+}
+export async function fetchAppFromDocument(parsedDoc, appId, allowMultiple) {
+    const appElement = parsedDoc.getElementById(appId);
+    if (appElement === null)
+        throw new Error("app id does not exist");
+    document.body.appendChild(appElement);
+    return new Application(appElement, window.appManager.windowTemplate, window.appManager.taskbar);
+}
+export function webpageAsApp(link, style, windowTitle, icon, iconTitle) {
     let div = document.createElement("div");
     let embed = document.createElement("iframe");
     embed.src = link;
@@ -349,6 +418,9 @@ export function webpageAsApp(windowTemplate, taskbar, link, appStorage, heightLi
     div.setAttribute("data-fullScreenCapable", "");
     div.setAttribute("data-closable", "");
     document.body.appendChild(div);
-    let app = new Application(div, windowTemplate, taskbar);
-    addApp(app, appStorage, heightList);
+    let app = new Application(div, window.appManager.windowTemplate, window.appManager.taskbar);
+    addApp(app);
+}
+export function instantiateApp({ link, style, windowTitle, icon, iconTitle, }) {
+    webpageAsApp(link, style, windowTitle, icon, iconTitle);
 }

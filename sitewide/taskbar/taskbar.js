@@ -1,7 +1,7 @@
 // This is just so I may instantiate a single taskbar div wherever I choose and
 // still benefit from html linting :3
-import { initializeApplications, webpageAsApp, } from "../apps/applicationManager.js";
-import startSaveLoop from "../misc/points.js";
+import { initializeApplications, } from "../apps/applicationManager.js";
+import { pointManager } from "../misc/points/pointManager.js";
 // Get stylesheets for different sub modules
 // TODO: Switch to using anchor version of stylesheet when all major browsers support
 const taskbarCSS = document.createElement("link");
@@ -36,9 +36,9 @@ fetch("/sitewide/taskbar/taskbar.html")
     //musicPlayerScript2.type = "module";
     //musicPlayerScript2.src = "/sitewide/apps/musicPlayer/musicPlayerRevamp.js";
     //document.head.appendChild(musicPlayerScript2);
-    const clockScript = document.createElement("script");
-    clockScript.src = "https://melonking.net/scripts/swatchTime.js";
-    document.head.appendChild(clockScript);
+    //const clockScript = document.createElement("script");
+    //clockScript.src = "https://melonking.net/scripts/swatchTime.js";
+    //document.head.appendChild(clockScript);
     // Super stupid fix but apparently just importing the script as a DOM node
     // directly will not execute, so i have to basically stringify and destring
     // to get this to run
@@ -46,10 +46,6 @@ fetch("/sitewide/taskbar/taskbar.html")
     deferred.innerHTML = (doc.querySelector("#deferred")).innerHTML;
     document.body.appendChild(deferred);
     const windowTemplate = doc.querySelector("#windowTemplate");
-    let [apps, zList] = initializeApplications(windowTemplate, taskbarDiv);
-    function instantiateApp({ link, style, windowTitle, icon, iconTitle, }) {
-        webpageAsApp(windowTemplate, taskbarDiv, link, apps, zList, style, windowTitle, icon, iconTitle);
-    }
-    window.instantiateApp = instantiateApp;
-    const saveLoop = startSaveLoop();
+    initializeApplications(windowTemplate, taskbarDiv);
+    pointManager.start();
 });

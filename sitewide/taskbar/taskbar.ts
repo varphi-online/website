@@ -3,9 +3,8 @@
 
 import {
   initializeApplications,
-  webpageAsApp,
 } from "../apps/applicationManager.js";
-import startSaveLoop from "../misc/points.js";
+import { pointManager } from "../misc/points/pointManager.js";
 
 // Get stylesheets for different sub modules
 // TODO: Switch to using anchor version of stylesheet when all major browsers support
@@ -47,9 +46,9 @@ fetch("/sitewide/taskbar/taskbar.html")
     //musicPlayerScript2.src = "/sitewide/apps/musicPlayer/musicPlayerRevamp.js";
     //document.head.appendChild(musicPlayerScript2);
 
-    const clockScript = document.createElement("script");
-    clockScript.src = "https://melonking.net/scripts/swatchTime.js";
-    document.head.appendChild(clockScript);
+    //const clockScript = document.createElement("script");
+    //clockScript.src = "https://melonking.net/scripts/swatchTime.js";
+    //document.head.appendChild(clockScript);
 
     // Super stupid fix but apparently just importing the script as a DOM node
     // directly will not execute, so i have to basically stringify and destring
@@ -62,24 +61,6 @@ fetch("/sitewide/taskbar/taskbar.html")
 
     const windowTemplate = <HTMLDivElement>doc.querySelector("#windowTemplate");
 
-    let [apps, zList] = initializeApplications(windowTemplate, taskbarDiv);
-
-    function instantiateApp({
-      link,
-      style,
-      windowTitle,
-      icon,
-      iconTitle,
-    }: {
-      link: string;
-      style?: string;
-      windowTitle?: string;
-      icon?: string;
-      iconTitle?: string;
-    }) {
-      webpageAsApp(windowTemplate, taskbarDiv, link, apps, zList, style, windowTitle, icon, iconTitle);
-    }
-
-    (window as any).instantiateApp = instantiateApp;
-    const saveLoop = startSaveLoop();
+    initializeApplications(windowTemplate, taskbarDiv);
+    pointManager.start();
   });
