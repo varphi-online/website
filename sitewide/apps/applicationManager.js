@@ -373,51 +373,6 @@ export function initializeApplications(windowTemplate, taskbar) {
     document.dispatchEvent(appInitEvent);
     console.log(window.appManager);
 }
-function initSelector() {
-    const selectorDiv = document.createElement('div');
-    document.body.appendChild(selectorDiv);
-    selectorDiv.id = "selector";
-    selectorDiv.className = "windowShadow";
-    Object.assign(selectorDiv.style, {
-        display: "none",
-        position: "absolute",
-        zIndex: "-999",
-        border: "2px dashed rgba(90,90,90,0.9)",
-        background: "rgba(90,90,90,0.1)",
-        boxSizing: "border-box"
-    });
-    let initialMousePosition = [0, 0];
-    document.addEventListener("mousedown", (event) => {
-        if (event.target != document.documentElement)
-            return;
-        event.preventDefault();
-        initialMousePosition = [event.clientX, event.clientY];
-        selectorDiv.style.display = "block";
-        selectorDiv.style.left = initialMousePosition[0] + "px";
-        selectorDiv.style.top = initialMousePosition[1] + "px";
-        selectorDiv.style.width = "0px";
-        selectorDiv.style.height = "0px";
-    });
-    document.addEventListener("mousemove", (event) => {
-        if (selectorDiv.style.display != "block")
-            return;
-        const currentX = event.clientX;
-        const currentY = event.clientY;
-        const startX = initialMousePosition[0];
-        const startY = initialMousePosition[1];
-        const newLeft = Math.min(startX, currentX);
-        const newTop = Math.min(startY, currentY);
-        const newWidth = Math.abs(currentX - startX);
-        const newHeight = Math.abs(currentY - startY);
-        selectorDiv.style.left = newLeft + "px";
-        selectorDiv.style.top = newTop + "px";
-        selectorDiv.style.width = newWidth + "px";
-        selectorDiv.style.height = newHeight + "px";
-    });
-    document.addEventListener("mouseup", () => {
-        selectorDiv.style.display = "none";
-    });
-}
 export function addApp(app, allowMultiple) {
     if (!allowMultiple &&
         window.appManager.apps.some((a) => a.applicationID === app.applicationID))
@@ -469,4 +424,63 @@ export function webpageAsApp(link, style, windowTitle, icon, iconTitle) {
 }
 export function instantiateApp({ link, style, windowTitle, icon, iconTitle, }) {
     webpageAsApp(link, style, windowTitle, icon, iconTitle);
+}
+//------ Desktop Like Selection Handling --------//
+/**
+ * Data object of select in px
+ */
+const selectData = { startX: 0, startY: 0, endX: 0, endY: 0 };
+export const desktopSelect = new CustomEvent("desktopSelect", {
+    detail: selectData,
+});
+export function selected(x, y, selectorData) {
+    const minX = Math.min(selectorData.startX, selectorData.endX);
+    const maxX = Math.max(selectorData.startX, selectorData.endX);
+    const minY = Math.min(selectorData.startY, selectorData.endY);
+    const maxY = Math.max(selectorData.startY, selectorData.endY);
+    return x >= minX && x <= maxX && y >= minY && y <= maxY;
+}
+function initSelector() {
+    const selectorDiv = document.createElement("div");
+    document.body.appendChild(selectorDiv);
+    selectorDiv.id = "selector";
+    selectorDiv.className = "windowShadow";
+    Object.assign(selectorDiv.style, {
+        display: "none",
+        position: "absolute",
+        zIndex: "-999",
+        border: "2px dashed rgba(90,90,90,0.9)",
+        background: "rgba(90,90,90,0.1)",
+        boxSizing: "border-box",
+    });
+    document.addEventListener("mousedown", (event) => {
+        if (event.target != document.documentElement)
+            return;
+        event.preventDefault();
+        selectData.startX = event.clientX;
+        selectData.startY = event.clientY;
+        selectorDiv.style.display = "block";
+        selectorDiv.style.left = selectData.startX + "px";
+        selectorDiv.style.top = selectData.startY + "px";
+        selectorDiv.style.width = "0px";
+        selectorDiv.style.height = "0px";
+    });
+    document.addEventListener("mousemove", (event) => {
+        if (selectorDiv.style.display != "block")
+            return;
+        selectData.endX = event.clientX;
+        selectData.endY = event.clientY;
+        document.dispatchEvent(desktopSelect);
+        const newLeft = Math.min(selectData.startX, selectData.endX);
+        const newTop = Math.min(selectData.startY, selectData.endY);
+        const newWidth = Math.abs(selectData.endX - selectData.startX);
+        const newHeight = Math.abs(selectData.endY - selectData.startY);
+        selectorDiv.style.left = newLeft + "px";
+        selectorDiv.style.top = newTop + "px";
+        selectorDiv.style.width = newWidth + "px";
+        selectorDiv.style.height = newHeight + "px";
+    });
+    document.addEventListener("mouseup", () => {
+        selectorDiv.style.display = "none";
+    });
 }

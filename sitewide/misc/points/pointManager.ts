@@ -139,7 +139,7 @@ class PointManager {
 
         const nextMilestone =
             milestoneBonuses[this.state.currentSave.milestone];
-        if (nextMilestone && this.state.currentSave.time >= nextMilestone.req) {
+        if (nextMilestone && this.state.currentSave.time + 1 >= nextMilestone.req) {
             console.log(
                 `Milestone ${this.state.currentSave.milestone + 1} reached!`
             );
@@ -154,6 +154,7 @@ class PointManager {
         if (stateChanged) {
             this.notifySubscribers();
         }
+        
         this.lastUpdateTime = now;
     }
 

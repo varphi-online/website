@@ -63,7 +63,7 @@ class PointManager {
         }
         this.state.currentSave.time += deltaTime / 1000;
         const nextMilestone = milestoneBonuses[this.state.currentSave.milestone];
-        if (nextMilestone && this.state.currentSave.time >= nextMilestone.req) {
+        if (nextMilestone && this.state.currentSave.time + 1 >= nextMilestone.req) {
             console.log(`Milestone ${this.state.currentSave.milestone + 1} reached!`);
             this.state.currentSave.points += nextMilestone.bonus;
             this.state.currentSave.multiplier += nextMilestone.multAdd;

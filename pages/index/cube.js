@@ -1,4 +1,4 @@
-"use strict";
+import { desktopSelect, selected, } from "../../sitewide/apps/applicationManager.js";
 var cube = (document.getElementsByClassName("cube")[0]);
 let container = (document.getElementsByClassName("main")[0]);
 container.style.transform = `translate(0%,0%);`;
@@ -19,6 +19,25 @@ let impulsed = false;
 function clamp(num, lower, upper) {
     return Math.min(Math.max(num, lower), upper);
 }
+let isItemCurrentlySelected = false;
+const baseFilter = "url(#pixelate2)";
+const selectedFilter = "url(#pixelate2) invert(1)";
+document.addEventListener(desktopSelect.type, (e) => {
+    const detail = e.detail;
+    if (!detail)
+        return; // Type guard
+    const nowSelected = selected(pos[0] + prim.containerWidth / 2, pos[1] + prim.containerHeight / 2, detail);
+    if (nowSelected && !isItemCurrentlySelected) {
+        container.style.filter = selectedFilter;
+        isItemCurrentlySelected = true;
+        console.log("Item selected, applying filter:", selectedFilter);
+    }
+    else if (!nowSelected && isItemCurrentlySelected) {
+        container.style.filter = baseFilter;
+        isItemCurrentlySelected = false;
+        console.log("Item deselected, applying filter:", baseFilter);
+    }
+});
 cube.addEventListener("mousemove", (event) => {
     if (!impulsed) {
         // Only add speed if coming from the same direction
