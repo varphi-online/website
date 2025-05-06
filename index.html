@@ -59,6 +59,25 @@
   </div>
   <script type="module" src="pages/index/cube.js"></script>
 
+  <div id="wormhole">
+    <div id="wormholeCoverParent">
+      <img id="wormholeCover" src="sitewide/stars.gif" style="grid-row: 1; grid-column: 1;">
+    </div>
+    <a id="wormholeLink" href="/daydream">
+      
+      <div id="portalBorder">
+        <img id="portalImage" src="pages/index/bliss.jpg">
+      </div>
+    </a>
+  </div>
+
+  <!-- <script>
+    const [min, max, wormhole] = [30, 100, document.getElementById("wormhole")];
+    wormhole.setAttribute("style",
+      `left: calc(${Math.floor(Math.random() * 80)}vw);
+    top: calc(${Math.floor(Math.random() * (max - min + 1)) + min}vh - 20vh);`);
+  </script> -->
+
   <div class="app" data-window_title="General Info" data-icon_name="Info" data-icon="Help book.ico" data-movable
     style="right: 12vw; top: 47vh; display: none">
     <div style="
@@ -75,7 +94,7 @@
         updated, with changes plainly visible on the accompanying Github Repo.
         Please feel free to leave a message in the guestbook or look around at other
         projects!
-        <br/> <br/>
+        <br /> <br />
         Anything under the non-subdomain paths of this site are written exclusively
         in HTML, CSS and JS (Typescript) without any frameworks or other tools than
         a TS compiler.

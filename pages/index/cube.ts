@@ -32,6 +32,9 @@ function clamp(num: number, lower: number, upper: number) {
     return Math.min(Math.max(num, lower), upper);
 }
 
+const dirSpeedDiv = 7;
+const rotSpeedDiv = 4;
+
 let isItemCurrentlySelected = false;
 const baseFilter = "url(#pixelate2)";
 const selectedFilter = "url(#pixelate2) invert(1)";
@@ -56,26 +59,26 @@ document.addEventListener(desktopSelect.type, (e) => {
 });
 
 cube.addEventListener("mousemove", (event) => {
-    if (!impulsed) {
-        // Only add speed if coming from the same direction
-        if (Math.sign(dir[0]) == Math.sign(event.movementX)) {
-            dir[0] += event.movementX / 10;
-            rotSpeed[0] += event.movementX / 4;
-        } else {
-            dir[0] = event.movementX / 10;
-            rotSpeed[0] = event.movementX / 4;
-        }
-        if (Math.sign(dir[1]) == Math.sign(event.movementY)) {
-            dir[1] += event.movementY / 10;
-            rotSpeed[1] -= event.movementY / 4;
-        } else {
-            dir[1] = event.movementY / 10;
-            rotSpeed[1] = -event.movementY / 4;
-        }
-        dir = [clamp(dir[0], -20, 20), clamp(dir[1], -20, 20)];
-        rotSpeed = [clamp(rotSpeed[0], -10, 10), clamp(rotSpeed[1], -10, 10)];
-        impulsed = true;
-    }
+	if (!impulsed) {
+		// Only add speed if coming from the same direction
+		if (Math.sign(dir[0]) == Math.sign(event.movementX)) {
+			dir[0] += event.movementX / dirSpeedDiv;
+			rotSpeed[0] += event.movementX / rotSpeedDiv;
+		} else {
+			dir[0] = event.movementX / dirSpeedDiv;
+			rotSpeed[0] = event.movementX / rotSpeedDiv;
+		}
+		if (Math.sign(dir[1]) == Math.sign(event.movementY)) {
+			dir[1] += event.movementY / dirSpeedDiv;
+			rotSpeed[1] -= event.movementY / rotSpeedDiv;
+		} else {
+			dir[1] = event.movementY / dirSpeedDiv;
+			rotSpeed[1] = -event.movementY / rotSpeedDiv;
+		}
+		dir = [clamp(dir[0], -20, 20), clamp(dir[1], -20, 20)];
+		rotSpeed = [clamp(rotSpeed[0], -10, 10), clamp(rotSpeed[1], -10, 10)];
+		impulsed = true;
+	}
 });
 
 cube.addEventListener("mouseleave", () => {
