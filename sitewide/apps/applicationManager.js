@@ -369,8 +369,54 @@ export function initializeApplications(windowTemplate, taskbar) {
         zList.unshift(app);
         app.zList = zList;
     });
+    initSelector();
     document.dispatchEvent(appInitEvent);
     console.log(window.appManager);
+}
+function initSelector() {
+    const selectorDiv = document.createElement('div');
+    document.body.appendChild(selectorDiv);
+    selectorDiv.id = "selector";
+    selectorDiv.className = "windowShadow";
+    Object.assign(selectorDiv.style, {
+        display: "none",
+        position: "absolute",
+        zIndex: "-999",
+        border: "2px dashed rgba(90,90,90,0.9)",
+        background: "rgba(90,90,90,0.1)",
+        boxSizing: "border-box"
+    });
+    let initialMousePosition = [0, 0];
+    document.addEventListener("mousedown", (event) => {
+        if (event.target != document.documentElement)
+            return;
+        event.preventDefault();
+        initialMousePosition = [event.clientX, event.clientY];
+        selectorDiv.style.display = "block";
+        selectorDiv.style.left = initialMousePosition[0] + "px";
+        selectorDiv.style.top = initialMousePosition[1] + "px";
+        selectorDiv.style.width = "0px";
+        selectorDiv.style.height = "0px";
+    });
+    document.addEventListener("mousemove", (event) => {
+        if (selectorDiv.style.display != "block")
+            return;
+        const currentX = event.clientX;
+        const currentY = event.clientY;
+        const startX = initialMousePosition[0];
+        const startY = initialMousePosition[1];
+        const newLeft = Math.min(startX, currentX);
+        const newTop = Math.min(startY, currentY);
+        const newWidth = Math.abs(currentX - startX);
+        const newHeight = Math.abs(currentY - startY);
+        selectorDiv.style.left = newLeft + "px";
+        selectorDiv.style.top = newTop + "px";
+        selectorDiv.style.width = newWidth + "px";
+        selectorDiv.style.height = newHeight + "px";
+    });
+    document.addEventListener("mouseup", () => {
+        selectorDiv.style.display = "none";
+    });
 }
 export function addApp(app, allowMultiple) {
     if (!allowMultiple &&

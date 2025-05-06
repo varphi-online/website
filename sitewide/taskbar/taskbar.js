@@ -1,6 +1,6 @@
 // This is just so I may instantiate a single taskbar div wherever I choose and
 // still benefit from html linting :3
-import { initializeApplications, } from "../apps/applicationManager.js";
+import { initializeApplications } from "../apps/applicationManager.js";
 import { pointManager } from "../misc/points/pointManager.js";
 // Get stylesheets for different sub modules
 // TODO: Switch to using anchor version of stylesheet when all major browsers support
@@ -45,7 +45,7 @@ fetch("/sitewide/taskbar/taskbar.html")
     const deferred = document.createElement("script");
     deferred.innerHTML = (doc.querySelector("#deferred")).innerHTML;
     document.body.appendChild(deferred);
-    const windowTemplate = doc.querySelector("#windowTemplate");
+    const windowTemplate = (doc.querySelector("#windowTemplate"));
     initializeApplications(windowTemplate, taskbarDiv);
     pointManager.start();
 });
