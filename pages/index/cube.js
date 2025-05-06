@@ -32,12 +32,10 @@ document.addEventListener(desktopSelect.type, (e) => {
     if (nowSelected && !isItemCurrentlySelected) {
         container.style.filter = selectedFilter;
         isItemCurrentlySelected = true;
-        console.log("Item selected, applying filter:", selectedFilter);
     }
     else if (!nowSelected && isItemCurrentlySelected) {
         container.style.filter = baseFilter;
         isItemCurrentlySelected = false;
-        console.log("Item deselected, applying filter:", baseFilter);
     }
 });
 cube.addEventListener("mousemove", (event) => {

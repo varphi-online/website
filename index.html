@@ -64,19 +64,33 @@
       <img id="wormholeCover" src="sitewide/stars.gif" style="grid-row: 1; grid-column: 1;">
     </div>
     <a id="wormholeLink" href="/daydream">
-      
       <div id="portalBorder">
         <img id="portalImage" src="pages/index/bliss.jpg">
+        <!-- <img src="sitewide/images/mini/orbit.png" style="display: none;"> USE IF ORBIT IMG IS REMOVED FROM CUBE -->
       </div>
     </a>
   </div>
 
-  <!-- <script>
-    const [min, max, wormhole] = [30, 100, document.getElementById("wormhole")];
-    wormhole.setAttribute("style",
-      `left: calc(${Math.floor(Math.random() * 80)}vw);
-    top: calc(${Math.floor(Math.random() * (max - min + 1)) + min}vh - 20vh);`);
-  </script> -->
+  <script>
+    const portal = document.getElementById("portalImage");
+    const portalBorder = document.getElementById("portalBorder");
+    let portalSelected = false;
+    const baseFilter = "";
+    const selectedFilter = "brightness(0)";
+
+    document.addEventListener("desktopSelect", (e) => {
+      const nowSelected = window.desktopSelected(portal.getBoundingClientRect().left + portal.getBoundingClientRect().width / 2, portal.getBoundingClientRect().top + portal.getBoundingClientRect().height / 2)
+      if (nowSelected && !portalSelected) {
+        portal.src = "sitewide/images/mini/orbit.png";
+        portalBorder.style.border = "8px solid black";
+        portalSelected = true;
+    } else if (!nowSelected && portalSelected) {
+        portal.src = "pages/index/bliss.jpg";
+        portalBorder.style.border = "2px solid white";
+        portalSelected = false;
+    }
+    })
+  </script>
 
   <div class="app" data-window_title="General Info" data-icon_name="Info" data-icon="Help book.ico" data-movable
     style="right: 12vw; top: 47vh; display: none">

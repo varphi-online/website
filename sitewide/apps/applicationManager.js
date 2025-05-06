@@ -434,12 +434,15 @@ export const desktopSelect = new CustomEvent("desktopSelect", {
     detail: selectData,
 });
 export function selected(x, y, selectorData) {
+    if (!selectorData)
+        selectorData = selectData;
     const minX = Math.min(selectorData.startX, selectorData.endX);
     const maxX = Math.max(selectorData.startX, selectorData.endX);
     const minY = Math.min(selectorData.startY, selectorData.endY);
     const maxY = Math.max(selectorData.startY, selectorData.endY);
     return x >= minX && x <= maxX && y >= minY && y <= maxY;
 }
+window.desktopSelected = selected;
 function initSelector() {
     const selectorDiv = document.createElement("div");
     document.body.appendChild(selectorDiv);
@@ -448,7 +451,7 @@ function initSelector() {
     Object.assign(selectorDiv.style, {
         display: "none",
         position: "absolute",
-        zIndex: "-999",
+        zIndex: "500",
         border: "2px dashed rgba(90,90,90,0.9)",
         background: "rgba(90,90,90,0.1)",
         boxSizing: "border-box",
@@ -459,6 +462,9 @@ function initSelector() {
         event.preventDefault();
         selectData.startX = event.clientX;
         selectData.startY = event.clientY;
+        selectData.endX = event.clientX;
+        selectData.endY = event.clientY;
+        document.dispatchEvent(desktopSelect);
         selectorDiv.style.display = "block";
         selectorDiv.style.left = selectData.startX + "px";
         selectorDiv.style.top = selectData.startY + "px";

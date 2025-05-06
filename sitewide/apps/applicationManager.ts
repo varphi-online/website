@@ -607,6 +607,8 @@ declare global {
             taskbar: HTMLDivElement;
             instantiateApp: typeof instantiateApp;
         };
+
+        desktopSelected: typeof selected
     }
 }
 
@@ -630,14 +632,17 @@ export const desktopSelect = new CustomEvent("desktopSelect", {
 export function selected(
     x: number,
     y: number,
-    selectorData: typeof selectData
+    selectorData?: typeof selectData
 ): boolean {
+    if (!selectorData) selectorData = selectData;
     const minX = Math.min(selectorData.startX, selectorData.endX);
     const maxX = Math.max(selectorData.startX, selectorData.endX);
     const minY = Math.min(selectorData.startY, selectorData.endY);
     const maxY = Math.max(selectorData.startY, selectorData.endY);
     return x >= minX && x <= maxX && y >= minY && y <= maxY;
 }
+
+window.desktopSelected = selected;
 
 function initSelector() {
     const selectorDiv = document.createElement("div");
@@ -648,7 +653,7 @@ function initSelector() {
     Object.assign(selectorDiv.style, {
         display: "none",
         position: "absolute",
-        zIndex: "-999",
+        zIndex: "500",
         border: "2px dashed rgba(90,90,90,0.9)",
         background: "rgba(90,90,90,0.1)",
         boxSizing: "border-box",
@@ -660,6 +665,9 @@ function initSelector() {
 
         selectData.startX = event.clientX;
         selectData.startY = event.clientY;
+        selectData.endX = event.clientX;
+        selectData.endY = event.clientY;
+        document.dispatchEvent(desktopSelect);
 
         selectorDiv.style.display = "block";
 
