@@ -2,7 +2,8 @@
 // still benefit from html linting :3
 
 import { initializeApplications } from "../apps/applicationManager.js";
-import { pointManager } from "../misc/points/pointManager.js";
+
+// import { pointManager } from "../misc/points/pointManager.js";
 
 // Get stylesheets for different sub modules
 // TODO: Switch to using anchor version of stylesheet when all major browsers support
@@ -63,5 +64,5 @@ fetch("/sitewide/taskbar/taskbar.html")
         );
 
         initializeApplications(windowTemplate, taskbarDiv);
-        pointManager.start();
+        // pointManager.start();
     });

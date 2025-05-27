@@ -210,6 +210,17 @@
 
     <div id="appIcons"></div>
     <div id="controlPanel">
+      <div style="
+        background-color: gray;
+        color: white; 
+        height: min-content;
+        border-radius: 15px;">
+        <p style="
+          margin: 2px;
+          margin-left: 6px;
+          margin-right: 6px;">Visitors: <span id="visitorCount"></span></p>
+      </div>
+
       <input id="volumeIcon" type="checkbox" />
       <label id="volumeIconLabel" for="volumeIcon">
         <img src="/sitewide/images/icons/Volume.ico" alt="" />
@@ -218,7 +229,6 @@
           <input id="volumeSlider" value="0.5" type="range" step="0.0000001" min="0" max="1" orient="vertical" />
         </div>
       </label>
-
       <div id="clock">
         <span id="pointClock">0:00</span>
         <!--<script defer src="https://melonking.net/scripts/swatchTime.js"></script>-->
@@ -247,6 +257,21 @@
     startSubMenuFolders.forEach((element) =>
       element.appendChild(contextArrow.cloneNode()),
     );
+
+    fetch("https://guestbook.varphi.online/visitor_count").then(
+      r => {
+        if (r.ok) {
+          let vc = document.getElementById("visitorCount");
+          r.text().then(t => vc.innerText = t)
+          if (localstorage.getItem("firstTimeVisitor") !== "false") {
+            fetch("https://guestbook.varphi.online/visitor_count", {
+              method: 'POST',
+            }).then(r2 => localStorage.setItem("firstTimeVisitor", "false"))
+          }
+        }
+      }
+    )
+
   </script>
 
   <div id="windowTemplate">

@@ -94,7 +94,7 @@ class musicPlayer {
       ["fote6/underground_plateau.mp3", "Underground Plateay"],
       ["fote6/dark_forest_hypothesis.mp3", "Dark Forest Hypothesis"],
       ["fote6/tidally_locked.mp3", "Tidally Locked"],
-      ["fote6/Limbo.mp3", "Limbo"],
+      ["fote6/limbo.mp3", "Limbo"],
       ["fote6/sincerest_apologies,.mp3", "Sincerest Apologies,"],
       ["fote6/absolute_failure.mp3", "Absolute Failure"],
       ["fote6/when_we_were_friends.mp3", "When We Were Friends"],
