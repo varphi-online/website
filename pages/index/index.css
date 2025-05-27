@@ -4,6 +4,7 @@
   width: 400px;
   height: 400px;
   perspective: 400px;
+  z-index: 20;
 
   position: absolute;
   top: 50%;
@@ -83,4 +84,118 @@
 #infoBox .windowContent {
   text-wrap: balance;
   width: 30vh;
+}
+
+/*Wormhole related ----------------------------------------------------*/
+
+#wormhole {
+  overflow: visible !important;
+  container-type: size;
+  /* overflow: hidden; */
+  position: absolute;
+  left: calc(50vw - 25vh / 2);
+  top: calc(50vh - 25vh / 2);
+  width: 25vh;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px dashed gray; */
+}
+
+#wormholeCoverParent{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* visibility: hidden; */
+}
+
+#wormholeCover {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  position: absolute;
+  left: 0;
+  top: -100cqh;
+  overflow: none;
+  z-index: 19;
+  transform-origin: left center;
+  transition: transform 5s linear 10s;
+  cursor:default;
+}
+
+#wormhole:hover #wormholeCover {
+  transform: translateY(350cqh);
+  transition: transform 7s linear 0.8s;
+  animation: flash 0.5s ease-in-out alternate;
+}
+
+#wormholeLink {
+  animation: hover 3s ease-in-out infinite alternate;
+  transform: translateY(-50%);
+  animation-delay: 0.5s;
+  top: 50%;
+  z-index: 5;
+  position: absolute;
+  display: flex;
+  width: 100%;
+  aspect-ratio: 1/1;
+  align-items: center;
+  justify-content: center;
+  filter: url(#pixelate2);
+}
+
+#portalBorder {
+  border: 2px solid white;
+  animation: rotate 10s ease-in-out infinite alternate-reverse;
+  filter: drop-shadow(0 0 0.7rem #0088ff);
+  width: 50%;
+  height:50%;
+  transition: filter 1s ease;
+  transform-style: preserve-3d;
+  position: relative;
+  border-radius: 50%;
+  }
+
+#portalImage {
+  border-radius: 50%;
+  width: 100%;
+  height:100%;
+  
+}
+
+#wormholeLink:hover #portalBorder{
+  filter: drop-shadow(0 0 2rem #7fb6e6);
+}
+
+
+
+@keyframes hover {
+  0% {
+    transform: translateY(calc(-50% + -5%));
+  }
+  100% {
+    transform: translateY(calc(-50% + 5%));
+  }
+}
+@keyframes flash {
+  0%{
+    filter: contrast(80%);
+  }
+  100%{
+    filter: contrast(100%);
+  }
+}
+/*transform: rotateX(50deg) rotateY(-10deg) rotateZ(0deg);*/
+@keyframes rotate {
+  0% {
+    transform: rotateY(-45deg) rotateX(40deg) rotateZ(0deg) ;
+  }
+
+  100%{
+    transform: rotateY(45deg) rotateX(40deg);
+  }
 }

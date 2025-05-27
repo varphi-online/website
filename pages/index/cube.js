@@ -1,4 +1,4 @@
-"use strict";
+import { desktopSelect, selected, } from "../../sitewide/apps/applicationManager.js";
 var cube = (document.getElementsByClassName("cube")[0]);
 let container = (document.getElementsByClassName("main")[0]);
 container.style.transform = `translate(0%,0%);`;
@@ -19,24 +19,43 @@ let impulsed = false;
 function clamp(num, lower, upper) {
     return Math.min(Math.max(num, lower), upper);
 }
+const dirSpeedDiv = 7;
+const rotSpeedDiv = 4;
+let isItemCurrentlySelected = false;
+const baseFilter = "url(#pixelate2)";
+const selectedFilter = "url(#pixelate2) invert(1)";
+document.addEventListener(desktopSelect.type, (e) => {
+    const detail = e.detail;
+    if (!detail)
+        return; // Type guard
+    const nowSelected = selected(pos[0] + prim.containerWidth / 2, pos[1] + prim.containerHeight / 2, detail);
+    if (nowSelected && !isItemCurrentlySelected) {
+        container.style.filter = selectedFilter;
+        isItemCurrentlySelected = true;
+    }
+    else if (!nowSelected && isItemCurrentlySelected) {
+        container.style.filter = baseFilter;
+        isItemCurrentlySelected = false;
+    }
+});
 cube.addEventListener("mousemove", (event) => {
     if (!impulsed) {
         // Only add speed if coming from the same direction
         if (Math.sign(dir[0]) == Math.sign(event.movementX)) {
-            dir[0] += event.movementX / 10;
-            rotSpeed[0] += event.movementX / 4;
+            dir[0] += event.movementX / dirSpeedDiv;
+            rotSpeed[0] += event.movementX / rotSpeedDiv;
         }
         else {
-            dir[0] = event.movementX / 10;
-            rotSpeed[0] = event.movementX / 4;
+            dir[0] = event.movementX / dirSpeedDiv;
+            rotSpeed[0] = event.movementX / rotSpeedDiv;
         }
         if (Math.sign(dir[1]) == Math.sign(event.movementY)) {
-            dir[1] += event.movementY / 10;
-            rotSpeed[1] -= event.movementY / 4;
+            dir[1] += event.movementY / dirSpeedDiv;
+            rotSpeed[1] -= event.movementY / rotSpeedDiv;
         }
         else {
-            dir[1] = event.movementY / 10;
-            rotSpeed[1] = -event.movementY / 4;
+            dir[1] = event.movementY / dirSpeedDiv;
+            rotSpeed[1] = -event.movementY / rotSpeedDiv;
         }
         dir = [clamp(dir[0], -20, 20), clamp(dir[1], -20, 20)];
         rotSpeed = [clamp(rotSpeed[0], -10, 10), clamp(rotSpeed[1], -10, 10)];
