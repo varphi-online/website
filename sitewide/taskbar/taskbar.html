@@ -263,7 +263,7 @@
         if (r.ok) {
           let vc = document.getElementById("visitorCount");
           r.text().then(t => vc.innerText = t)
-          if (localstorage.getItem("firstTimeVisitor") !== "false") {
+          if (localStorage.getItem("firstTimeVisitor") !== "false") {
             fetch("https://guestbook.varphi.online/visitor_count", {
               method: 'POST',
             }).then(r2 => localStorage.setItem("firstTimeVisitor", "false"))
