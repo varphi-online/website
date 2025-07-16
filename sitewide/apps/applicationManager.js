@@ -19,7 +19,7 @@ export class Application {
         this.zList = [];
         let windowTemplateInstance = windowTemplate.cloneNode(true);
         // Get some unique ID from the window header, to be used in all other places
-        this.applicationID = this.appDiv.dataset.window_title.replace(/\s+/g, "_");
+        this.applicationID = this.appDiv.dataset.window_title.replace(/\s+/g, "_") + String(Math.floor(Math.random() * 1000)); // Almost garuntees uniqueness
         // "Singleton" enforcement
         if (!allowMultiple &&
             window.appManager.apps.some((a) => a.applicationID === this.applicationID)) {
@@ -422,6 +422,9 @@ export function webpageAsApp(link, style, windowTitle, icon, iconTitle) {
     let app = new Application(div, window.appManager.windowTemplate, window.appManager.taskbar);
     addApp(app);
 }
+/**
+ * Single object wrapper for creating web applications as apps.
+ */
 export function instantiateApp({ link, style, windowTitle, icon, iconTitle, }) {
     webpageAsApp(link, style, windowTitle, icon, iconTitle);
 }

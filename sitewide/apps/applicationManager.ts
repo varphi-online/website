@@ -31,7 +31,7 @@ export class Application {
         this.applicationID = (<string>this.appDiv.dataset.window_title).replace(
             /\s+/g,
             "_"
-        );
+        ) + String(Math.floor(Math.random() * 1000)); // Almost garuntees uniqueness
 
         // "Singleton" enforcement
         if (
@@ -65,12 +65,12 @@ export class Application {
             )[0],
             windowTemplateInstance.getElementsByClassName("windowTitlebar")[0],
         ] as [
-            HTMLParagraphElement,
-            HTMLDivElement,
-            HTMLDivElement,
-            HTMLDivElement,
-            HTMLDivElement
-        ];
+                HTMLParagraphElement,
+                HTMLDivElement,
+                HTMLDivElement,
+                HTMLDivElement,
+                HTMLDivElement
+            ];
 
         [
             this.minimizeButton,
@@ -91,11 +91,11 @@ export class Application {
                 "windowExtern"
             )[0],
         ] as [
-            HTMLButtonElement,
-            HTMLButtonElement,
-            HTMLButtonElement,
-            HTMLButtonElement
-        ];
+                HTMLButtonElement,
+                HTMLButtonElement,
+                HTMLButtonElement,
+                HTMLButtonElement
+            ];
 
         // Store contained html for usage later.
         this.surface.innerHTML = this.appDiv.innerHTML;
@@ -144,11 +144,11 @@ export class Application {
             "img",
             "p",
         ].map((val) => document.createElement(val)) as [
-            HTMLInputElement,
-            HTMLLabelElement,
-            HTMLImageElement,
-            HTMLParagraphElement
-        ];
+                HTMLInputElement,
+                HTMLLabelElement,
+                HTMLImageElement,
+                HTMLParagraphElement
+            ];
 
         Object.assign(iconCheckbox, {
             className: "taskbarIcon win95",
@@ -349,7 +349,7 @@ export class Application {
                     this.appDiv.style.left = `${newLeft}vw`;
                 });
 
-                this.titleBar.addEventListener("touchend", () => {});
+                this.titleBar.addEventListener("touchend", () => { });
             }
         }
     }
@@ -367,9 +367,9 @@ export class Application {
 
 class Shadow {
     /* This class is used in the dragging of windows, visually it is the grey
-	box that indicates to the user where the window will be placed after a drag
-	and drop, but it also contains info about styles and movement.
-	*/
+    box that indicates to the user where the window will be placed after a drag
+    and drop, but it also contains info about styles and movement.
+    */
     public object: HTMLDivElement;
     public initialDivPosition: [number, number];
     public initialMousePosition: [number, number];
@@ -425,7 +425,7 @@ class Shadow {
                     (this.initialDivPosition[0] -
                         this.initialMousePosition[1] +
                         event.clientY)) /
-                    window.innerHeight
+                window.innerHeight
             ) + "vh";
 
         this.object.style.left =
@@ -434,7 +434,7 @@ class Shadow {
                     (this.initialDivPosition[1] -
                         this.initialMousePosition[0] +
                         event.clientX)) /
-                    window.innerWidth
+                window.innerWidth
             ) + "vw";
     }
 
@@ -462,9 +462,9 @@ export function initializeApplications(
     taskbar: HTMLDivElement
 ) {
     /*
-		Here we loop through each application element to format it into a window
-		we define
-		*/
+        Here we loop through each application element to format it into a window
+        we define
+        */
 
     // Create some primitives that are replicated in every window.
     let appDefinitions = Array.from(
@@ -582,6 +582,9 @@ export function webpageAsApp(
     addApp(app);
 }
 
+/**
+ * Single object wrapper for creating web applications as apps.
+ */
 export function instantiateApp({
     link,
     style,
