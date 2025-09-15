@@ -9,7 +9,7 @@ document.addEventListener(appInitEvent.type, () => {
           background-image: url('/pages/index/blobz.gif');
           color: black;
           width: 40dvh;
-          height: 70dvh;
+          height: 75dvh;
           margin: 2px;
           background-repeat: repeat;
           background-size: 100px 100px;
@@ -42,12 +42,14 @@ document.addEventListener(appInitEvent.type, () => {
                     gap: 12px;
                     width: 60%;
                     overflow-y: auto;
-                    padding-right: 4px;
+                    padding-bottom: 2px;
                   }
+
                   #linkzz *>img {
                     width: 30px;
                     height: 30px;
                     margin-right: 8px;
+                    
                   }
 
                   .linq {
@@ -60,6 +62,7 @@ document.addEventListener(appInitEvent.type, () => {
                       inset 1.5px 2px #eaebea,
                       1px 1px #323132,
                       2px 2px #414041;
+                      height: 50px;
                       
                     border-radius: 2px;
                   }
