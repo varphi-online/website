@@ -75,24 +75,24 @@ document.addEventListener(appInitEvent.type, () => {
                     filter: drop-shadow(2px 2px 0px black);
                   }
                 </style>
-                <a class="win95 linq" href="https://varphiartist.bandcamp.com/" target="_blank">
-                  <img src="/sitewide/taskbar/logos/bandcamp_logo.png" />
-                  <p>Bandcamp</p>
-                </a>
                 <a class="win95 linq"
                   href="https://open.spotify.com/artist/1hMrh5wetHbeiJYBezuEPs?si=aXMsvaFwT86NiAlWRh3fMw" target="_blank">
                   <img src="/sitewide/taskbar/logos/spotify_logo.png" />
                   <p>Spotify</p>
                 </a>
-                <a class="win95 linq" href="https://www.youtube.com/@varphiartist"
-                  target="_blank">
-                  <img src="/sitewide/taskbar/logos/youtube_logo.webp" />
-                  <p>YouTube</p>
+                <a class="win95 linq" href="https://varphiartist.bandcamp.com/" target="_blank">
+                  <img src="/sitewide/taskbar/logos/bandcamp_logo.png" />
+                  <p>Bandcamp</p>
                 </a>
                 <a class="win95 linq" href="https://music.apple.com/ee/artist/varphi/1648184088"
                   target="_blank">
                   <img src="/sitewide/taskbar/logos/apple_music_logo.png" />
                   <p>Apple Music</p>
+                </a>
+                <a class="win95 linq" href="https://www.youtube.com/@varphiartist"
+                  target="_blank">
+                  <img src="/sitewide/taskbar/logos/youtube_logo.webp" />
+                  <p>YouTube</p>
                 </a>
                 <a class="win95 linq" href="https://tidal.com/artist/34788896" target="_blank">
                   <img src="/sitewide/taskbar/logos/tidal_logo.png" style="filter: invert(1);"/>
