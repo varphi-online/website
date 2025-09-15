@@ -4,18 +4,18 @@ document.addEventListener(appInitEvent.type, () => {
   if(!(window.location.hash.substring(1) === "links")) return;
   const linksApp = document.createElement('div');
   linksApp.innerHTML = `
-      <div class="app" data-window_title="linkShareDONTRUN.exe" data-icon_name="Links :3" data-icon="Cursor active.ico" data-movable style="left: calc(50vw - 41vh / 2); top: calc(50vh - 70vh / 2);; display: block">
+      <div class="app" data-window_title="linkShareDONTRUN.exe" data-icon_name="Links :3" data-icon="Cursor active.ico" data-movable style="left: calc(50vw - 41vh / 2); top: calc(50vh - 70dvh / 2);; display: block">
         <div style="
           background-image: url('/pages/index/blobz.gif');
           color: black;
           width: 40vh;
-          height: 70vh;
+          height: 70dvh;
           margin: 2px;
           background-repeat: repeat;
           background-size: 100px 100px;
           background-color: lightblue;
           background-blend-mode: multiply;
-          font-family: 'Comic Sans MS', cursive;
+          font-family: 'CS';
           box-shadow:
             inset -1px -1px #f1f0f1,
             inset -2px -2px #eaebea,
@@ -29,6 +29,13 @@ document.addEventListener(appInitEvent.type, () => {
               <img src="/pages/index/RC1.png" style="width: 25vh; box-shadow: 2px 2px 2px black"/>
               <div id="linkzz">
                 <style>
+                  @font-face {
+                    font-family: 'CS';
+                    src: url('/pages/index/CS.ttf') format('truetype');
+                    font-weight: normal;
+                    font-style: normal;
+                  }
+
                   #linkzz {
                     display: flex;
                     flex-direction: column;
