@@ -4,18 +4,18 @@ document.addEventListener(appInitEvent.type, () => {
   if(!(window.location.hash.substring(1) === "links")) return;
   const linksApp = document.createElement('div');
   linksApp.innerHTML = `
-      <div class="app" data-window_title="linkShareDONTRUN.exe" data-icon_name="Links :3" data-icon="Cursor active.ico" data-movable style="left: calc(50vw - 41vh / 2); top: calc(50vh - 70dvh / 2);; display: block">
+      <div class="app" data-window_title="linkShareDONTRUN.exe" data-icon_name="Links :3" data-icon="Microphone & Cassette.ico" data-movable style="left: calc(50vw - 41dvh / 2); top: calc(47dvh - 70dvh / 2); display: block">
         <div style="
           background-image: url('/pages/index/blobz.gif');
           color: black;
-          width: 40vh;
+          width: 40dvh;
           height: 70dvh;
           margin: 2px;
           background-repeat: repeat;
           background-size: 100px 100px;
           background-color: lightblue;
           background-blend-mode: multiply;
-          font-family: 'CS';
+          font-family: 'comik', sans-serif;
           box-shadow:
             inset -1px -1px #f1f0f1,
             inset -2px -2px #eaebea,
@@ -23,41 +23,51 @@ document.addEventListener(appInitEvent.type, () => {
             inset 2px 2px #414041;">
             <div style="display: flex; flex-direction: column; align-items: center; padding: 10px; gap: 20px; height: 100%; box-sizing: border-box;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
-              <img src="/pages/index/arrow.png" style="height: 3vh; -webkit-filter: drop-shadow(1px 1px 0px black); filter: drop-shadow(1px 1px 0px black);"/>
+              <img src="/pages/index/arrow.png" style="height: 3dvh; -webkit-filter: drop-shadow(1px 1px 0px black); filter: drop-shadow(1px 1px 0px black);"/>
               <h2 style="color: white; margin: 0px; text-shadow: 2px 2px 2px black">LISTEN HERE!!</h2>
             </div>
-              <img src="/pages/index/RC1.png" style="width: 25vh; box-shadow: 2px 2px 2px black"/>
+              <img src="/pages/index/RC1.png" style="width: 25dvh; box-shadow: 2px 2px 2px black"/>
               <div id="linkzz">
                 <style>
                   @font-face {
-                    font-family: 'CS';
+                    font-family: 'comik';
                     src: url('/pages/index/CS.ttf') format('truetype');
-                    font-weight: normal;
-                    font-style: normal;
+                    src: url('/pages/index/CS.woff2') format('woff2');
                   }
 
                   #linkzz {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    gap: 6px;
+                    gap: 12px;
                     width: 60%;
                     overflow-y: auto;
                     padding-right: 4px;
                   }
                   #linkzz *>img {
-                    width: 24px;
-                    height: 24px;
+                    width: 30px;
+                    height: 30px;
                     margin-right: 8px;
                   }
 
                   .linq {
                     display: flex;
-                    justify-content: center;
+                    padding-left: 15px;
                     align-items: center;
                     width: 90%;
-                    box-shadow: 2px 2px 2px black;
+                    box-shadow:
+                      inset 1px 1px #f1f0f1,
+                      inset 1.5px 2px #eaebea,
+                      1px 1px #323132,
+                      2px 2px #414041;
+                      
                     border-radius: 2px;
+                  }
+                  
+                  .linq:hover {
+                    background-color: #010080;
+                    color: white;
+                    cursor: alias;
                   }
 
                   .linq img {
