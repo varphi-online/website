@@ -53,6 +53,9 @@ fetch("/sitewide/taskbar/taskbar.html")
         // Super stupid fix but apparently just importing the script as a DOM node
         // directly will not execute, so i have to basically stringify and destring
         // to get this to run
+
+        const allowSelect = ["/"];
+
         const deferred = document.createElement("script");
         deferred.innerHTML = (<HTMLScriptElement>(
             doc.querySelector("#deferred")
@@ -63,6 +66,6 @@ fetch("/sitewide/taskbar/taskbar.html")
             doc.querySelector("#windowTemplate")
         );
 
-        initializeApplications(windowTemplate, taskbarDiv);
+        initializeApplications(windowTemplate, taskbarDiv, allowSelect.includes(window.location.pathname));
         // pointManager.start();
     });

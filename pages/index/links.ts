@@ -62,7 +62,7 @@ document.addEventListener(appInitEvent.type, () => {
                       inset 1.5px 2px #eaebea,
                       1px 1px #323132,
                       2px 2px #414041;
-                      height: 50px;
+     tm                 height: 50px;
                       
                     border-radius: 2px;
                   }
