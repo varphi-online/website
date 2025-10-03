@@ -62,7 +62,7 @@ document.addEventListener(appInitEvent.type, () => {
                       inset 1.5px 2px #eaebea,
                       1px 1px #323132,
                       2px 2px #414041;
-                      height: 50px;
+     tm                 height: 50px;
                       
                     border-radius: 2px;
                   }
@@ -79,11 +79,11 @@ document.addEventListener(appInitEvent.type, () => {
                   }
                 </style>
                 <a class="win95 linq"
-                  href="https://open.spotify.com/artist/1hMrh5wetHbeiJYBezuEPs?si=aXMsvaFwT86NiAlWRh3fMw" target="_blank">
+                  href="https://open.spotify.com/album/5IdsjjBUZ1rgha0sMnSaVT" target="_blank">
                   <img src="/sitewide/taskbar/logos/spotify_logo.png" />
                   <p>Spotify</p>
                 </a>
-                <a class="win95 linq" href="https://varphiartist.bandcamp.com/" target="_blank">
+                <a class="win95 linq" href="https://varphiartist.bandcamp.com/album/daydream-automata" target="_blank">
                   <img src="/sitewide/taskbar/logos/bandcamp_logo.png" />
                   <p>Bandcamp</p>
                 </a>

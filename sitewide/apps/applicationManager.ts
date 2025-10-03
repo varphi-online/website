@@ -459,7 +459,8 @@ export const appInitEvent = new Event("applicationsInitialized");
 
 export function initializeApplications(
     windowTemplate: HTMLDivElement,
-    taskbar: HTMLDivElement
+    taskbar: HTMLDivElement,
+    enableDesktopSelection = true
 ) {
     /*
         Here we loop through each application element to format it into a window
@@ -493,7 +494,7 @@ export function initializeApplications(
         app.zList = zList;
     });
 
-    initSelector();
+    initSelector(enableDesktopSelection);
 
     document.dispatchEvent(appInitEvent);
     console.log(window.appManager);
@@ -647,7 +648,8 @@ export function selected(
 
 window.desktopSelected = selected;
 
-function initSelector() {
+function initSelector(enabled = true) {
+    if (!enabled) return;
     const selectorDiv = document.createElement("div");
     document.body.appendChild(selectorDiv);
     selectorDiv.id = "selector";

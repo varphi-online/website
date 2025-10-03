@@ -347,7 +347,7 @@ class Shadow {
     }
 }
 export const appInitEvent = new Event("applicationsInitialized");
-export function initializeApplications(windowTemplate, taskbar) {
+export function initializeApplications(windowTemplate, taskbar, enableDesktopSelection = true) {
     /*
         Here we loop through each application element to format it into a window
         we define
@@ -369,7 +369,7 @@ export function initializeApplications(windowTemplate, taskbar) {
         zList.unshift(app);
         app.zList = zList;
     });
-    initSelector();
+    initSelector(enableDesktopSelection);
     document.dispatchEvent(appInitEvent);
     console.log(window.appManager);
 }
@@ -446,7 +446,9 @@ export function selected(x, y, selectorData) {
     return x >= minX && x <= maxX && y >= minY && y <= maxY;
 }
 window.desktopSelected = selected;
-function initSelector() {
+function initSelector(enabled = true) {
+    if (!enabled)
+        return;
     const selectorDiv = document.createElement("div");
     document.body.appendChild(selectorDiv);
     selectorDiv.id = "selector";
