@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <meta name="description" content="Virtual home of Varphi, developer, musician, and artist. Links to socials as well as projects are accessible here." />
+    <title>Memory Glade - Daydream Automata</title>
+    <!-- <link rel="stylesheet" href="/sitewide/primary.css" /> -->
+    <script type="module" src="/sitewide/taskbar/taskbar.js" defer></script>
+    <link rel="stylesheet" href="/sitewide/taskbar/taskbar.css" media="print" onload="this.media='all'">
+
+    <link rel="icon" src="data:image/jpeg;base64,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" />
+</head>
+
+<body onload="getPics()">
+    <style>
+        /* @import url("https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap"); */
+
+        @font-face {
+            font-family: win95;
+            display: swap;
+            src: url("W95FA.otf") format("opentype");
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #c6c3c6;
+        }
+
+        /*  
+            https://cs.gettysburg.edu/~duncjo01/archive/patterns/
+            https://cs.gettysburg.edu/~duncjo01/assets/images/patterns/
+        */
+        #body {
+            overflow-y: auto;
+            height: 96vh;
+            width: 100vw;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: flex;
+            justify-content: center;
+            font-family: monospace;
+
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAMFBMVEUAAACAAAAAgACAgAAAAICAAIAAgICAgIDAwMD/AAAA/wD//wAAAP//AP8A//////97H7HEAAAAAWJLR0QAiAUdSAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+EKGg8HJWvByGAAAACbSURBVCjPXcq7EYQgEADQrU4shB400sQZs6NMLzNh8CK4/QGLL35QXqB8Bw/k/DGCg99tQzwhb6aEGcdlSjxo9BJmHr3EQ0YtGGTUgkGHFAo6pFCogwqHOqhwaGPLEtq4bgl97OtrJDeO3ft1GGmanB0YtOjAoEUGBykyOEjhoYELDw1caLRAhUYLVHCYgMVBMgHLCcUPFniW0R/gZjEAdAvPWwAAAABJRU5ErkJggg==);
+            
+            /* 192, 198*/
+            background-color: rgb(49, 44, 75);
+            background-blend-mode: multiply;
+            background-repeat: repeat;
+            background-attachment: scroll;
+            background-size: 25px 25px;
+        }
+
+        #content {
+            color: white;
+            padding: 2em;
+            height: fit-content;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+        }
+
+        img,
+        video,
+        audio {
+            max-width: 100%;
+        }
+
+        a {
+            color: white;
+        }
+
+        .grid img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+            /* border: 2px solid rgb(0, 0, 0); */
+        }
+
+        pre,
+        code {
+            white-space: pre-line;
+        }
+
+        #fullpage {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            width: 100vw;
+            height: 96vh;
+            background-size: contain;
+            background-repeat: no-repeat no-repeat;
+            background-position: center center;
+            background-color: rgba(0, 0, 0, 0.525);
+            cursor: zoom-out;
+        }
+
+        p {
+            line-height: 1.3em;
+        }
+
+        /* Scrollbar */
+        #content {
+            scrollbar-color: rgb(97, 96, 106) transparent;
+        }
+
+        ::-webkit-scrollbar {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgb(97, 96, 106);
+        }
+    </style>
+    <script defer>document.addEventListener('DOMContentLoaded',()=>{const i = document.querySelectorAll('img');const f=document.querySelector('#fullpage');i.forEach((g)=>{g.style.cursor='zoom-in';g.addEventListener('click',()=>{f.style.backgroundImage=`url("${g.src}")`;f.style.display='block';});});});</script>
+    <!-- <script>
+        // Changes the number of the png in the background image url to change the pattern every second and displays it in the top right
+        let patternNum = 349; // 
+        patterns = [9, 34, 103, 154, 192, 198, 205, 243]
+        function changePattern(num) {
+            patternNum = num;
+            document.getElementById("body").style.backgroundImage = `url("https://cs.gettysburg.edu/~duncjo01/assets/images/patterns/${patterns[patternNum % patterns.length]}.png")`;
+            document.querySelector("h1").innerText = `Pattern: ${patterns[patternNum % patterns.length]}`;
+        }
+            
+        setInterval(() => {
+            patternNum++;
+            changePattern(patternNum);
+        }, 1500);
+        
+        window.onload = () => {
+            changePattern(patternNum);
+        }
+    </script> -->
+    <div id="body">
+        <div id="content">
+            <div style="max-width: 90ch;">
+                <h1>Memory Glade</h1>
+                <p style="
+                text-align: center;
+                padding: 1em 0px 2em 0px;
+                font-family: initial;
+                line-height: initial;
+
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGBAMAAAB7teJuAAAAMFBMVEUAAACAAAAAgACAgAAAAICAAIAAgICAgIDAwMD/AAAA/wD//wAAAP//AP8A//////97H7HEAAAAAWJLR0QAiAUdSAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+EKGg4yHeAw2H8AAAQ3SURBVHja7VzBcqswDNRfkxtHfOvnxjcekJTYWJbWyA5pnjmkHobOVjFa1uul5N04z7Oblo9WQ3JudMsx+fWzzbBjFGAMwzIehsG76XcYHMFZYRgc3AW0Tv56C/jtFliH93k/7q+zszAcX78xMhdQWuHjp3ueQr6Ncf+FdZhc8EUY20xN2/Q8hgFGcFYYBhjcBcS0f4ABskZQB84l231Y0gnbHXwr6sFhmqafIozbcvgijJv3fi7C+FkOf2EdLBO42/pnPe5djGwmt1T+wOC45MgE96iOCSCbuA6OS44dFM/HBDRpPB9cD3IYQR0gRlAHiBHMB4jxmg8FY+eSbY6yXHIkm/HBCLPPc8mRCVQuSS5AuIRhAic3RUo2+7ed6UGmgzSMpElVjJQJFIyUbC6ug2ECQJfEZKPrkoQJ5idb5MRISjZPQrrzwoVUJuB7UCQbtgclJuAxRLLhMQQmyNQhkQ2PITABzyUy2ehcooqRQuFC6t2dG7ritUHHgNY4ChMwF6hkE19AKhMwSxiVbGLhQnbprz7wvwjDuoRRhQvZlzAq2ZB9CaMKF7JLf/WBT/YljCpc3lIHYIcoSxhVuBBih8hLGFW4gD1oEi4ohkW4oBgW4QJyiUm4fBCXmB7GHaMAAzBRJeHCS5RUl6gmal64ZHzaWLhQ1Sd3dm3wLRgVFYhHvNcmyx2qqkBAz9L05EYxLArkwjpgBZJb2GR92v2giDUEBcKzhuTT7sREUbcJCoTvNsk62RshxcgokDxGzjoRMDIKRKgjY52EGKAC4VlDsE6iOjAu4VlD4pL4uwKfqjnWcPLSqAwj021OXlIUYeRYw8lLo/fVgW3ucqwhWyePRqCYNQQFwrOGYJ0c6mhguPrjfDQwXL07WUeB4RoQE7UyXANiolaGq8wldUxE1zFOYWB+iSl1gvglM2S4psNfYqKGGRwh+/FXMUAuOT+knlX7H7Nq6j6OlVZITZrZw2zUylyQsx9fgFHRJLlkT7iBSYLkMqzmApIvsZok764D2KaxhtkI2KaxhtmQfIk1zIbkS6xhNiRfYg2zIfkSa5gN4hJjmA3MTJjCbCiGJQSGYljCbG+pA9MlpjAblC8xhtn6nnDfE+77tZ+0J8xThTXMBr2PYwyz9fdx+vs4/X2cy9/HAXdszofZCN6xOR9mo6o7NkV9fnLHpgjj5I5NEZec3LH5OC45uQtR6Fl2jLz3ilmrp8JspCbN7GE2qvrk5hv66zCqKBCemKgqa/DERFUVSK4/aj65MxhVFciVdWhJM3uYjdSkmT3MRmrSzB5mIzVpZg+zkZo0s4fZSE2a2cNspCbN7GE2UpNm9jAbqQktewiM1KSZPcz2ljrUpJk9zEZq0sweZqNWhiuS/aj49jC1MlyRfEnFt4epleEK50vqvBHbMQowTv5/o5LUCalJM3uYrWfVPiur9g+vNxsX1jrISQAAAABJRU5ErkJggg==');
+
+                background-color: rgb(209 184 184);
+                background-blend-mode: difference;
+                 "><em>
+                        I'd like to think that a computer's digital dreams are hidden;<br>
+                        nestled deep within the silicon impurities of its weary transistors,<br>
+                        and between the sectors of rotted bits belonging to the forgotten<br>
+                        text files of an old hard-drive platter...
+                        <br><br>
+                        What then, I wonder, would computers dream about...</em>
+                </p>
+                <p>
+                    Hey! It's been a while...
+                    Sorry it's taken so goddamn long to finish this project, I really hope you like it!
+                    <br><br>
+                    I wanted to write about the album prior to releasing it to decompress and look back at
+                    all of the work and scrapped ideas that have gone into its creation. I'd like to say it
+                    came easy, that I was in <a href="https://archive.ph/BjBl8" target="_blank">"development heaven"</a>
+                    and
+                    I was bursting with creativity for
+                    the better part of 3 years, but it was definitely not.
+                    <br><br>
+                    If you just want a bit about each song on the released version and some BTS, skip to
+                    <strong><a href="#dda">Daydream Automata</a></strong> otherwise, I'll go over some scrapped
+                    ideas now :&rpar;
+                <h1 id="orbit"><a href="#orbit">&gt;Orbit</a></h1>
+                <p>
+                    Originally, before Daydream, when all the dust had settled from my previous releases (Faded Horizons
+                    & An End of
+                    Sorts)
+                    and I was left with this pile of strewn together songs, I attached to it an idea I'd had for a while
+                    -
+                    a "dual sided" album that is part Daytime and Nighttime, "Orbit".
+                    <br><br>
+                    A good portion of songs from Orbit made it to DDA, and so this was more transitionary than
+                    anything
+                    else. I also got from this the "so retro" vibe that would eventually comprise DDA's whole visual
+                    aesthetic,
+                    trying to emulate the PS2's low-poly, billboarded graphics and boxy skyboxes. I eventually got what
+                    I
+                    wanted
+                    from tinkering in blender:
+                </p>
+                <div class="grid" style="
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                gap: 12px;">
+                    <img loading="lazy" src="acsmall.png" alt="A picture from the inside of a car looking at the world through a mirror." />
+                    <img loading="lazy" src="orbit/help.png" alt="An abstract mess of Willow trees and shapes on a blue background." />
+                    <img loading="lazy" src="orbit/skybox2.png" alt="An image of a sunset, one half of the sky is the blue of night. The image is 3D, projected on the inside face of a cylinder." />
+                    <img loading="lazy" src="orbit/bts1.png" alt="An isometric screenshot of Blender software showing a the split skybox looming over a field of 2D Willow trees all facing one direction." />
+                    <img loading="lazy" src="orbit/orbit.png" alt="The same landscape as the screenshot prior, now from the angle of a camera on the ground. All trees are facing the viewer." />
+                    <img loading="lazy" src="orbit/OrbitSplit.png" alt="The same picture as before but with some fog post-proscessing effects applied."/>
+                </div>
+                <p>
+                    I even made a few music videos with the older iterations of the songs, like this one, for "Castillo
+                    Del
+                    Sol"
+                    (which would become BOOTLOADER):
+                </p>
+                <video controls preload="metadata">
+                    <source src="dawn.mp4" type="video/mp4" />
+                    Browser does not support video :&lpar;
+                </video>
+                <p>
+                    Here are a couple of the scrapped songs that didn't make it to release, which is not to say they
+                    won't
+                    be released
+                    in an official capacity some time later!
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 0.5em;">
+                    dethrone
+                    <audio controls style="width: 100%; margin-bottom: 1em;">
+                        <source src="orbit/dethrone.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    a short time in the shade of a dying Willow tree
+                    <audio controls style="width: 100%; margin-bottom: 1em;">
+                        <source src="orbit/Patience.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    Moonlit
+                    <audio controls style="width: 100%; margin-bottom: 1em;">
+                        <source src="orbit/twilight2.mp3" type="audio/mpeg">
+                        Your browser does not supports the audio element.
+                    </audio>
+                    Mirage
+                    <audio controls style="width: 100%; margin-bottom: 1em;">
+                        <source src="orbit/dwell6.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    Virtual Dawn
+                    <audio controls style="width: 100%;">
+                        <source src="orbit/virtual_lullaby.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <h1 id="dda"><a href="#dda">Daydream Automata</a></h1>
+                <div class="grid" style="
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(1, 1fr);
+                gap: 12px;">
+                    <img loading="lazy" src="RC1.png" alt="The Daydream Automata album cover. The scene depicted is a gallery of 90's technologies and references strewn across a checkerboard stage the sky is a gradient of dark to light blue, with a standalone door in the middle of the scene. The door opens inward to reveal part of the famous Bliss wallpaper from Windows XP. The corners are filled with a web of green and red pipes hailing from the Windows 95 'Pipes' wallpaper, which are adorned with a multitude of small objects including some radio  and optical telescopes, cassette tape magnetic tape, and a small mouse. Hanging from somewhere out of frame are cardboard cutout planets and stars in the order of Mars, Saturn, Earth, and Jupiter from left to right. In the top left the words 'Daydream Automata' can be seen with a computer cursor hovering over it. In the center, a cassette tape has a grouping of media playback controls and a spectrum visualizer. There is a cat sleeping in a reflective half-glass chrome orb floating over the ground."/>
+                    <video controls preload="metadata" loop autoplay muted>
+                        <source src="output.mp4" type="video/mp4" />
+                        Browser does not support video :&lpar;
+                    </video>
+                </div>
+                <p>
+                    Daydream Automata is a love letter to all the days of my childhood, where I would spend messing with
+                    every font
+                    in Windows 98 Wordpad, and playing with a copy of Netscape Navigator that wasn't even connected to
+                    the internet most of the time.
+                    <br><br>
+                    It's also just a compilation of the many moments from my life that have happened during its
+                    creation,
+                    big or small, scary or joyful, listening back on this album feels like a time capsule of my young
+                    adult life.
+                </p>
+                <h2>Tracklist</h2>
+                <ol>
+                    <li>
+                        <h3 id="bootloader">BOOTLOADER</h3>
+                        <p style="margin-left: 2em;"><em>Working Titles: bliss_three, Castillo Del Sol</em>
+                            <br><em>First Created: Feb 2024</em>
+                        </p>
+                        <p style="margin-left: 2em;">Inspired by <a
+                                href="https://open.spotify.com/track/6sN3QMbN2lMk5TrmNFDGKA?si=4afbe05686d241d4"
+                                target="_blank">sunset
+                                express {to eternal bliss}</a> by bliss3three, this song originally was a burst of
+                            creative energy
+                            in one day that ended up being about 1:30 and pretty well off to stand alone. It's the first
+                            song I ever made that utilizes the chopped up Amen Break beat, and layered with the bright
+                            synths and stuttering
+                            chords, it fits well. Eventually I added a B section after finding some new synth patches
+                            that are reminiscent of
+                            the aforementioned songs' trumpets, and a mix of the A and B sections into a big finish,
+                            similar to what I did on FOTE6.</p>
+                    </li>
+                    <li>
+                        <h3 id="ANTEMATTER">ANTEMATTER</h3>
+                        <p style="margin-left: 2em;"><em>Working Titles: Future, Future2</em>
+                            <br><em>First Created: Oct 2023</em>
+                        </p>
+                        <p style="margin-left: 2em;">Continuing the trend of a burst of creative energy -> a long
+                            refinement process, ANTEMATTER's starry saw wave section was
+                            an attempt to emulate the sound of Dorian Concept's <a
+                                href="https://open.spotify.com/track/1WZGaNYzreZrvteuUEfp8X?si=9336e41b04f84cce"
+                                target="_blank">hide</a>.
+                            Sometime
+                            in its creation I sped it up and realized it sounded cool, so I saved it and moved on. Later
+                            I would come back to it to flesh it out into a longer song with
+                            some actual progression to it. I'm quite fond of the transition section and the
+                            blaster-sounding riser
+                            that tips off the drop :&rpar;
+                        </p>
+                    </li>
+                    <li>
+                        <h3>RETROGRADE</h3>
+                        <p style="margin-left: 2em;"><em>Working Title: return</em>
+                            <br><em>First Created: Oct 2024</em>
+                        </p>
+                        <p style="margin-left: 2em;">Caramel Treat's song <a
+                                href="https://open.spotify.com/track/6xGIhBf8gTwuJw2EwD1i7W?si=ffa17410a63c4e5f"
+                                target="_blank">A Rose
+                                Torn in Two</a> is my definition of the perfect execution of an idea. If you listen the
+                            first
+                            twenty seconds or so, you will undoubtedly hear the inspiration ('^-^). Not too much to say
+                            otherwise
+                            sans the bells section contains a motif I have used in a lot of my music :]</p>
+                    </li>
+                    <li>
+                        <h3>[DICHROMATIC]</h3>
+                        <p style="margin-left: 2em;"><em>Working Title: chiral</em>
+                            <br><em>First Created: Oct 2024</em>
+                        </p>
+                        <pre style="margin-left: 2em;">
+                            <em>Our bodies helplessly tangled (in a messy sprawl across the twin sized bed.)
+                            Experiencing each other (just as we) find ourselves.
+
+                            (Each tight breath a mutual desperate beg for the other to push the boundaries of what’s normal.
+
+                            The feeling of skin, brushing silently across one another, as we struggle to find the right position.)
+
+                            This must be the death of me,
+
+                            (for I am now her and she is now me and we are now one, just as we were always meant to be.)</em>
+                        </pre>
+                    </li>
+                    <li>
+                        <h3>OBSESSION!!! ≧​∇​≦</h3>
+                        <p style="margin-left: 2em;"><em>Working Titles: DistortedArp, l0ve</em>
+                            <br><em>First Created: Nov 2023</em>
+                        </p>
+                        <p style="margin-left: 2em;">Cableguys <a href="https://www.cableguys.com/shaperbox"
+                                target="_blank">ShaperBox 3</a> was something I got myself in November 2023 impulsively
+                            as it went on sale for black friday. It has a unique "time shaper" LFO that allows you to
+                            bend, reverse, slow down and speed up time across multiple
+                            bars by frequency. This song's main arpegggiating structure was my first ever real test of
+                            that and I kept it throughout the making of this album.
+                            <br><br>
+                            The songs title is a kind of personal response to <em>An End of Sorts</em>, which was the
+                            by-product of a months-long obsession with someone following a series of int/er/ra/personal
+                            events.
+                            It was a way of expressing the complex and convoluted fight of knowing what I was doing was
+                            unhealthy and unproductive but not being able to stop myself...
+                            In a way, this is the real finale to that single, I eventually did have some kind of
+                            resolution, and had finally broken free of, or rather redirected that
+                            manic mindset somewhere else.
+                        <p>
+                    </li>
+                    <li>
+                        <h3>Nightfall</h3>
+                        <p style="margin-left: 2em;"><em>Working Titles: peeano, ww_ilude</em>
+                            <br><em>First Created: Jan 2023</em>
+                        </p>
+                        <p style="margin-left: 2em;">I've found that no matter how abrupt something might seem, there is
+                            <em>always</em> a transition.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>fille de la lune</h3>
+                        <p style="margin-left: 2em;"><em>Working Titles: later, ville da lune</em>
+                            <br><em>First Created: Sept 2023</em>
+                        </p>
+                        <p style="margin-left: 2em;">
+                            I created a majority of the melodies and pads I used here in one session running off of
+                            battery in my University's public library. The waltz-y feeling
+                            bells remind me of the Fungal Wastes area of Hollow Knight. I tried to make this feel grand
+                            with a big operatic choir, echoy plucked strings and a large
+                            sea of synths, but my favorite moment of the whole song is the end - that just reiterates
+                            the original melody through the soft exhaling breath of the section
+                            prior.
+                            <br><br>
+                            The section of the music video for this song is all footage from NASA's Exploration of the
+                            Planets Documentary. I tried to cut it together to make a cohesive
+                            visual story about Voyager making a fly-by, but unfortunately there was not enough footage
+                            to keep the same planet as the centerpiece (I would have loved it
+                            to be Saturn the whole way through)
+                        </p>
+                    </li>
+                    <li>
+                        <h3>prison of the body</h3>
+                        <p style="margin-left: 2em;"><em>Working Title: catacombs</em>
+                            <br><em>First Created: Mar 2024</em>
+                        </p>
+                        <p style="margin-left: 2em;">
+                            When I originally made this song, I was in the middle of a 4 month period where I had to be
+                            off of some mentally stabilizing medications for health reasons. The initial
+                            version was a lot less "energetic" and more of an ambient piece containing the pads from the
+                            final, and very muted breakbeat. Coming back to it after I had gotten back
+                            on my medication, I took it in a more "happy" direction with a low-passed bit lead and
+                            faster drums.
+                            There is a little ear candy sound effect coming from UNDERTALE in the song, being the 3
+                            notes
+                            played
+                            when you save, followed by the sound of an attack. If you know anything about the game, I
+                            think the
+                            same mindset you have you'd hear that sound in game, is similar to what I had when this
+                            first came to be.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>and the stars danced without us</h3>
+                        <p style="margin-left: 2em;"><em>Working Title: wander</em>
+                            <br><em>First Created: Mar 2024</em>
+                        </p>
+                        <p style="margin-left: 2em;">
+                            I took the drums from this "scrapped(?)" song I made and slowed them down.
+                            <br><br>
+                            After the End
+                            <audio controls style="width: 100%;">
+                                <source src="orbit/after_the_end.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <br><br>
+                            I don't have much to say other than that the I really love the dueting vox synths playing in
+                            each ear. I'm not sure where I found the
+                            patch, but they have a great quality to them.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>(latent space)</h3>
+                        <p style="margin-left: 2em;"><em>Working Title: dusk</em>
+                            <br><em>First Created: Jul 2023</em>
+                        </p>
+                        <p style="margin-left: 2em;">This was my first and only attempt at doing some kind of microtonal
+                            song, and I think it
+                            turned out quite well! This one is 31 EDO (Equal Divisions of the Octave as opposed to the
+                            standard 12), and I think
+                            it enhances the emotional aspect I was going for on this one. To me, this song is like the
+                            kind of scream-singing in the shower
+                            you do when you're sure no one else is home, and letting out everything at once, which is
+                            why I chose a supernova for the
+                            part of this song in the music video. I think an ambient end to this album, similar to
+                            something you might have heard on FOTE6
+                            is a great way to finish off so much effort and emotion. Thank you for listening to my
+                            music. Thank you for reading my thoughts.<br><br>
+                            Thank you.
+                        </p>
+                    </li>
+                </ol>
+                <h3>Extra Special Thanks to:</h3>
+                <p>
+                    Caramel Treat, glass beach, bliss3three, Dorian Concept, Disasterpeace, vivivivivi, Oliver Buckland,
+                    Mort Garson, and C418 - All huge inspirations not only in the making of this album, but inspiring me
+                    to make music.<br><br>
+                    Mom, Dad, Chase, Sam, Remilia, Nick, Blake, Starlight, Saige, Maisie, Chloe, Alex, Leah, Myla and
+                    everyone else - I've changed a lot in 3 years, just like my music. Thanks for seeing me through and
+                    supporting me through everything.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="fullpage" onclick="this.style.display='none';"></div>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 @font-face {
   font-family: win95;
+  font-display: swap;
   src: url("/sitewide/W95FA.otf") format("opentype");
 }
 
